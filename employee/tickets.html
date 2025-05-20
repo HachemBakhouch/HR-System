@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes Tâches | Mazzaro Milano RH</title>
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="../assets/img/logo.png" alt="Mazzaro Milano" class="sidebar-logo">
+        <button class="sidebar-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      
+      <ul class="sidebar-menu">
+        <li class="sidebar-item">
+          <a href="index.html" class="sidebar-link">
+            <i class="fas fa-tachometer-alt sidebar-icon"></i>
+            <span class="sidebar-text">Tableau de bord</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="profile.html" class="sidebar-link">
+            <i class="fas fa-user sidebar-icon"></i>
+            <span class="sidebar-text">Mon profil</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="tickets.html" class="sidebar-link active">
+            <i class="fas fa-tasks sidebar-icon"></i>
+            <span class="sidebar-text">Mes tâches</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="attendance.html" class="sidebar-link">
+            <i class="fas fa-clock sidebar-icon"></i>
+            <span class="sidebar-text">Pointage</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="leave.html" class="sidebar-link">
+            <i class="fas fa-calendar-alt sidebar-icon"></i>
+            <span class="sidebar-text">Mes congés</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="calendar.html" class="sidebar-link">
+            <i class="fas fa-calendar-day sidebar-icon"></i>
+            <span class="sidebar-text">Calendrier</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="sidebar-footer">
+        <span>Mazzaro Milano RH v1.0</span>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="page-title">Mes Tâches</h1>
+        
+        <div class="header-actions">
+          <button class="header-action notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">2</span>
+          </button>
+          
+          <div class="user-profile">
+            <div class="user-avatar">
+              <img src="../assets/img/avatars/employee.jpg" alt="Employee Profile">
+            </div>
+            <div class="user-info">
+              <span class="user-name">Ahmed Employe</span>
+              <span class="user-role">Vendeur - Boutique Sud</span>
+            </div>
+            <i class="fas fa-chevron-down dropdown-toggle"></i>
+            
+            <!-- User Dropdown Menu -->
+            <div class="dropdown-menu user-dropdown-menu">
+              <a href="profile.html" class="dropdown-item">
+                <i class="fas fa-user"></i> Mon profil
+              </a>
+              <a href="settings.html" class="dropdown-item">
+                <i class="fas fa-cog"></i> Paramètres
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item" onclick="auth.logout()">
+                <i class="fas fa-sign-out-alt"></i> Se déconnecter
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Notification Panel -->
+      <div class="notification-panel">
+        <div class="notification-header">
+          <h3 class="notification-title">Notifications</h3>
+          <span class="notification-count">2</span>
+        </div>
+        <div class="notification-body">
+          <div class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <div class="notification-content">
+              <p class="notification-message">Nouvelle tâche assignée: <strong>Mise en place des promotions</strong></p>
+              <span class="notification-time">Il y a 1 heure</span>
+            </div>
+          </div>
+          <div class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="notification-content">
+              <p class="notification-message">Votre demande de congé a été <strong>approuvée</strong></p>
+              <span class="notification-time">Hier, 15:30</span>
+            </div>
+          </div>
+        </div>
+        <div class="notification-footer">
+          <a href="notifications.html" class="view-all">Voir toutes les notifications</a>
+        </div>
+      </div>
+      
+      <!-- Tickets Content -->
+      <div class="tickets-content">
+        <!-- Filters and Search -->
+        <div class="filters-container mb-4">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="search" class="form-control" placeholder="Rechercher une tâche...">
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="d-flex justify-content-end">
+                <select name="status-filter" class="form-control mr-2" style="width: auto; margin-right: 10px;">
+                  <option value="all">Tous les statuts</option>
+                  <option value="new">Nouveau</option>
+                  <option value="in-progress">En cours</option>
+                  <option value="review">En révision</option>
+                  <option value="completed">Terminé</option>
+                </select>
+                <select name="priority-filter" class="form-control" style="width: auto; margin-right: 10px;">
+                  <option value="all">Toutes les priorités</option>
+                  <option value="high">Priorité haute</option>
+                  <option value="medium">Priorité moyenne</option>
+                  <option value="low">Priorité basse</option>
+                </select>
+                <select name="sort-option" class="form-control" style="width: auto;">
+                  <option value="date-desc">Date ↓</option>
+                  <option value="date-asc">Date ↑</option>
+                  <option value="priority-high">Priorité haute d'abord</option>
+                  <option value="priority-low">Priorité basse d'abord</option>
+                  <option value="status">Par statut</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Ticket Overview Cards -->
+        <div class="row mb-4">
+          <div class="col-3">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <div class="stat-number text-primary">7</div>
+                <div class="stat-text">Toutes les tâches</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <div class="stat-number text-warning">5</div>
+                <div class="stat-text">En cours</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <div class="stat-number text-success">12</div>
+                <div class="stat-text">Terminées</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <div class="stat-number text-info">2</div>
+                <div class="stat-text">En retard</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tickets List -->
+        <div class="ticket-list">
+          <!-- Ticket Item -->
+          <div class="ticket-item" data-id="ticket-1" data-date="2025-05-19T10:00:00" data-store="south">
+            <div class="ticket-header">
+              <div class="ticket-id">
+                <i class="fas fa-hashtag"></i>
+                TASK-2025-001
+              </div>
+              <div class="ticket-status in-progress">En cours</div>
+            </div>
+            <div class="ticket-body">
+              <h3 class="ticket-title">Mise en place des promotions saisonnières</h3>
+              <p class="ticket-description">Mettre en place les étiquettes et la signalétique pour les promotions de l'été 2025. Réorganiser les présentoirs des produits concernés.</p>
+              <div class="ticket-meta">
+                <div class="ticket-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  Date limite: 20/05/2025
+                </div>
+                <div class="ticket-priority high">
+                  <i class="fas fa-flag"></i>
+                  Priorité haute
+                </div>
+              </div>
+              <div class="ticket-assignees">
+                <div class="ticket-assignee">
+                  <img src="../assets/img/avatars/employee.jpg" alt="Assignee">
+                </div>
+                <div class="ticket-assignee">
+                  <img src="../assets/img/avatars/employee3.jpg" alt="Assignee">
+                </div>
+              </div>
+            </div>
+            <div class="ticket-footer">
+              <div class="ticket-store">
+                <i class="fas fa-store"></i>
+                Boutique Sud
+              </div>
+              <div class="ticket-actions">
+                <button class="ticket-action" data-action="update-status">
+                  <i class="fas fa-check-circle"></i> Mise à jour
+                </button>
+                <button class="ticket-action" data-action="comment">
+                  <i class="fas fa-comment"></i> Commenter
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Ticket Item -->
+          <div class="ticket-item" data-id="ticket-2" data-date="2025-05-18T09:00:00" data-store="south">
+            <div class="ticket-header">
+              <div class="ticket-id">
+                <i class="fas fa-hashtag"></i>
+                TASK-2025-002
+              </div>
+              <div class="ticket-status in-progress">En cours</div>
+            </div>
+            <div class="ticket-body">
+              <h3 class="ticket-title">Inventaire hebdomadaire des produits</h3>
+              <p class="ticket-description">Réaliser l'inventaire hebdomadaire des produits en stock dans la boutique Sud. Identifier les produits à commander et mettre à jour la base de données.</p>
+              <div class="ticket-meta">
+                <div class="ticket-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  Date limite: 21/05/2025
+                </div>
+                <div class="ticket-priority medium">
+                  <i class="fas fa-flag"></i>
+                  Priorité moyenne
+                </div>
+              </div>
+              <div class="ticket-assignees">
+                <div class="ticket-assignee">
+                  <img src="../assets/img/avatars/employee.jpg" alt="Assignee">
+                </div>
+              </div>
+            </div>
+            <div class="ticket-footer">
+              <div class="ticket-store">
+                <i class="fas fa-store"></i>
+                Boutique Sud
+              </div>
+              <div class="ticket-actions">
+                <button class="ticket-action" data-action="update-status">
+                  <i class="fas fa-check-circle"></i> Mise à jour
+                </button>
+                <button class="ticket-action" data-action="comment">
+                  <i class="fas fa-comment"></i> Commenter
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Ticket Item -->
+          <div class="ticket-item" data-id="ticket-3" data-date="2025-05-17T14:00:00" data-store="south">
+            <div class="ticket-header">
+              <div class="ticket-id">
+                <i class="fas fa-hashtag"></i>
+                TASK-2025-003
+              </div>
+              <div class="ticket-status in-progress">En cours</div>
+            </div>
+            <div class="ticket-body">
+              <h3 class="ticket-title">Formation du nouveau vendeur</h3>
+              <p class="ticket-description">Assurer la formation de la nouvelle vendeuse Yasmine sur les processus de vente, les produits et l'utilisation du système de caisse.</p>
+              <div class="ticket-meta">
+                <div class="ticket-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  Date limite: 25/05/2025
+                </div>
+                <div class="ticket-priority low">
+                  <i class="fas fa-flag"></i>
+                  Priorité basse
+                </div>
+              </div>
+              <div class="ticket-assignees">
+                <div class="ticket-assignee">
+                  <img src="../assets/img/avatars/employee.jpg" alt="Assignee">
+                </div>
+                <div class="ticket-assignee">
+                  <img src="../assets/img/avatars/employee6.jpg" alt="Assignee">
+                </div>
+              </div>
+            </div>
+            <div class="ticket-footer">
+              <div class="ticket-store">
+                <i class="fas fa-store"></i>
+                Boutique Sud
+              </div>
+              <div class="ticket-actions">
+                <button class="ticket-action" data-action="update-status">
+                  <i class="fas fa-check-circle"></i> Mise à jour
+                </button>
+                <button class="ticket-action" data-action="comment">
+                  <i class="fas fa-comment"></i> Commenter
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Ticket Item -->
+          <div class="ticket-item" data-id="ticket-4" data-date="2025-05-15T11:00:00" data-store="south">
+            <div class="ticket-header">
+              <div class="ticket-id">
+                <i class="fas fa-hashtag"></i>
+                TASK-2025-004
+              </div>
+              <div class="ticket-status new">Nouveau</div>
+            </div>
+            <div class="ticket-body">
+              <h3 class="ticket-title">Réorganisation de la vitrine</h3>
+              <p class="ticket-description">Modifier la disposition de la vitrine principale pour mettre en avant la nouvelle collection été. Suivre le plan d'aménagement fourni par l'équipe Marketing.</p>
+              <div class="ticket-meta">
+                <div class="ticket-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  Date limite: 23/05/2025
+                </div>
+                <div class="ticket-priority medium">
+                  <i class="fas fa-flag"></i>
+                  Priorité moyenne
+                </div>
+              </div>
+              <div class="ticket-assignees">
+                <div class="ticket-assignee">
+                  <img src="../assets/img/avatars/employee.jpg" alt="Assignee">
+                </div>
+                <div class="ticket-assignee">
+                  <img src="../assets/img/avatars/employee3.jpg" alt="Assignee">
+                </div>
+              </div>
+            </div>
+            <div class="ticket-footer">
+              <div class="ticket-store">
+                <i class="fas fa-store"></i>
+                Boutique Sud
+              </div>
+              <div class="ticket-actions">
+                <button class="ticket-action" data-action="update-status">
+                  <i class="fas fa-check-circle"></i> Mise à jour
+                </button>
+                <button class="ticket-action" data-action="comment">
+                  <i class="fas fa-comment"></i> Commenter
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Ticket Item -->
+          <div class="ticket-item" data-id="ticket-5" data-date="2025-05-14T09:30:00" data-store="south">
+            <div class="ticket-header">
+              <div class="ticket-id">
+                <i class="fas fa-hashtag"></i>
+                TASK-2025-005
+              </div>
+              <div class="ticket-status in-progress">En cours</div>
+            </div>
+            <div class="ticket-body">
+              <h3 class="ticket-title">Contrôle qualité des articles retournés</h3>
+              <p class="ticket-description">Vérifier l'état des articles retournés cette semaine et les classer selon leur état (à remettre en vente, à envoyer au SAV, à déclasser).</p>
+              <div class="ticket-meta">
+                <div class="ticket-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  Date limite: 22/05/2025
+                </div>
+                <div class="ticket-priority medium">
+                  <i class="fas fa-flag"></i>
+                  Priorité moyenne
+                </div>
+              </div>
+              <div class="ticket-assignees">
+                <div class="ticket-assignee">
+                  <img src="../assets/img/avatars/employee.jpg" alt="Assignee">
+                </div>
+              </div>
+            </div>
+            <div class="ticket-footer">
+              <div class="ticket-store">
+                <i class="fas fa-store"></i>
+                Boutique Sud
+              </div>
+              <div class="ticket-actions">
+                <button class="ticket-action" data-action="update-status">
+                  <i class="fas fa-check-circle"></i> Mise à jour
+                </button>
+                <button class="ticket-action" data-action="comment">
+                  <i class="fas fa-comment"></i> Commenter
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Ticket Item (Completed) -->
+          <div class="ticket-item" data-id="ticket-6" data-date="2025-05-12T15:00:00" data-store="south">
+            <div class="ticket-header">
+              <div class="ticket-id">
+                <i class="fas fa-hashtag"></i>
+                TASK-2025-006
+              </div>
+              <div class="ticket-status completed">Terminé</div>
+            </div>
+            <div class="ticket-body">
+              <h3 class="ticket-title">Mise à jour des fiches produits</h3>
+              <p class="ticket-description">Mettre à jour les fiches descriptives des nouveaux produits dans le système. Vérifier que toutes les informations sont correctes.</p>
+              <div class="ticket-meta">
+                <div class="ticket-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  Terminé le: 18/05/2025
+                </div>
+                <div class="ticket-priority low">
+                  <i class="fas fa-flag"></i>
+                  Priorité basse
+                </div>
+              </div>
+              <div class="ticket-assignees">
+                <div class="ticket-assignee">
+                  <img src="../assets/img/avatars/employee.jpg" alt="Assignee">
+                </div>
+              </div>
+            </div>
+            <div class="ticket-footer">
+              <div class="ticket-store">
+                <i class="fas fa-store"></i>
+                Boutique Sud
+              </div>
+              <div class="ticket-actions">
+                <button class="ticket-action" data-action="view-details">
+                  <i class="fas fa-eye"></i> Voir détails
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Ticket Item (Completed) -->
+          <div class="ticket-item" data-id="ticket-7" data-date="2025-05-10T10:00:00" data-store="south">
+            <div class="ticket-header">
+              <div class="ticket-id">
+                <i class="fas fa-hashtag"></i>
+                TASK-2025-007
+              </div>
+              <div class="ticket-status completed">Terminé</div>
+            </div>
+            <div class="ticket-body">
+              <h3 class="ticket-title">Formation sur le nouveau logiciel de caisse</h3>
+              <p class="ticket-description">Participer à la formation sur la nouvelle version du logiciel de caisse et compléter les exercices pratiques de validation.</p>
+              <div class="ticket-meta">
+                <div class="ticket-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  Terminé le: 16/05/2025
+                </div>
+                <div class="ticket-priority high">
+                  <i class="fas fa-flag"></i>
+                  Priorité haute
+                </div>
+              </div>
+              <div class="ticket-assignees">
+                <div class="ticket-assignee">
+                  <img src="../assets/img/avatars/employee.jpg" alt="Assignee">
+                </div>
+                <div class="ticket-assignee">
+                  <img src="../assets/img/avatars/employee2.jpg" alt="Assignee">
+                </div>
+                <div class="ticket-assignee">
+                  <img src="../assets/img/avatars/employee3.jpg" alt="Assignee">
+                </div>
+              </div>
+            </div>
+            <div class="ticket-footer">
+              <div class="ticket-store">
+                <i class="fas fa-store"></i>
+                Boutique Sud
+              </div>
+              <div class="ticket-actions">
+                <button class="ticket-action" data-action="view-details">
+                  <i class="fas fa-eye"></i> Voir détails
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Sidebar Overlay (Mobile) -->
+  <div class="sidebar-overlay"></div>
+  
+  <!-- Status Update Modal -->
+  <div class="modal-overlay" id="statusUpdateModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Mettre à jour le statut</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="statusUpdateForm">
+          <div class="form-group">
+            <label for="status" class="form-label">Nouveau statut</label>
+            <select id="status" class="form-control">
+              <option value="new">Nouveau</option>
+              <option value="in-progress" selected>En cours</option>
+              <option value="review">En révision</option>
+              <option value="completed">Terminé</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="completion" class="form-label">Pourcentage de complétion</label>
+            <input type="range" id="completion" class="form-control-range" min="0" max="100" value="35">
+            <div class="d-flex justify-content-between">
+              <span>0%</span>
+              <span id="completionValue">35%</span>
+              <span>100%</span>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="statusNote" class="form-label">Note (optionnel)</label>
+            <textarea id="statusNote" class="form-control" rows="3" placeholder="Ajoutez une note concernant cette mise à jour..."></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-light modal-cancel">Annuler</button>
+        <button class="btn btn-primary" id="saveStatusBtn">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Comment Modal -->
+  <div class="modal-overlay" id="commentModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Ajouter un commentaire</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="commentForm">
+          <div class="form-group">
+            <label for="comment" class="form-label">Votre commentaire</label>
+            <textarea id="comment" class="form-control" rows="5" placeholder="Saisissez votre commentaire ici..."></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="attachment" class="form-label">Pièce jointe (optionnel)</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="attachment">
+              <label class="custom-file-label" for="attachment">Choisir un fichier</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-light modal-cancel">Annuler</button>
+        <button class="btn btn-primary" id="saveCommentBtn">Envoyer</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Ticket Details Modal -->
+  <div class="modal-overlay" id="ticketDetailsModal">
+    <div class="modal" style="max-width: 700px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Détails de la tâche</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="ticket-details-content">
+          <div class="ticket-detail-header mb-3">
+            <h4 id="detailTitle">Titre de la tâche</h4>
+            <div class="ticket-detail-meta">
+              <span id="detailId">TASK-2025-001</span>
+              <span id="detailStatus" class="ticket-status completed">Terminé</span>
+            </div>
+          </div>
+          
+          <div class="row mb-3">
+            <div class="col-6">
+              <div class="detail-group">
+                <div class="detail-label">Assigné à:</div>
+                <div class="detail-value" id="detailAssignees">
+                  <div class="ticket-assignees">
+                    <div class="ticket-assignee">
+                      <img src="../assets/img/avatars/employee.jpg" alt="Assignee">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="detail-group">
+                <div class="detail-label">Boutique:</div>
+                <div class="detail-value" id="detailStore">Boutique Sud</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row mb-3">
+            <div class="col-6">
+              <div class="detail-group">
+                <div class="detail-label">Date de création:</div>
+                <div class="detail-value" id="detailCreatedDate">12/05/2025</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="detail-group">
+                <div class="detail-label">Date limite:</div>
+                <div class="detail-value" id="detailDueDate">20/05/2025</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row mb-3">
+            <div class="col-6">
+              <div class="detail-group">
+                <div class="detail-label">Priorité:</div>
+                <div class="detail-value" id="detailPriority">
+                  <span class="badge badge-danger">Haute</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="detail-group">
+                <div class="detail-label">Progression:</div>
+                <div class="detail-value" id="detailProgress">
+                  <div class="progress" style="height: 15px;">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 

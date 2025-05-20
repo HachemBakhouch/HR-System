@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Secteur | Mazzaro Milano RH</title>
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="../assets/img/logo.png" alt="Mazzaro Milano" class="sidebar-logo">
+        <button class="sidebar-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      
+      <ul class="sidebar-menu">
+        <li class="sidebar-item">
+          <a href="index.html" class="sidebar-link active">
+            <i class="fas fa-tachometer-alt sidebar-icon"></i>
+            <span class="sidebar-text">Tableau de bord</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="employees.html" class="sidebar-link">
+            <i class="fas fa-users sidebar-icon"></i>
+            <span class="sidebar-text">Employés</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="tickets.html" class="sidebar-link">
+            <i class="fas fa-tasks sidebar-icon"></i>
+            <span class="sidebar-text">Tickets & Tâches</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="attendance.html" class="sidebar-link">
+            <i class="fas fa-clock sidebar-icon"></i>
+            <span class="sidebar-text">Pointage & Présence</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="leave.html" class="sidebar-link">
+            <i class="fas fa-calendar-alt sidebar-icon"></i>
+            <span class="sidebar-text">Congés</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="calendar.html" class="sidebar-link">
+            <i class="fas fa-calendar-day sidebar-icon"></i>
+            <span class="sidebar-text">Calendrier</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="statistics.html" class="sidebar-link">
+            <i class="fas fa-chart-bar sidebar-icon"></i>
+            <span class="sidebar-text">Statistiques</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="sidebar-footer">
+        <span>Mazzaro Milano RH v1.0</span>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="page-title">Tableau de bord Secteur Nord</h1>
+        
+        <div class="header-actions">
+          <button class="header-action notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">4</span>
+          </button>
+          
+          <div class="user-profile">
+            <div class="user-avatar">
+              <img src="../assets/img/avatars/sector.jpg" alt="Manager Profile">
+            </div>
+            <div class="user-info">
+              <span class="user-name">Manager Nord</span>
+              <span class="user-role">Responsable Secteur</span>
+            </div>
+            <i class="fas fa-chevron-down dropdown-toggle"></i>
+            
+            <!-- User Dropdown Menu -->
+            <div class="dropdown-menu user-dropdown-menu">
+              <a href="profile.html" class="dropdown-item">
+                <i class="fas fa-user"></i> Mon profil
+              </a>
+              <a href="settings.html" class="dropdown-item">
+                <i class="fas fa-cog"></i> Paramètres
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item" onclick="auth.logout()">
+                <i class="fas fa-sign-out-alt"></i> Se déconnecter
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Notification Panel -->
+      <div class="notification-panel">
+        <div class="notification-header">
+          <h3 class="notification-title">Notifications</h3>
+          <span class="notification-count">4</span>
+        </div>
+        <div class="notification-body">
+          <div class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="notification-content">
+              <p class="notification-message">Retard de <strong>Ahmed Karim</strong> - Boutique Sud</p>
+              <span class="notification-time">Il y a 1 heure</span>
+            </div>
+          </div>
+          <div class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div class="notification-content">
+              <p class="notification-message">Nouvelle demande de congé de <strong>Fatma Ben Ali</strong></p>
+              <span class="notification-time">Il y a 3 heures</span>
+            </div>
+          </div>
+          <div class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-store"></i>
+            </div>
+            <div class="notification-content">
+              <p class="notification-message">Performance exceptionnelle à la <strong>Boutique Nord</strong></p>
+              <span class="notification-time">Hier, 14:35</span>
+            </div>
+          </div>
+          <div class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <div class="notification-content">
+              <p class="notification-message">Nouvelle tâche assignée: <strong>Évaluation trimestrielle</strong></p>
+              <span class="notification-time">Hier, 09:15</span>
+            </div>
+          </div>
+        </div>
+        <div class="notification-footer">
+          <a href="notifications.html" class="view-all">Voir toutes les notifications</a>
+        </div>
+      </div>
+      
+      <!-- Dashboard Content -->
+      <div class="dashboard-content">
+        <!-- Sector Selection -->
+        <div class="sector-selector mb-4">
+          <div class="form-group">
+            <label for="sector-select" class="form-label">Zone géographique:</label>
+            <select id="sector-select" class="form-control">
+              <option value="north" selected>Secteur Nord</option>
+              <option value="south">Secteur Sud</option>
+              <option value="east">Secteur Est</option>
+              <option value="west">Secteur Ouest</option>
+              <option value="center">Secteur Centre</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Welcome Message -->
+        <div class="welcome-message mb-4">
+          <h2>Bonjour, Manager Nord 👋</h2>
+          <p>Bienvenue sur le tableau de bord du secteur Nord. Voici un aperçu des boutiques de votre secteur.</p>
+        </div>
+        
+        <!-- Stats Cards -->
+        <div class="dashboard-stats">
+          <div class="stat-card">
+            <div class="stat-icon primary">
+              <i class="fas fa-store"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-value">3</h3>
+              <p class="stat-label">Boutiques</p>
+              <div class="stat-change">
+                <i class="fas fa-plus"></i> Nouvelle boutique ce mois-ci
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon secondary">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-value">24</h3>
+              <p class="stat-label">Employés</p>
+              <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> +2 ce mois
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon info">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-value">95,6%</h3>
+              <p class="stat-label">Taux de présence</p>
+              <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> +1.2% ce mois
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon success">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-value">98,4%</h3>
+              <p class="stat-label">Objectifs</p>
+              <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> +3.4% ce mois
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Store Performance Chart -->
+        <div class="row">
+          <div class="col-8">
+            <div class="chart-container">
+              <div class="chart-header">
+                <h3 class="chart-title">Performance des boutiques</h3>
+                <div class="chart-actions">
+                  <button class="btn btn-sm btn-light">Mensuel</button>
+                  <button class="btn btn-sm btn-light">Exporter</button>
+                </div>
+              </div>
+              <div class="chart-body">
+                <canvas id="storePerformanceChart"></canvas>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-4">
+            <div class="chart-container">
+              <div class="chart-header">
+                <h3 class="chart-title">Répartition des employés</h3>
+                <div class="chart-actions">
+                  <button class="btn btn-sm btn-light">Exporter</button>
+                </div>
+              </div>
+              <div class="chart-body">
+                <canvas id="employeeDistributionChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Stores Overview -->
+        <div class="card mt-4">
+          <div class="card-header">
+            <h3 class="card-title">Aperçu des boutiques</h3>
+            <a href="stores.html" class="btn btn-sm btn-light">Voir tout</a>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Boutique</th>
+                    <th>Responsable</th>
+                    <th>Employés</th>
+                    <th>Performance</th>
+                    <th>Taux de présence</th>
+                    <th>Tickets actifs</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="store-icon me-2 bg-primary">
+                          <i class="fas fa-store"></i>
+                        </div>
+                        <span>Boutique Nord - Centre Commercial</span>
+                      </div>
+                    </td>
+                    <td>Sarah Trabelsi</td>
+                    <td>9</td>
+                    <td>
+                      <div class="progress-small">
+                        <div class="progress-bar" style="width: 95%;"></div>
+                        <span>95%</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="progress-small">
+                        <div class="progress-bar bg-success" style="width: 98%;"></div>
+                        <span>98%</span>
+                      </div>
+                    </td>
+                    <td>5</td>
+                    <td>
+                      <div class="btn-group">
+                        <a href="store-details.html?id=1" class="btn btn-sm btn-light">
+                          <i class="fas fa-eye"></i>
+                        </a>
+                        <button class="btn btn-sm btn-light">
+                          <i class="fas fa-chart-line"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="store-icon me-2 bg-primary">
+                          <i class="fas fa-store"></i>
+                        </div>
+                        <span>Boutique Nord - Avenue Principale</span>
+                      </div>
+                    </td>
+                    <td>Mehdi Selmi</td>
+                    <td>8</td>
+                    <td>
+                      <div class="progress-small">
+                        <div class="progress-bar" style="width: 92%;"></div>
+                        <span>92%</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="progress-small">
+                        <div class="progress-bar bg-success" style="width: 94%;"></div>
+                        <span>94%</span>
+                      </div>
+                    </td>
+                    <td>3</td>
+                    <td>
+                      <div class="btn-group">
+                        <a href="store-details.html?id=2" class="btn btn-sm btn-light">
+                          <i class="fas fa-eye"></i>
+                        </a>
+                        <button class="btn btn-sm btn-light">
+                          <i class="fas fa-chart-line"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="store-icon me-2 bg-primary">
+                          <i class="fas fa-store"></i>
+                        </div>
+                        <span>Boutique Nord - Galerie Marchande</span>
+                      </div>
+                    </td>
+                    <td>Amina Slimani</td>
+                    <td>7</td>
+                    <td>
+                      <div class="progress-small">
+                        <div class="progress-bar" style="width: 88%;"></div>
+                        <span>88%</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="progress-small">
+                        <div class="progress-bar bg-warning" style="width: 85%;"></div>
+                        <span>85%</span>
+                      </div>
+                    </td>
+                    <td>7</td>
+                    <td>
+                      <div class="btn-group">
+                        <a href="store-details.html?id=3" class="btn btn-sm btn-light">
+                          <i class="fas fa-eye"></i>
+                        </a>
+                        <button class="btn btn-sm btn-light">
+                          <i class="fas fa-chart-line"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Recent Activity and Pending Approvals -->
+        <div class="row mt-4">
+          <div class="col-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Activité récente</h3>
+                <a href="#" class="btn btn-sm btn-light">Voir tout</a>
+              </div>
+              <div class="card-body p-0">
+                <ul class="activity-list">
+                  <li class="activity-item">
+                    <div class="activity-icon">
+                      <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="activity-content">
+                      <p class="activity-text"><strong>Sarah Trabelsi</strong> a ajouté un nouvel employé: Yasmine Cherif</p>
+                      <span class="activity-time">Il y a 2 heures</span>
+                    </div>
+                  </li>
+                  <li class="activity-item">
+                    <div class="activity-icon">
+                      <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="activity-content">
+                      <p class="activity-text"><strong>Mehdi Selmi</strong> a complété l'inventaire mensuel</p>
+                      <span class="activity-time">Hier, 14:30</span>
+                    </div>
+                  </li>
+                  <li class="activity-item">
+                    <div class="activity-icon">
+                      <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="activity-content">
+                      <p class="activity-text">La <strong>Boutique Nord - Centre Commercial</strong> a dépassé son objectif mensuel</p>
+                      <span class="activity-time">Hier, 09:15</span>
+                    </div>
+                  </li>
+                  <li class="activity-item">
+                    <div class="activity-icon">
+                      <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="activity-content">
+                      <p class="activity-text">Alerte de retard fréquent pour <strong>Youssef Miled</strong></p>
+                      <span class="activity-time">Avant-hier, 08:45</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Approbations en attente</h3>
+                <a href="#" class="btn btn-sm btn-light">Voir tout</a>
+              </div>
+              <div class="card-body">
+                <div class="approval-list">
+                  <div class="approval-item">
+                    <div class="approval-header">
+                      <div class="approval-type">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Demande de congé</span>
+                      </div>
+                      <div class="approval-badge pending">En attente</div>
+                    </div>
+                    <div class="approval-content">
+                      <p class="approval-text"><strong>Fatma Ben Ali</strong> demande 3 jours de congé annuel</p>
+                      <p class="approval-details">Du 20/05/2025 au 22/05/2025</p>
+                    </div>
+                    <div class="approval-actions">
+                      <button class="btn btn-sm btn-success">
+                        <i class="fas fa-check"></i> Approuver
+                      </button>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-times"></i> Refuser
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div class="approval-item">
+                    <div class="approval-header">
+                      <div class="approval-type">
+                        <i class="fas fa-clock"></i>
+                        <span>Heures supplémentaires</span>
+                      </div>
+                      <div class="approval-badge pending">En attente</div>
+                    </div>
+                    <div class="approval-content">
+                      <p class="approval-text"><strong>Ahmed Karim</strong> a déclaré 5 heures supplémentaires</p>
+                      <p class="approval-details">Semaine du 10/05/2025 au 14/05/2025</p>
+                    </div>
+                    <div class="approval-actions">
+                      <button class="btn btn-sm btn-success">
+                        <i class="fas fa-check"></i> Approuver
+                      </button>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-times"></i> Refuser
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div class="approval-item">
+                    <div class="approval-header">
+                      <div class="approval-type">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Demande d'achat</span>
+                      </div>
+                      <div class="approval-badge pending">En attente</div>
+                    </div>
+                    <div class="approval-content">
+                      <p class="approval-text"><strong>Boutique Nord - Avenue Principale</strong> a demandé du nouveau matériel</p>
+                      <p class="approval-details">2 ordinateurs de caisse pour un total de 2 400 DT</p>
+                    </div>
+                    <div class="approval-actions">
+                      <button class="btn btn-sm btn-success">
+                        <i class="fas fa-check"></i> Approuver
+                      </button>
+                      <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-times"></i> Refuser
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Sidebar Overlay (Mobile) -->
+  <div class="sidebar-overlay"></div>
+  
+  <!-- Scripts -->
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/dashboard.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  
+  <!-- Chart Initialization -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize store performance chart
+      const performanceChart = document.getElementById('storePerformanceChart');
+      if (performanceChart) {
+        const ctx = performanceChart.getContext('2d');
+        
+        // Performance data
+        const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'];
+        const datasets = [
+          {
+            label: 'Boutique Centre Commercial',
+            data: [88, 90, 92, 94, 95, 93, 95, 94, 96, 97, 98, 95],
+            borderColor: 'rgba(59, 89, 152, 1)',
+            backgroundColor: 'rgba(59, 89, 152, 0.1)',
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: 'Boutique Avenue Principale',
+            data: [85, 87, 89, 90, 88, 91, 92, 90, 93, 94, 92, 92],
+            borderColor: 'rgba(237, 69, 15, 1)',
+            backgroundColor: 'rgba(237, 69, 15, 0.1)',
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: 'Boutique Galerie Marchande',
+            data: [82, 84, 83, 85, 87, 86, 88, 87, 86, 89, 88, 88],
+            borderColor: 'rgba(40, 167, 69, 1)',
+            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+            tension: 0.4,
+            fill: true
+          }
+        ];
+        
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: months,
+            datasets: datasets
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: {
+                  usePointStyle: true,
+                  padding: 20
+                }
+              },
+              tooltip: {
+                mode: 'index',
+                intersect: false,
+                callbacks: {
+                  label: function(context) {
+                    return context.dataset.label + ': ' + context.parsed.y + '%';
+                  }
+                }
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: false,
+                min: 80,
+                max: 100,
+                ticks: {
+                  callback: function(value) {
+                    return value + '%';
+                  }
+                }
+              }
+            },
+            interaction: {
+              mode: 'index',
+              intersect: false
+            }
+          }
+        });
+      }
+      
+      // Initialize employee distribution chart
+      const distributionChart = document.getElementById('employeeDistributionChart');
+      if (distributionChart) {
+        const ctx = distributionChart.getContext('2d');
+        
+        new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Boutique Centre Commercial', 'Boutique Avenue Principale', 'Boutique Galerie Marchande'],
+            datasets: [{
+              data: [9, 8, 7],
+              backgroundColor: [
+                'rgba(59, 89, 152, 0.7)',
+                'rgba(237, 69, 15, 0.7)',
+                'rgba(40, 167, 69, 0.7)'
+              ],
+              borderColor: [
+                'rgba(59, 89, 152, 1)',
+                'rgba(237, 69, 15, 1)',
+                'rgba(40, 167, 69, 1)'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  usePointStyle: true,
+                  padding: 20
+                }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    return context.label + ': ' + context.formattedValue + ' employés';
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+      
+      // Handle sector selection
+      const sectorSelect = document.getElementById('sector-select');
+      if (sectorSelect) {
+        sectorSelect.addEventListener('change', function() {
+          // In a real app, this would update the dashboard data
+          // For this prototype, we'll just show a notification
+          
+          const selectedSector = this.options[this.selectedIndex].text;
+          showNotification('Secteur changé', `Vous consultez maintenant les données du ${selectedSector}`);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

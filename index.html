@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mazzaro Milano RH</title>
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+  
+  <!-- Redirect to login page -->
+  <meta http-equiv="refresh" content="0;url=auth/login.html">
+  
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f2f5;
+      text-align: center;
+    }
+    
+    .container {
+      max-width: 500px;
+      padding: 40px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    img {
+      max-width: 200px;
+      margin-bottom: 30px;
+    }
+    
+    h1 {
+      color: #3b5998;
+      margin-bottom: 20px;
+    }
+    
+    p {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(59, 89, 152, 0.1);
+      border-radius: 50%;
+      border-top-color: #3b5998;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #3b5998;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="assets/img/logo.png" alt="Mazzaro Milano">
+    <h1>Système de Gestion RH</h1>
+    <p>Redirection vers la page de connexion...</p>
+    <div class="spinner"></div>
+    <div>
+      <a href="auth/login.html" class="link">Cliquez ici si vous n'êtes pas redirigé automatiquement</a>
+    </div>
+  </div>
+  
+  <script>
+    // Redirect to login page after 2 seconds
+    setTimeout(() => {
+      window.location.href = 'auth/login.html';
+    }, 2000);
+  </script>
+</body>
+</html>

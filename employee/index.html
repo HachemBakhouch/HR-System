@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Employé | Mazzaro Milano RH</title>
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="../assets/img/logo.png" alt="Mazzaro Milano" class="sidebar-logo">
+        <button class="sidebar-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      
+      <ul class="sidebar-menu">
+        <li class="sidebar-item">
+          <a href="index.html" class="sidebar-link active">
+            <i class="fas fa-tachometer-alt sidebar-icon"></i>
+            <span class="sidebar-text">Tableau de bord</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="profile.html" class="sidebar-link">
+            <i class="fas fa-user sidebar-icon"></i>
+            <span class="sidebar-text">Mon profil</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="tickets.html" class="sidebar-link">
+            <i class="fas fa-tasks sidebar-icon"></i>
+            <span class="sidebar-text">Mes tâches</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="attendance.html" class="sidebar-link">
+            <i class="fas fa-clock sidebar-icon"></i>
+            <span class="sidebar-text">Pointage</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="leave.html" class="sidebar-link">
+            <i class="fas fa-calendar-alt sidebar-icon"></i>
+            <span class="sidebar-text">Mes congés</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="calendar.html" class="sidebar-link">
+            <i class="fas fa-calendar-day sidebar-icon"></i>
+            <span class="sidebar-text">Calendrier</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="sidebar-footer">
+        <span>Mazzaro Milano RH v1.0</span>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="page-title">Tableau de bord Employé</h1>
+        
+        <div class="header-actions">
+          <button class="header-action notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">2</span>
+          </button>
+          
+          <div class="user-profile">
+            <div class="user-avatar">
+              <img src="../assets/img/avatars/employee.jpg" alt="Employee Profile">
+            </div>
+            <div class="user-info">
+              <span class="user-name">Ahmed Employe</span>
+              <span class="user-role">Vendeur - Boutique Sud</span>
+            </div>
+            <i class="fas fa-chevron-down dropdown-toggle"></i>
+            
+            <!-- User Dropdown Menu -->
+            <div class="dropdown-menu user-dropdown-menu">
+              <a href="profile.html" class="dropdown-item">
+                <i class="fas fa-user"></i> Mon profil
+              </a>
+              <a href="settings.html" class="dropdown-item">
+                <i class="fas fa-cog"></i> Paramètres
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item" onclick="auth.logout()">
+                <i class="fas fa-sign-out-alt"></i> Se déconnecter
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Notification Panel -->
+      <div class="notification-panel">
+        <div class="notification-header">
+          <h3 class="notification-title">Notifications</h3>
+          <span class="notification-count">2</span>
+        </div>
+        <div class="notification-body">
+          <div class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <div class="notification-content">
+              <p class="notification-message">Nouvelle tâche assignée: <strong>Mise en place des promotions</strong></p>
+              <span class="notification-time">Il y a 1 heure</span>
+            </div>
+          </div>
+          <div class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="notification-content">
+              <p class="notification-message">Votre demande de congé a été <strong>approuvée</strong></p>
+              <span class="notification-time">Hier, 15:30</span>
+            </div>
+          </div>
+        </div>
+        <div class="notification-footer">
+          <a href="notifications.html" class="view-all">Voir toutes les notifications</a>
+        </div>
+      </div>
+      
+      <!-- Dashboard Content -->
+      <div class="dashboard-content">
+        <!-- Welcome Message -->
+        <div class="welcome-message mb-4">
+          <h2>Bonjour, Ahmed 👋</h2>
+          <p>Bienvenue sur votre espace personnel. Voici un aperçu de vos activités et de votre calendrier.</p>
+        </div>
+        
+        <!-- Summary Cards -->
+        <div class="dashboard-stats">
+          <div class="stat-card">
+            <div class="stat-icon primary">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-value">5</h3>
+              <p class="stat-label">Tâches en cours</p>
+              <div class="stat-change">
+                <i class="fas fa-clock"></i> 2 à faire aujourd'hui
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon success">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-value">12</h3>
+              <p class="stat-label">Tâches terminées</p>
+              <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> +3 cette semaine
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon info">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-value">8</h3>
+              <p class="stat-label">Jours de congé restants</p>
+              <div class="stat-change">
+                <i class="fas fa-minus"></i> 2 utilisés ce mois
+              </div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon warning">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="stat-info">
+              <h3 class="stat-value">98%</h3>
+              <p class="stat-label">Taux de ponctualité</p>
+              <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> +2% ce mois
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Recent Activity and Upcoming Tasks -->
+        <div class="row">
+          <div class="col-8">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Mes tâches à faire</h3>
+                <a href="tickets.html" class="btn btn-sm btn-light">Voir tout</a>
+              </div>
+              <div class="card-body">
+                <div class="tasks-list">
+                  <div class="task-item">
+                    <div class="task-checkbox">
+                      <input type="checkbox" id="task1" class="form-check-input">
+                      <label for="task1"></label>
+                    </div>
+                    <div class="task-content">
+                      <h4 class="task-title">Mise en place des promotions saisonnières</h4>
+                      <div class="task-meta">
+                        <span class="task-date"><i class="fas fa-calendar"></i> Échéance: 20 Mai 2025</span>
+                        <span class="task-priority high"><i class="fas fa-flag"></i> Priorité haute</span>
+                      </div>
+                      <div class="task-progress">
+                        <div class="progress-bar">
+                          <div class="progress" style="width: 35%;"></div>
+                        </div>
+                        <span class="progress-text">35%</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="task-item">
+                    <div class="task-checkbox">
+                      <input type="checkbox" id="task2" class="form-check-input">
+                      <label for="task2"></label>
+                    </div>
+                    <div class="task-content">
+                      <h4 class="task-title">Inventaire hebdomadaire des produits</h4>
+                      <div class="task-meta">
+                        <span class="task-date"><i class="fas fa-calendar"></i> Échéance: 21 Mai 2025</span>
+                        <span class="task-priority medium"><i class="fas fa-flag"></i> Priorité moyenne</span>
+                      </div>
+                      <div class="task-progress">
+                        <div class="progress-bar">
+                          <div class="progress" style="width: 10%;"></div>
+                        </div>
+                        <span class="progress-text">10%</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="task-item">
+                    <div class="task-checkbox">
+                      <input type="checkbox" id="task3" class="form-check-input">
+                      <label for="task3"></label>
+                    </div>
+                    <div class="task-content">
+                      <h4 class="task-title">Formation du nouveau vendeur</h4>
+                      <div class="task-meta">
+                        <span class="task-date"><i class="fas fa-calendar"></i> Échéance: 25 Mai 2025</span>
+                        <span class="task-priority low"><i class="fas fa-flag"></i> Priorité basse</span>
+                      </div>
+                      <div class="task-progress">
+                        <div class="progress-bar">
+                          <div class="progress" style="width: 50%;"></div>
+                        </div>
+                        <span class="progress-text">50%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <a href="tickets.html" class="btn btn-primary btn-block mt-3">
+                  <i class="fas fa-tasks"></i> Gérer toutes mes tâches
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-4">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Aujourd'hui</h3>
+                <a href="calendar.html" class="btn btn-sm btn-light">Calendrier</a>
+              </div>
+              <div class="card-body">
+                <div class="today-date">
+                  <div class="date-number">19</div>
+                  <div class="date-details">
+                    <span class="date-day">Lundi</span>
+                    <span class="date-month">Mai 2025</span>
+                  </div>
+                </div>
+                
+                <div class="today-schedule">
+                  <div class="schedule-item">
+                    <div class="schedule-time">08:30 - 16:30</div>
+                    <div class="schedule-content">
+                      <div class="schedule-title">Horaire de travail</div>
+                      <div class="schedule-location"><i class="fas fa-map-marker-alt"></i> Boutique Sud</div>
+                    </div>
+                  </div>
+                  
+                  <div class="schedule-item">
+                    <div class="schedule-time">10:00 - 11:00</div>
+                    <div class="schedule-content">
+                      <div class="schedule-title">Réunion d'équipe</div>
+                      <div class="schedule-location"><i class="fas fa-map-marker-alt"></i> Salle de réunion</div>
+                    </div>
+                  </div>
+                  
+                  <div class="schedule-item">
+                    <div class="schedule-time">14:00 - 15:00</div>
+                    <div class="schedule-content">
+                      <div class="schedule-title">Formation e-commerce</div>
+                      <div class="schedule-location"><i class="fas fa-map-marker-alt"></i> Salle de formation</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="clock-widget">
+                  <div class="current-time">--:--:--</div>
+                  <div class="clock-actions">
+                    <button class="btn btn-primary clock-in">
+                      <i class="fas fa-sign-in-alt"></i> Pointer l'arrivée
+                    </button>
+                    <button class="btn btn-secondary clock-out disabled" disabled>
+                      <i class="fas fa-sign-out-alt"></i> Pointer le départ
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Performance and Leave Request sections -->
+        <div class="row mt-4">
+          <div class="col-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Mes performances</h3>
+                <a href="profile.html" class="btn btn-sm btn-light">Détails</a>
+              </div>
+              <div class="card-body">
+                <div class="performance-chart-container">
+                  <canvas id="performanceChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Demande de congé</h3>
+                <a href="leave.html" class="btn btn-sm btn-light">Historique</a>
+              </div>
+              <div class="card-body">
+                <form id="quickLeaveForm">
+                  <div class="form-group">
+                    <label for="leave-type" class="form-label">Type de congé</label>
+                    <select id="leave-type" class="form-control">
+                      <option value="annual">Congé annuel</option>
+                      <option value="sick">Congé maladie</option>
+                      <option value="personal">Congé personnel</option>
+                      <option value="other">Autre</option>
+                    </select>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="leave-start" class="form-label">Date de début</label>
+                        <input type="date" id="leave-start" class="form-control" min="2025-05-20">
+                      </div>
+                    </div>
+                    
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="leave-end" class="form-label">Date de fin</label>
+                        <input type="date" id="leave-end" class="form-control" min="2025-05-20">
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="leave-reason" class="form-label">Motif</label>
+                    <textarea id="leave-reason" class="form-control" rows="3" placeholder="Décrivez brièvement le motif de votre demande..."></textarea>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-paper-plane"></i> Soumettre la demande
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Sidebar Overlay (Mobile) -->
+  <div class="sidebar-overlay"></div>
+  
+  <!-- Scripts -->
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/dashboard.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  
+  <!-- Initialize employee-specific charts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize performance chart
+      const performanceChart = document.getElementById('performanceChart');
+      if (performanceChart) {
+        const ctx = performanceChart.getContext('2d');
+        
+        // Performance data for last 6 months
+        const months = ['Déc', 'Jan', 'Fév', 'Mar', 'Avr', 'Mai'];
+        
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: months,
+            datasets: [
+              {
+                label: 'Ventes',
+                data: [72, 76, 80, 82, 85, 88],
+                borderColor: 'rgba(59, 89, 152, 1)',
+                backgroundColor: 'rgba(59, 89, 152, 0.1)',
+                tension: 0.4,
+                fill: true
+              },
+              {
+                label: 'Objectif',
+                data: [75, 75, 78, 80, 82, 85],
+                borderColor: 'rgba(237, 69, 15, 1)',
+                backgroundColor: 'transparent',
+                borderDash: [5, 5],
+                tension: 0.4,
+                fill: false
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: {
+                  usePointStyle: true,
+                  padding: 15
+                }
+              },
+              tooltip: {
+                mode: 'index',
+                intersect: false,
+                callbacks: {
+                  label: function(context) {
+                    return context.dataset.label + ': ' + context.parsed.y + '%';
+                  }
+                }
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: false,
+                min: 50,
+                max: 100,
+                ticks: {
+                  callback: function(value) {
+                    return value + '%';
+                  }
+                }
+              }
+            },
+            interaction: {
+              mode: 'index',
+              intersect: false
+            }
+          }
+        });
+      }
+      
+      // Initialize quick leave form 
+      const quickLeaveForm = document.getElementById('quickLeaveForm');
+      if (quickLeaveForm) {
+        quickLeaveForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Basic validation
+          const startDate = document.getElementById('leave-start').value;
+          const endDate = document.getElementById('leave-end').value;
+          const reason = document.getElementById('leave-reason').value;
+          
+          if (!startDate || !endDate || !reason) {
+            alert('Veuillez remplir tous les champs');
+            return;
+          }
+          
+          // In a real app, this would submit the form via API
+          // For this prototype, we'll just show a notification
+          
+          showNotification('Demande envoyée', 'Votre demande de congé a été soumise avec succès');
+          
+          // Reset form
+          this.reset();
+        });
+      }
+      
+      // Initialize clock widget
+      initClockWidget();
+    });
+    
+    // Handle clock in/out functionality
+    function initClockWidget() {
+      const clockElement = document.querySelector('.current-time');
+      const clockInBtn = document.querySelector('.clock-in');
+      const clockOutBtn = document.querySelector('.clock-out');
+      
+      if (clockElement) {
+        // Update clock immediately and then every second
+        updateClock();
+        setInterval(updateClock, 1000);
+      }
+      
+      if (clockInBtn && clockOutBtn) {
+        // Check if already clocked in
+        const isClocked = localStorage.getItem('clockedIn') === 'true';
+        
+        if (isClocked) {
+          clockInBtn.classList.add('disabled');
+          clockInBtn.disabled = true;
+          clockOutBtn.classList.remove('disabled');
+          clockOutBtn.disabled = false;
+        }
+        
+        // Clock in button event
+        clockInBtn.addEventListener('click', function() {
+          const now = new Date();
+          
+          // Store clock in time
+          localStorage.setItem('clockedIn', 'true');
+          localStorage.setItem('clockInTime', now.toISOString());
+          
+          // Update button states
+          this.classList.add('disabled');
+          this.disabled = true;
+          clockOutBtn.classList.remove('disabled');
+          clockOutBtn.disabled = false;
+          
+          // Show notification
+          showNotification('Pointage', `Heure d'arrivée enregistrée: ${formatTime(now)}`);
+        });
+        
+        // Clock out button event
+        clockOutBtn.addEventListener('click', function() {
+          const now = new Date();
+          const clockInTime = localStorage.getItem('clockInTime');
+          
+          let message = `Heure de départ enregistrée: ${formatTime(now)}`;
+          
+          if (clockInTime) {
+            const clockInDate = new Date(clockInTime);
+            const hours = Math.floor((now - clockInDate) / (1000 * 60 * 60));
+            const minutes = Math.floor(((now - clockInDate) % (1000 * 60 * 60)) / (1000 * 60));
+            
+            message += `<br>Durée de travail: ${hours}h ${minutes}min`;
+          }
+          
+          // Reset clock status
+          localStorage.setItem('clockedIn', 'false');
+          localStorage.removeItem('clockInTime');
+          
+          // Update button states
+          this.classList.add('disabled');
+          this.disabled = true;
+          clockInBtn.classList.remove('disabled');
+          clockInBtn.disabled = false;
+          
+          // Show notification
+          showNotification('Pointage', message);
+        });
+      }
+    }
+    
+    // Update clock display
+    function updateClock() {
+      const timeElement = document.querySelector('.current-time');
+      if (timeElement) {
+        const now = new Date();
+        timeElement.textContent = formatTime(now);
+      }
+    }
+    
+    // Format time as HH:MM:SS
+    function formatTime(date) {
+      return date.toLocaleTimeString('fr-FR', { 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit',
+        hour12: false
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Profil | Mazzaro Milano RH</title>
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  
+  <style>
+    /* Additional profile-specific styles */
+    .profile-header {
+      background-color: #fff;
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-sm);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+      display: flex;
+      align-items: center;
+    }
+    
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: var(--spacing-xl);
+      border: 5px solid rgba(59, 89, 152, 0.1);
+    }
+    
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .profile-details {
+      flex-grow: 1;
+    }
+    
+    .profile-name {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--dark-gray);
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .profile-position {
+      font-size: 1.1rem;
+      color: var(--medium-gray);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .profile-stats {
+      display: flex;
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-md);
+    }
+    
+    .profile-stat {
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--medium-gray);
+      text-transform: uppercase;
+    }
+    
+    .profile-actions {
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+    
+    .nav-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--light-gray);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .nav-tab {
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--medium-gray);
+      transition: all 0.2s ease;
+    }
+    
+    .nav-tab:hover {
+      color: var(--primary-color);
+    }
+    
+    .nav-tab.active {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+    }
+    
+    .tab-content {
+      background-color: #fff;
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-sm);
+      padding: var(--spacing-lg);
+    }
+    
+    .tab-pane {
+      display: none;
+    }
+    
+    .tab-pane.active {
+      display: block;
+    }
+    
+    .profile-form-row {
+      display: flex;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .profile-form-group {
+      flex: 1;
+    }
+    
+    .avatar-upload {
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .avatar-upload input[type="file"] {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    
+    .avatar-upload-icon {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background-color: var(--primary-color);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .performance-review {
+      background-color: #fff;
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-sm);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .performance-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .performance-date {
+      color: var(--medium-gray);
+      font-size: 0.9rem;
+    }
+    
+    .rating-stars {
+      color: #ffc107;
+      font-size: 1.2rem;
+    }
+    
+    .criteria-item {
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .criteria-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .criteria-name {
+      font-weight: 500;
+    }
+    
+    .criteria-score {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    
+    .criteria-bar {
+      height: 6px;
+      background-color: var(--light-gray);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    
+    .criteria-progress {
+      height: 100%;
+      background-color: var(--primary-color);
+      border-radius: 3px;
+    }
+    
+    .qualification-item {
+      background-color: #f9f9f9;
+      border-radius: var(--border-radius-md);
+      padding: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .qualification-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .qualification-date {
+      color: var(--medium-gray);
+      font-size: 0.9rem;
+    }
+    
+    .task-history-item {
+      display: flex;
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    
+    .task-history-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: var(--spacing-md);
+      flex-shrink: 0;
+    }
+    
+    .task-history-icon.completed {
+      background-color: rgba(40, 167, 69, 0.1);
+      color: var(--success-color);
+    }
+    
+    .task-history-icon.assigned {
+      background-color: rgba(59, 89, 152, 0.1);
+      color: var(--primary-color);
+    }
+    
+    .task-history-details {
+      flex-grow: 1;
+    }
+    
+    .task-history-title {
+      font-weight: 500;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .task-history-meta {
+      font-size: 0.85rem;
+      color: var(--medium-gray);
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .attendance-record {
+      margin-top: var(--spacing-md);
+    }
+    
+    .attendance-month {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .attendance-day {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      border-radius: 50%;
+      border: 1px solid var(--light-gray);
+    }
+    
+    .attendance-day.present {
+      background-color: rgba(40, 167, 69, 0.1);
+      color: var(--success-color);
+      border-color: var(--success-color);
+    }
+    
+    .attendance-day.absent {
+      background-color: rgba(220, 53, 69, 0.1);
+      color: var(--danger-color);
+      border-color: var(--danger-color);
+    }
+    
+    .attendance-day.late {
+      background-color: rgba(255, 193, 7, 0.1);
+      color: var(--warning-color);
+      border-color: var(--warning-color);
+    }
+    
+    .attendance-day.weekend {
+      background-color: var(--light-gray);
+      color: var(--medium-gray);
+    }
+    
+    .attendance-day.holiday {
+      background-color: rgba(23, 162, 184, 0.1);
+      color: var(--info-color);
+      border-color: var(--info-color);
+    }
+    
+    .attendance-day.future {
+      background-color: transparent;
+      color: var(--medium-gray);
+      border-color: var(--light-gray);
+    }
+    
+    .leave-balance {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .leave-balance-item {
+      background-color: rgba(59, 89, 152, 0.1);
+      border-radius: var(--border-radius-md);
+      padding: var(--spacing-md);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .leave-balance-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    
+    .leave-balance-label {
+      font-size: 0.85rem;
+      color: var(--medium-gray);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="../assets/img/logo.png" alt="Mazzaro Milano" class="sidebar-logo">
+        <button class="sidebar-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      
+      <ul class="sidebar-menu">
+        <li class="sidebar-item">
+          <a href="index.html" class="sidebar-link">
+            <i class="fas fa-tachometer-alt sidebar-icon"></i>
+            <span class="sidebar-text">Tableau de bord</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="profile.html" class="sidebar-link active">
+            <i class="fas fa-user sidebar-icon"></i>
+            <span class="sidebar-text">Mon profil</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="tickets.html" class="sidebar-link">
+            <i class="fas fa-tasks sidebar-icon"></i>
+            <span class="sidebar-text">Mes tâches</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="attendance.html" class="sidebar-link">
+            <i class="fas fa-clock sidebar-icon"></i>
+            <span class="sidebar-text">Pointage</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="leave.html" class="sidebar-link">
+            <i class="fas fa-calendar-alt sidebar-icon"></i>
+            <span class="sidebar-text">Mes congés</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="calendar.html" class="sidebar-link">
+            <i class="fas fa-calendar-day sidebar-icon"></i>
+            <span class="sidebar-text">Calendrier</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="sidebar-footer">
+        <span>Mazzaro Milano RH v1.0</span>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="page-title">Mon Profil</h1>
+        
+        <div class="header-actions">
+          <button class="header-action notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">2</span>
+          </button>
+          
+          <div class="user-profile">
+            <div class="user-avatar">
+              <img src="../assets/img/avatars/employee.jpg" alt="Employee Profile">
+            </div>
+            <div class="user-info">
+              <span class="user-name">Ahmed Employe</span>
+              <span class="user-role">Vendeur - Boutique Sud</span>
+            </div>
+            <i class="fas fa-chevron-down dropdown-toggle"></i>
+            
+            <!-- User Dropdown Menu -->
+            <div class="dropdown-menu user-dropdown-menu">
+              <a href="profile.html" class="dropdown-item">
+                <i class="fas fa-user"></i> Mon profil
+              </a>
+              <a href="settings.html" class="dropdown-item">
+                <i class="fas fa-cog"></i> Paramètres
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item" onclick="auth.logout()">
+                <i class="fas fa-sign-out-alt"></i> Se déconnecter
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Notification Panel -->
+      <div class="notification-panel">
+        <div class="notification-header">
+          <h3 class="notification-title">Notifications</h3>
+          <span class="notification-count">2</span>
+        </div>
+        <div class="notification-body">
+          <div class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <div class="notification-content">
+              <p class="notification-message">Nouvelle tâche assignée: <strong>Mise en place des promotions</strong></p>
+              <span class="notification-time">Il y a 1 heure</span>
+            </div>
+          </div>
+          <div class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="notification-content">
+              <p class="notification-message">Votre demande de congé a été <strong>approuvée</strong></p>
+              <span class="notification-time">Hier, 15:30</span>
+            </div>
+          </div>
+        </div>
+        <div class="notification-footer">
+          <a href="notifications.html" class="view-all">Voir toutes les notifications</a>
+        </div>
+      </div>
+      
+      <!-- Profile Content -->
+      <div class="dashboard-content">
+        <!-- Profile Header -->
+        <div class="profile-header">
+          <div class="avatar-upload">
+            <div class="profile-avatar">
+              <img src="../assets/img/avatars/employee.jpg" alt="Ahmed Employe">
+            </div>
+            <input type="file" accept="image/*">
+            <div class="avatar-upload-icon">
+              <i class="fas fa-camera"></i>
+            </div>
+          </div>
+          
+          <div class="profile-details">
+            <h2 class="profile-name">Ahmed Employe</h2>
+            <div class="profile-position">Vendeur - Boutique Sud</div>
+            <div class="profile-meta">
+              <span><i class="fas fa-id-card"></i> ID: EMP002</span>
+              <span class="ml-3"><i class="fas fa-calendar-alt"></i> Employé depuis: 03/06/2023</span>
+            </div>
+            
+            <div class="profile-stats">
+              <div class="profile-stat">
+                <div class="stat-value">98%</div>
+                <div class="stat-label">Présence</div>
+              </div>
+              <div class="profile-stat">
+                <div class="stat-value">88%</div>
+                <div class="stat-label">Performance</div>
+              </div>
+              <div class="profile-stat">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Tâches terminées</div>
+              </div>
+              <div class="profile-stat">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Jours de congé restants</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="profile-actions">
+            <button class="btn btn-primary" id="editProfileBtn">
+              <i class="fas fa-edit"></i> Modifier
+            </button>
+          </div>
+        </div>
+        
+        <!-- Profile Navigation Tabs -->
+        <div class="nav-tabs">
+          <div class="nav-tab active" data-tab="infos">Informations personnelles</div>
+          <div class="nav-tab" data-tab="performance">Performance</div>
+          <div class="nav-tab" data-tab="qualifications">Qualifications</div>
+          <div class="nav-tab" data-tab="tasks">Historique des tâches</div>
+          <div class="nav-tab" data-tab="attendance">Présence</div>
+          <div class="nav-tab" data-tab="leave">Congés</div>
+        </div>
+        
+        <!-- Profile Tab Content -->
+        <div class="tab-content">
+          <!-- Personal Information Tab -->
+          <div class="tab-pane active" id="infos">
+            <h3 class="mb-3">Informations personnelles</h3>
+            
+            <form id="profileForm">
+              <div class="profile-form-row">
+                <div class="profile-form-group">
+                  <label for="firstName" class="form-label">Prénom</label>
+                  <input type="text" id="firstName" class="form-control" value="Ahmed" disabled>
+                </div>
+                
+                <div class="profile-form-group">
+                  <label for="lastName" class="form-label">Nom</label>
+                  <input type="text" id="lastName" class="form-control" value="Karim" disabled>
+                </div>
+              </div>
+              
+              <div class="profile-form-row">
+                <div class="profile-form-group">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" id="email" class="form-control" value="ahmed.k@mazzaro.com" disabled>
+                </div>
+                
+                <div class="profile-form-group">
+                  <label for="phone" class="form-label">Téléphone</label>
+                  <input type="tel" id="phone" class="form-control" value="+216 29 234 567" disabled>
+                </div>
+              </div>
+              
+              <div class="profile-form-row">
+                <div class="profile-form-group">
+                  <label for="birthDate" class="form-label">Date de naissance</label>
+                  <input type="date" id="birthDate" class="form-control" value="1995-07-22" disabled>
+                </div>
+                
+                <div class="profile-form-group">
+                  <label for="hireDate" class="form-label">Date d'embauche</label>
+                  <input type="date" id="hireDate" class="form-control" value="2023-06-03" disabled>
+                </div>
+              </div>
+              
+              <div class="profile-form-row">
+                <div class="profile-form-group">
+                  <label for="position" class="form-label">Poste</label>
+                  <input type="text" id="position" class="form-control" value="Vendeur" disabled>
+                </div>
+                
+                <div class="profile-form-group">
+                  <label for="department" class="form-label">Boutique</label>
+                  <input type="text" id="department" class="form-control" value="Boutique Sud" disabled>
+                </div>
+              </div>
+              
+              <div class="profile-form-group">
+                <label for="address" class="form-label">Adresse</label>
+                <textarea id="address" class="form-control" rows="3" disabled>Avenue Habib Bourguiba, Tunis</textarea>
+              </div>
+              
+              <div class="form-actions mt-4" style="display: none;">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save"></i> Enregistrer
+                </button>
+                <button type="button" class="btn btn-light" id="cancelEditBtn">
+                  <i class="fas fa-times"></i> Annuler
+                </button>
+              </div>
+            </form>
+            
+            <div class="card mt-4">
+              <div class="card-header">
+                <h4 class="card-title">Modifier le mot de passe</h4>
+              </div>
+              <div class="card-body">
+                <form id="passwordForm">
+                  <div class="profile-form-row">
+                    <div class="profile-form-group">
+                      <label for="currentPassword" class="form-label">Mot de passe actuel</label>
+                      <div class="password-field">
+                        <input type="password" id="currentPassword" class="form-control">
+                        <button type="button" class="password-toggle">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="profile-form-row">
+                    <div class="profile-form-group">
+                      <label for="newPassword" class="form-label">Nouveau mot de passe</label>
+                      <div class="password-field">
+                        <input type="password" id="newPassword" class="form-control">
+                        <button type="button" class="password-toggle">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                      </div>
+                    </div>
+                    
+                    <div class="profile-form-group">
+                      <label for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
+                      <div class="password-field">
+                        <input type="password" id="confirmPassword" class="form-control">
+                        <button type="button" class="password-toggle">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="password-requirements mt-2 mb-3">
+                    <small class="text-medium-gray">Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.</small>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-lock"></i> Changer le mot de passe
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Performance Tab -->
+          <div class="tab-pane" id="performance">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h3>Évaluations de performance</h3>
+              
+              <div class="performance-filter">
+                <select class="form-control">
+                  <option value="2025">2025</option>
+                  <option value="2024">2024</option>
+                  <option value="2023">2023</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="performance-chart-container mb-4">
+              <canvas id="performanceChart" height="250"></canvas>
+            </div>
+            
+            <div class="performance-reviews">
+              <div class="performance-review">
+                <div class="performance-header">
+                  <h4>Évaluation trimestrielle - Q1 2025</h4>
+                  <div class="performance-date">15 Avril 2025</div>
+                </div>
+                
+                <div class="rating-stars mb-3">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <i class="far fa-star"></i>
+                  <span class="ml-2">3.5/5</span>
+                </div>
+                
+                <div class="criteria-items">
+                  <div class="criteria-item">
+                    <div class="criteria-header">
+                      <div class="criteria-name">Service client</div>
+                      <div class="criteria-score">4.2/5</div>
+                    </div>
+                    <div class="criteria-bar">
+                      <div class="criteria-progress" style="width: 84%"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="criteria-item">
+                    <div class="criteria-header">
+                      <div class="criteria-name">Connaissances des produits</div>
+                      <div class="criteria-score">3.8/5</div>
+                    </div>
+                    <div class="criteria-bar">
+                      <div class="criteria-progress" style="width: 76%"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="criteria-item">
+                    <div class="criteria-header">
+                      <div class="criteria-name">Objectifs de vente</div>
+                      <div class="criteria-score">3.5/5</div>
+                    </div>
+                    <div class="criteria-bar">
+                      <div class="criteria-progress" style="width: 70%"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="criteria-item">
+                    <div class="criteria-header">
+                      <div class="criteria-name">Travail d'équipe</div>
+                      <div class="criteria-score">3.9/5</div>
+                    </div>
+                    <div class="criteria-bar">
+                      <div class="criteria-progress" style="width: 78%"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="criteria-item">
+                    <div class="criteria-header">
+                      <div class="criteria-name">Ponctualité</div>
+                      <div class="criteria-score">4.5/5</div>
+                    </div>
+                    <div class="criteria-bar">
+                      <div class="criteria-progress" style="width: 90%"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="comments-section mt-3">
+                  <div class="comments-label">Commentaires du responsable:</div>
+                  <div class="comments-text">
+                    Ahmed montre une excellente attitude de service client et une bonne ponctualité. Il doit continuer à améliorer ses connaissances des produits et ses techniques de vente pour atteindre plus régulièrement ses objectifs commerciaux. Son travail d'équipe est apprécié par ses collègues.
+                  </div>
+                </div>
+              </div>
+              
+              <div class="performance-review">
+                <div class="performance-header">
+                  <h4>Évaluation trimestrielle - Q4 2024</h4>
+                  <div class="performance-date">15 Janvier 2025</div>
+                </div>
+                
+                <div class="rating-stars mb-3">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <span class="ml-2">3.0/5</span>
+                </div>
+                
+                <div class="criteria-items">
+                  <div class="criteria-item">
+                    <div class="criteria-header">
+                      <div class="criteria-name">Service client</div>
+                      <div class="criteria-score">3.8/5</div>
+                    </div>
+                    <div class="criteria-bar">
+                      <div class="criteria-progress" style="width: 76%"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="criteria-item">
+                    <div class="criteria-header">
+                      <div class="criteria-name">Connaissances des produits</div>
+                      <div class="criteria-score">3.2/5</div>
+                    </div>
+                    <div class="criteria-bar">
+                      <div class="criteria-progress" style="width: 64%"></div>
+                    </div>
+                  </div>

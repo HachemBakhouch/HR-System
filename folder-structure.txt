@@ -1,0 +1,79 @@
+mazzaro-hr-system/
+│
+├── assets/
+│   ├── css/
+│   │   ├── main.css
+│   │   ├── login.css
+│   │   ├── dashboard.css
+│   │   └── components.css
+│   │
+│   ├── js/
+│   │   ├── main.js
+│   │   ├── auth.js
+│   │   ├── dashboard.js
+│   │   ├── tickets.js
+│   │   ├── attendance.js
+│   │   ├── leave.js
+│   │   ├── calendar.js
+│   │   ├── employees.js
+│   │   └── charts.js
+│   │
+│   ├── img/
+│   │   ├── logo.png
+│   │   ├── icons/
+│   │   ├── backgrounds/
+│   │   └── avatars/
+│   │
+│   └── fonts/
+│       └── [font files]
+│
+├── auth/
+│   ├── login.html
+│   ├── forgot-password.html
+│   └── reset-password.html
+│
+├── admin/
+│   ├── index.html (dashboard)
+│   ├── employees.html
+│   ├── tickets.html
+│   ├── attendance.html
+│   ├── leave.html
+│   ├── calendar.html
+│   ├── statistics.html
+│   ├── settings.html
+│   └── evaluations.html
+│
+├── sector/
+│   ├── index.html (dashboard)
+│   ├── employees.html
+│   ├── tickets.html
+│   ├── attendance.html
+│   ├── leave.html
+│   ├── calendar.html
+│   └── statistics.html
+│
+├── store/
+│   ├── index.html (dashboard)
+│   ├── employees.html
+│   ├── tickets.html
+│   ├── attendance.html
+│   ├── leave.html
+│   └── calendar.html
+│
+├── employee/
+│   ├── index.html (dashboard)
+│   ├── profile.html
+│   ├── tickets.html
+│   ├── attendance.html
+│   ├── leave.html
+│   └── calendar.html
+│
+├── components/
+│   ├── sidebar.html
+│   ├── header.html
+│   ├── footer.html
+│   ├── ticket-card.html
+│   ├── employee-card.html
+│   └── modals.html
+│
+└── index.html (redirect to login)
