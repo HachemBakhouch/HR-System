@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pointage | Mazzaro Milano RH</title>
-  
+
   <!-- Favicon -->
   <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
-  
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../assets/css/main.css">
   <link rel="stylesheet" href="../assets/css/dashboard.css">
   <link rel="stylesheet" href="../assets/css/components.css">
 </head>
+
 <body>
   <div class="app-container">
     <!-- Sidebar -->
@@ -34,7 +38,7 @@
           <i class="fas fa-bars"></i>
         </button>
       </div>
-      
+
       <ul class="sidebar-menu">
         <li class="sidebar-item">
           <a href="index.html" class="sidebar-link">
@@ -73,24 +77,24 @@
           </a>
         </li>
       </ul>
-      
+
       <div class="sidebar-footer">
         <span>Mazzaro Milano RH v1.0</span>
       </div>
     </aside>
-    
+
     <!-- Main Content -->
     <div class="main-content">
       <!-- Header -->
       <header class="header">
         <h1 class="page-title">Pointage & Présence</h1>
-        
+
         <div class="header-actions">
           <button class="header-action notification-btn">
             <i class="fas fa-bell"></i>
             <span class="notification-badge">2</span>
           </button>
-          
+
           <div class="user-profile">
             <div class="user-avatar">
               <img src="../assets/img/avatars/employee.jpg" alt="Employee Profile">
@@ -100,7 +104,7 @@
               <span class="user-role">Vendeur - Boutique Sud</span>
             </div>
             <i class="fas fa-chevron-down dropdown-toggle"></i>
-            
+
             <!-- User Dropdown Menu -->
             <div class="dropdown-menu user-dropdown-menu">
               <a href="profile.html" class="dropdown-item">
@@ -117,7 +121,7 @@
           </div>
         </div>
       </header>
-      
+
       <!-- Notification Panel -->
       <div class="notification-panel">
         <div class="notification-header">
@@ -148,7 +152,7 @@
           <a href="notifications.html" class="view-all">Voir toutes les notifications</a>
         </div>
       </div>
-      
+
       <!-- Attendance Content -->
       <div class="attendance-content">
         <!-- Clock Widget -->
@@ -178,7 +182,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Attendance Summary and Chart -->
         <div class="row mt-4">
           <div class="col-8">
@@ -202,7 +206,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="col-4">
             <div class="card">
               <div class="card-header">
@@ -217,7 +221,7 @@
                       <div class="progress-bar bg-primary" style="width: 81%;"></div>
                     </div>
                   </div>
-                  
+
                   <div class="summary-item">
                     <div class="summary-label">Heures travaillées</div>
                     <div class="summary-value">134.5h / 168h</div>
@@ -225,7 +229,7 @@
                       <div class="progress-bar bg-primary" style="width: 80%;"></div>
                     </div>
                   </div>
-                  
+
                   <div class="summary-item">
                     <div class="summary-label">Ponctualité</div>
                     <div class="summary-value">98%</div>
@@ -233,7 +237,7 @@
                       <div class="progress-bar bg-success" style="width: 98%;"></div>
                     </div>
                   </div>
-                  
+
                   <div class="summary-item">
                     <div class="summary-label">Jours de congé</div>
                     <div class="summary-value">2 / 21</div>
@@ -241,7 +245,7 @@
                       <div class="progress-bar bg-info" style="width: 9.5%;"></div>
                     </div>
                   </div>
-                  
+
                   <div class="summary-item">
                     <div class="summary-label">Absences</div>
                     <div class="summary-value">1 / 21</div>
@@ -249,7 +253,7 @@
                       <div class="progress-bar bg-danger" style="width: 4.8%;"></div>
                     </div>
                   </div>
-                  
+
                   <div class="summary-item">
                     <div class="summary-label">Retards</div>
                     <div class="summary-value">2 / 21</div>
@@ -262,7 +266,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Attendance Calendar -->
         <div class="row mt-4">
           <div class="col-12">
@@ -304,7 +308,7 @@
                       <div class="day-number">5</div>
                       <div class="day-status weekend">Weekend</div>
                     </div>
-                    
+
                     <div class="day-cell">
                       <div class="day-number">6</div>
                       <div class="day-status present">08:29 - 16:35</div>
@@ -333,7 +337,7 @@
                       <div class="day-number">12</div>
                       <div class="day-status weekend">Weekend</div>
                     </div>
-                    
+
                     <div class="day-cell">
                       <div class="day-number">13</div>
                       <div class="day-status absent">Absent</div>
@@ -362,7 +366,7 @@
                       <div class="day-number">19</div>
                       <div class="day-status weekend">Weekend</div>
                     </div>
-                    
+
                     <div class="day-cell today">
                       <div class="day-number">20</div>
                       <div class="day-status current">08:30 - --:--</div>
@@ -391,7 +395,7 @@
                       <div class="day-number">26</div>
                       <div class="day-status weekend">Weekend</div>
                     </div>
-                    
+
                     <div class="day-cell">
                       <div class="day-number">27</div>
                       <div class="day-status future"></div>
@@ -416,7 +420,7 @@
                     <div class="day-cell other-month">2</div>
                   </div>
                 </div>
-                
+
                 <div class="calendar-legend mt-3">
                   <div class="legend-item">
                     <div class="legend-color present"></div>
@@ -447,7 +451,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Recent Attendance Records -->
         <div class="row mt-4">
           <div class="col-12">
@@ -590,26 +594,26 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Sidebar Overlay (Mobile) -->
   <div class="sidebar-overlay"></div>
-  
+
   <!-- Scripts -->
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/attendance.js"></script>
   <script src="../assets/js/auth.js"></script>
-  
+
   <!-- Additional Scripts -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // Initialize attendance chart
       const attendanceChart = document.getElementById('attendanceChart');
       if (attendanceChart) {
         const ctx = attendanceChart.getContext('2d');
-        
+
         // Days of the month
-        const days = Array.from({length: 31}, (_, i) => i + 1);
-        
+        const days = Array.from({ length: 31 }, (_, i) => i + 1);
+
         // Sample data for hours worked each day
         const hoursData = [
           0, 8, 8, 0, 0, // 1-5
@@ -618,7 +622,7 @@
           8, 0, 0, 0, 0, 0, 0, // 20-26
           0, 0, 0, 0, 0 // 27-31
         ];
-        
+
         // Expected working hours (8 hours on weekdays, 0 on weekends)
         const expectedData = [
           0, 8, 8, 0, 0, // 1-5 (May 2025 starts with Thursday)
@@ -627,7 +631,7 @@
           8, 8, 8, 8, 8, 0, 0, // 20-26
           8, 8, 8, 8, 8 // 27-31
         ];
-        
+
         new Chart(ctx, {
           type: 'bar',
           data: {
@@ -690,29 +694,59 @@
           }
         });
       }
-      
+
       // Update clock display
       updateClock();
       setInterval(updateClock, 1000);
-      
+
       // Clock in/out functionality
       const clockInBtn = document.querySelector('.clock-in');
       const clockOutBtn = document.querySelector('.clock-out');
-      
+
       if (clockInBtn && clockOutBtn) {
         // Clock out button event
-        clockOutBtn.addEventListener('click', function() {
+        clockOutBtn.addEventListener('click', function () {
           // Record clock out time
           const now = new Date();
-          
+
           // Display confirmation modal
           if (confirm('Êtes-vous sûr de vouloir pointer votre départ ?')) {
             // Reset clock status
             localStorage.setItem('clockedIn', 'false');
             localStorage.removeItem('clockInTime');
-            
+
             // Update button states
             this.classList.add('disabled');
             this.disabled = true;
             clockInBtn.classList.remove('disabled');
-            clockInBtn.disabled = false
+            clockInBtn.disabled = false;
+
+            // Show notification
+            showNotification('Pointage', `Heure de départ enregistrée: ${formatTime(now)}`);
+          }
+        });
+      }
+    });
+
+    // Update clock display
+    function updateClock() {
+      const timeElement = document.querySelector('.current-time');
+      if (timeElement) {
+        const now = new Date();
+        timeElement.textContent = formatTime(now);
+      }
+    }
+
+    // Format time as HH:MM:SS
+    function formatTime(date) {
+      return date.toLocaleTimeString('fr-FR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+    }
+  </script>
+</body>
+
+</html>
