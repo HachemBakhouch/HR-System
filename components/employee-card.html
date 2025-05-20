@@ -1,174 +1,202 @@
 <!-- Employee Card Component for Mazzaro Milano HR System -->
-<!-- This component represents a single employee card that can be reused throughout the system -->
+<!-- This component can be included in pages that need to display employee cards -->
 
-<div class="employee-card" data-id="${employeeId}" data-store="${employeeStore}">
-  <div class="employee-cover" style="background-color: ${coverColor}"></div>
+<div class="employee-card" id="employee-{{employeeId}}">
+  <div class="employee-cover" style="background-color: {{coverColor}}"></div>
   <div class="employee-avatar">
-    <img src="${employeeAvatar}" alt="${employeeName}">
+    <img src="{{avatarUrl}}" alt="{{employeeName}}">
   </div>
   <div class="employee-info">
-    <h3 class="employee-name">${employeeName}</h3>
-    <div class="employee-position">${employeePosition} - ${employeeStore}</div>
+    <h3 class="employee-name">{{employeeName}}</h3>
+    <div class="employee-position">{{employeePosition}}</div>
     
     <div class="employee-stats">
       <div class="employee-stat">
-        <div class="stat-number">${attendanceRate}</div>
+        <div class="stat-number">{{attendanceRate}}%</div>
         <div class="stat-label">Présence</div>
       </div>
       <div class="employee-stat">
-        <div class="stat-number">${tasksCompleted}</div>
-        <div class="stat-label">Tâches</div>
-      </div>
-      <div class="employee-stat">
-        <div class="stat-number">${performanceScore}</div>
+        <div class="stat-number">{{performanceRate}}%</div>
         <div class="stat-label">Performance</div>
       </div>
     </div>
     
     <div class="employee-rating">
-      ${ratingStars}
+      {{#each stars}}
+        <i class="fas {{this}}"></i>
+      {{/each}}
     </div>
     
     <div class="employee-actions">
-      <button class="employee-action" data-action="view" data-id="${employeeId}">
+      <a href="employee-details.html?id={{employeeId}}" class="employee-action">
         <i class="fas fa-eye"></i> Voir
-      </button>
-      <button class="employee-action" data-action="edit" data-id="${employeeId}">
-        <i class="fas fa-edit"></i> Modifier
-      </button>
-      <button class="employee-action" data-action="evaluate" data-id="${employeeId}">
+      </a>
+      <a href="#" class="employee-action" onclick="showEmployeeTasksModal('{{employeeId}}')">
+        <i class="fas fa-tasks"></i> Tâches
+      </a>
+      <a href="#" class="employee-action" onclick="showEmployeeEvalModal('{{employeeId}}')">
         <i class="fas fa-star"></i> Évaluer
-      </button>
+      </a>
     </div>
   </div>
 </div>
 
 <script>
-  // Function to generate the employee card HTML
-  function createEmployeeCard(employee) {
-    // Generate cover color based on employee store or department
-    let coverColor = 'var(--primary-color)';
-    switch (employee.store.code) {
-      case 'north':
-        coverColor = 'var(--primary-color)';
-        break;
-      case 'south':
-        coverColor = 'var(--secondary-color)';
-        break;
-      case 'east':
-        coverColor = 'var(--success-color)';
-        break;
-      case 'west':
-        coverColor = 'var(--info-color)';
-        break;
-      case 'center':
-        coverColor = 'var(--warning-color)';
-        break;
-    }
-    
-    // Generate rating stars based on performance score
-    let ratingStars = '';
-    const rating = Math.round(parseFloat(employee.performanceScore) / 20); // Convert percentage to 5-star rating
-    
-    for (let i = 1; i <= 5; i++) {
-      if (i <= rating) {
-        ratingStars += '<i class="fas fa-star"></i>';
-      } else if (i === rating + 0.5) {
-        ratingStars += '<i class="fas fa-star-half-alt"></i>';
-      } else {
-        ratingStars += '<i class="far fa-star"></i>';
-      }
-    }
-    
-    // Generate employee actions based on user role
-    let actionsHtml = '';
-    const userRole = getUserRole(); // Function to get current user role
-    
-    if (userRole === 'admin' || userRole === 'sector') {
-      actionsHtml = `
-        <button class="employee-action" data-action="view" data-id="${employee.id}">
-          <i class="fas fa-eye"></i> Voir
-        </button>
-        <button class="employee-action" data-action="edit" data-id="${employee.id}">
-          <i class="fas fa-edit"></i> Modifier
-        </button>
-        <button class="employee-action" data-action="evaluate" data-id="${employee.id}">
-          <i class="fas fa-star"></i> Évaluer
-        </button>
-      `;
-    } else if (userRole === 'store') {
-      actionsHtml = `
-        <button class="employee-action" data-action="view" data-id="${employee.id}">
-          <i class="fas fa-eye"></i> Voir
-        </button>
-        <button class="employee-action" data-action="evaluate" data-id="${employee.id}">
-          <i class="fas fa-star"></i> Évaluer
-        </button>
-        <button class="employee-action" data-action="tasks" data-id="${employee.id}">
-          <i class="fas fa-tasks"></i> Tâches
-        </button>
-      `;
+/**
+ * Renders an employee card with the provided data
+ * @param {Object} employeeData - The employee data object
+ * @param {string} employeeData.id - Employee ID
+ * @param {string} employeeData.name - Employee name
+ * @param {string} employeeData.position - Employee position
+ * @param {string} employeeData.avatar - URL to employee avatar image
+ * @param {number} employeeData.attendance - Attendance rate (0-100)
+ * @param {number} employeeData.performance - Performance rate (0-100)
+ * @param {number} employeeData.rating - Rating (0-5)
+ * @param {string} [employeeData.coverColor] - Cover background color (optional)
+ * @returns {string} HTML string of the employee card
+ */
+function renderEmployeeCard(employeeData) {
+  // Generate star icons based on rating
+  const stars = [];
+  const rating = employeeData.rating || 0;
+  
+  for (let i = 1; i <= 5; i++) {
+    if (i <= Math.floor(rating)) {
+      stars.push('fa-star'); // Full star
+    } else if (i === Math.ceil(rating) && !Number.isInteger(rating)) {
+      stars.push('fa-star-half-alt'); // Half star
     } else {
-      actionsHtml = `
-        <button class="employee-action" data-action="view" data-id="${employee.id}">
-          <i class="fas fa-eye"></i> Voir
-        </button>
-      `;
-    }
-    
-    // Format attendance rate with % symbol
-    const attendanceRate = employee.attendanceRate + '%';
-    
-    // Prepare the template with the employee data
-    const template = document.getElementById('employee-card-template').innerHTML
-      .replace('${employeeId}', employee.id)
-      .replace('${employeeStore}', employee.store.code)
-      .replace('${coverColor}', coverColor)
-      .replace('${employeeAvatar}', employee.avatar)
-      .replace('${employeeName}', employee.name)
-      .replace('${employeePosition}', employee.position)
-      .replace('${employeeStore}', employee.store.name)
-      .replace('${attendanceRate}', attendanceRate)
-      .replace('${tasksCompleted}', employee.tasksCompleted)
-      .replace('${performanceScore}', employee.performanceScore + '%')
-      .replace('${ratingStars}', ratingStars)
-      .replace('${employeeActions}', actionsHtml);
-    
-    return template;
-  }
-  
-  // Function to handle employee action clicks
-  function handleEmployeeAction(event) {
-    const actionButton = event.target.closest('.employee-action');
-    if (!actionButton) return;
-    
-    const action = actionButton.getAttribute('data-action');
-    const employeeId = actionButton.getAttribute('data-id');
-    
-    switch (action) {
-      case 'view':
-        viewEmployeeProfile(employeeId);
-        break;
-      case 'edit':
-        editEmployeeProfile(employeeId);
-        break;
-      case 'evaluate':
-        evaluateEmployee(employeeId);
-        break;
-      case 'tasks':
-        viewEmployeeTasks(employeeId);
-        break;
+      stars.push('fa-star far'); // Empty star (using regular style)
     }
   }
   
-  // Function to get current user role
-  function getUserRole() {
-    return window.auth ? window.auth.getUserRole() : 'employee';
+  // Replace placeholders with actual data
+  const template = document.getElementById('employee-card-template').innerHTML;
+  return template
+    .replace(/\{\{employeeId\}\}/g, employeeData.id)
+    .replace(/\{\{employeeName\}\}/g, employeeData.name)
+    .replace(/\{\{employeePosition\}\}/g, employeeData.position)
+    .replace(/\{\{avatarUrl\}\}/g, employeeData.avatar || '../assets/img/avatars/default.jpg')
+    .replace(/\{\{attendanceRate\}\}/g, employeeData.attendance || 0)
+    .replace(/\{\{performanceRate\}\}/g, employeeData.performance || 0)
+    .replace(/\{\{coverColor\}\}/g, employeeData.coverColor || 'var(--primary-color)')
+    .replace(/\{\{#each stars\}\}(.*?)\{\{\/each\}\}/s, stars.map(star => {
+      return `<i class="fas ${star}"></i>`;
+    }).join(''));
+}
+
+/**
+ * Shows the employee tasks modal
+ * @param {string} employeeId - The employee ID
+ */
+function showEmployeeTasksModal(employeeId) {
+  // Implementation would show a modal with employee tasks
+  console.log(`Showing tasks for employee ${employeeId}`);
+  // In a real implementation, this would trigger a modal to show
+  if (typeof ModalUtils !== 'undefined') {
+    // Load tasks for this employee and display in a modal
+    ModalUtils.show('taskDetailsModal');
+    
+    // In a real app, you'd fetch tasks for this employee from the server
+    // Here we just update the modal title
+    document.getElementById('taskDetailTitle').textContent = 
+      `Tâches assignées à l'employé #${employeeId}`;
   }
-  
-  // Initialize employee actions
-  document.addEventListener('DOMContentLoaded', function() {
-    // Add event delegation for employee actions
-    document.addEventListener('click', handleEmployeeAction);
-  });
+}
+
+/**
+ * Shows the employee evaluation modal
+ * @param {string} employeeId - The employee ID 
+ */
+function showEmployeeEvalModal(employeeId) {
+  // Implementation would show a modal for evaluating the employee
+  console.log(`Showing evaluation form for employee ${employeeId}`);
+  // In a real implementation, this would trigger a modal to show
+  if (typeof ModalUtils !== 'undefined') {
+    // Load evaluation form for this employee
+    ModalUtils.show('evaluationModal');
+    
+    // In a real app, you'd fetch employee data from the server
+    // Here we just update the modal title
+    document.getElementById('evalEmployeeName').textContent = 
+      `Évaluation de l'employé #${employeeId}`;
+  }
+}
 </script>
+
+<!-- Hidden template for use with the rendering function -->
+<script type="text/template" id="employee-card-template">
+  <div class="employee-card" id="employee-{{employeeId}}">
+    <div class="employee-cover" style="background-color: {{coverColor}}"></div>
+    <div class="employee-avatar">
+      <img src="{{avatarUrl}}" alt="{{employeeName}}">
+    </div>
+    <div class="employee-info">
+      <h3 class="employee-name">{{employeeName}}</h3>
+      <div class="employee-position">{{employeePosition}}</div>
+      
+      <div class="employee-stats">
+        <div class="employee-stat">
+          <div class="stat-number">{{attendanceRate}}%</div>
+          <div class="stat-label">Présence</div>
+        </div>
+        <div class="employee-stat">
+          <div class="stat-number">{{performanceRate}}%</div>
+          <div class="stat-label">Performance</div>
+        </div>
+      </div>
+      
+      <div class="employee-rating">
+        {{#each stars}}
+          <i class="fas {{this}}"></i>
+        {{/each}}
+      </div>
+      
+      <div class="employee-actions">
+        <a href="employee-details.html?id={{employeeId}}" class="employee-action">
+          <i class="fas fa-eye"></i> Voir
+        </a>
+        <a href="#" class="employee-action" onclick="showEmployeeTasksModal('{{employeeId}}')">
+          <i class="fas fa-tasks"></i> Tâches
+        </a>
+        <a href="#" class="employee-action" onclick="showEmployeeEvalModal('{{employeeId}}')">
+          <i class="fas fa-star"></i> Évaluer
+        </a>
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- Example usage -->
+<!-- 
+<div class="employee-grid">
+  <script>
+    // Example data (in a real app, this would come from an API)
+    const employees = [
+      {
+        id: "emp001",
+        name: "Ahmed Karim",
+        position: "Vendeur - Boutique Sud",
+        avatar: "../assets/img/avatars/employee.jpg",
+        attendance: 98,
+        performance: 87,
+        rating: 4.5,
+        coverColor: "var(--primary-color)"
+      },
+      {
+        id: "emp002",
+        name: "Fatma Ben Ali",
+        position: "Vendeuse - Boutique Nord",
+        avatar: "../assets/img/avatars/employee2.jpg",
+        attendance: 95,
+        performance: 92,
+        rating: 4,
+        coverColor: "var(--secondary-color)"
+      }
+    ];
+    
+    // Render employee cards
+    document.write(employees.map(emp => renderEmployeeCard(emp)).join(''));
+  </script>
+</div>
+-->
