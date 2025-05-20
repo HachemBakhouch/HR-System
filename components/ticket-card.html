@@ -1,0 +1,148 @@
+<!-- Ticket Card Component for Mazzaro Milano HR System -->
+<!-- This component represents a single ticket/task card that can be reused throughout the system -->
+
+<div class="ticket-item" data-id="${ticketId}" data-date="${ticketDate}" data-store="${ticketStore}">
+  <div class="ticket-header">
+    <div class="ticket-id">
+      <i class="fas fa-hashtag"></i>
+      ${ticketRef}
+    </div>
+    <div class="ticket-status ${ticketStatus}">${ticketStatusText}</div>
+  </div>
+  <div class="ticket-body">
+    <h3 class="ticket-title">${ticketTitle}</h3>
+    <p class="ticket-description">${ticketDescription}</p>
+    <div class="ticket-meta">
+      <div class="ticket-date">
+        <i class="fas fa-calendar-alt"></i>
+        ${ticketDueDate}
+      </div>
+      <div class="ticket-priority ${ticketPriority}">
+        <i class="fas fa-flag"></i>
+        ${ticketPriorityText}
+      </div>
+    </div>
+    <div class="ticket-assignees">
+      ${ticketAssignees}
+    </div>
+  </div>
+  <div class="ticket-footer">
+    <div class="ticket-store">
+      <i class="fas fa-store"></i>
+      ${ticketStoreText}
+    </div>
+    <div class="ticket-actions">
+      ${ticketActions}
+    </div>
+  </div>
+</div>
+
+<script>
+  // Function to generate the ticket card HTML
+  function createTicketCard(ticket) {
+    // Status text mapping
+    const statusText = {
+      'new': 'Nouveau',
+      'in-progress': 'En cours',
+      'review': 'En révision',
+      'completed': 'Terminé',
+      'rejected': 'Rejeté'
+    };
+    
+    // Priority text mapping
+    const priorityText = {
+      'high': 'Priorité haute',
+      'medium': 'Priorité moyenne',
+      'low': 'Priorité basse'
+    };
+    
+    // Generate assignees HTML
+    let assigneesHtml = '';
+    if (ticket.assignees && ticket.assignees.length > 0) {
+      ticket.assignees.forEach((assignee, index) => {
+        if (index < 3) { // Show max 3 assignees directly
+          assigneesHtml += `
+            <div class="ticket-assignee">
+              <img src="${assignee.avatar}" alt="${assignee.name}">
+            </div>
+          `;
+        }
+      });
+      
+      // If there are more assignees, show a count
+      if (ticket.assignees.length > 3) {
+        assigneesHtml += `
+          <div class="ticket-assignee-count">
+            +${ticket.assignees.length - 3}
+          </div>
+        `;
+      }
+    }
+    
+    // Generate actions HTML based on ticket status
+    let actionsHtml = '';
+    
+    if (ticket.status === 'completed' || ticket.status === 'rejected') {
+      actionsHtml = `
+        <button class="ticket-action" data-action="view-details">
+          <i class="fas fa-eye"></i> Voir détails
+        </button>
+      `;
+    } else {
+      actionsHtml = `
+        <button class="ticket-action" data-action="update-status">
+          <i class="fas fa-check-circle"></i> Mise à jour
+        </button>
+        <button class="ticket-action" data-action="comment">
+          <i class="fas fa-comment"></i> Commenter
+        </button>
+      `;
+    }
+    
+    // Prepare the template with the ticket data
+    const template = document.getElementById('ticket-card-template').innerHTML
+      .replace('${ticketId}', ticket.id)
+      .replace('${ticketDate}', ticket.dueDate)
+      .replace('${ticketStore}', ticket.store.code)
+      .replace('${ticketRef}', ticket.reference)
+      .replace('${ticketStatus}', ticket.status)
+      .replace('${ticketStatusText}', statusText[ticket.status] || 'Inconnu')
+      .replace('${ticketTitle}', ticket.title)
+      .replace('${ticketDescription}', ticket.description)
+      .replace('${ticketDueDate}', ticket.formattedDueDate)
+      .replace('${ticketPriority}', ticket.priority)
+      .replace('${ticketPriorityText}', priorityText[ticket.priority] || 'Normale')
+      .replace('${ticketAssignees}', assigneesHtml)
+      .replace('${ticketStoreText}', ticket.store.name)
+      .replace('${ticketActions}', actionsHtml);
+    
+    return template;
+  }
+  
+  // Function to handle ticket action clicks
+  function handleTicketAction(event) {
+    const actionButton = event.target.closest('.ticket-action');
+    if (!actionButton) return;
+    
+    const action = actionButton.getAttribute('data-action');
+    const ticketId = actionButton.closest('.ticket-item').getAttribute('data-id');
+    
+    switch (action) {
+      case 'update-status':
+        showStatusUpdateModal(ticketId);
+        break;
+      case 'comment':
+        showCommentModal(ticketId);
+        break;
+      case 'view-details':
+        showTicketDetailsModal(ticketId);
+        break;
+    }
+  }
+  
+  // Initialize ticket actions
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add event delegation for ticket actions
+    document.addEventListener('click', handleTicketAction);
+  });
+</script>

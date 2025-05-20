@@ -1,0 +1,174 @@
+<!-- Employee Card Component for Mazzaro Milano HR System -->
+<!-- This component represents a single employee card that can be reused throughout the system -->
+
+<div class="employee-card" data-id="${employeeId}" data-store="${employeeStore}">
+  <div class="employee-cover" style="background-color: ${coverColor}"></div>
+  <div class="employee-avatar">
+    <img src="${employeeAvatar}" alt="${employeeName}">
+  </div>
+  <div class="employee-info">
+    <h3 class="employee-name">${employeeName}</h3>
+    <div class="employee-position">${employeePosition} - ${employeeStore}</div>
+    
+    <div class="employee-stats">
+      <div class="employee-stat">
+        <div class="stat-number">${attendanceRate}</div>
+        <div class="stat-label">Présence</div>
+      </div>
+      <div class="employee-stat">
+        <div class="stat-number">${tasksCompleted}</div>
+        <div class="stat-label">Tâches</div>
+      </div>
+      <div class="employee-stat">
+        <div class="stat-number">${performanceScore}</div>
+        <div class="stat-label">Performance</div>
+      </div>
+    </div>
+    
+    <div class="employee-rating">
+      ${ratingStars}
+    </div>
+    
+    <div class="employee-actions">
+      <button class="employee-action" data-action="view" data-id="${employeeId}">
+        <i class="fas fa-eye"></i> Voir
+      </button>
+      <button class="employee-action" data-action="edit" data-id="${employeeId}">
+        <i class="fas fa-edit"></i> Modifier
+      </button>
+      <button class="employee-action" data-action="evaluate" data-id="${employeeId}">
+        <i class="fas fa-star"></i> Évaluer
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Function to generate the employee card HTML
+  function createEmployeeCard(employee) {
+    // Generate cover color based on employee store or department
+    let coverColor = 'var(--primary-color)';
+    switch (employee.store.code) {
+      case 'north':
+        coverColor = 'var(--primary-color)';
+        break;
+      case 'south':
+        coverColor = 'var(--secondary-color)';
+        break;
+      case 'east':
+        coverColor = 'var(--success-color)';
+        break;
+      case 'west':
+        coverColor = 'var(--info-color)';
+        break;
+      case 'center':
+        coverColor = 'var(--warning-color)';
+        break;
+    }
+    
+    // Generate rating stars based on performance score
+    let ratingStars = '';
+    const rating = Math.round(parseFloat(employee.performanceScore) / 20); // Convert percentage to 5-star rating
+    
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        ratingStars += '<i class="fas fa-star"></i>';
+      } else if (i === rating + 0.5) {
+        ratingStars += '<i class="fas fa-star-half-alt"></i>';
+      } else {
+        ratingStars += '<i class="far fa-star"></i>';
+      }
+    }
+    
+    // Generate employee actions based on user role
+    let actionsHtml = '';
+    const userRole = getUserRole(); // Function to get current user role
+    
+    if (userRole === 'admin' || userRole === 'sector') {
+      actionsHtml = `
+        <button class="employee-action" data-action="view" data-id="${employee.id}">
+          <i class="fas fa-eye"></i> Voir
+        </button>
+        <button class="employee-action" data-action="edit" data-id="${employee.id}">
+          <i class="fas fa-edit"></i> Modifier
+        </button>
+        <button class="employee-action" data-action="evaluate" data-id="${employee.id}">
+          <i class="fas fa-star"></i> Évaluer
+        </button>
+      `;
+    } else if (userRole === 'store') {
+      actionsHtml = `
+        <button class="employee-action" data-action="view" data-id="${employee.id}">
+          <i class="fas fa-eye"></i> Voir
+        </button>
+        <button class="employee-action" data-action="evaluate" data-id="${employee.id}">
+          <i class="fas fa-star"></i> Évaluer
+        </button>
+        <button class="employee-action" data-action="tasks" data-id="${employee.id}">
+          <i class="fas fa-tasks"></i> Tâches
+        </button>
+      `;
+    } else {
+      actionsHtml = `
+        <button class="employee-action" data-action="view" data-id="${employee.id}">
+          <i class="fas fa-eye"></i> Voir
+        </button>
+      `;
+    }
+    
+    // Format attendance rate with % symbol
+    const attendanceRate = employee.attendanceRate + '%';
+    
+    // Prepare the template with the employee data
+    const template = document.getElementById('employee-card-template').innerHTML
+      .replace('${employeeId}', employee.id)
+      .replace('${employeeStore}', employee.store.code)
+      .replace('${coverColor}', coverColor)
+      .replace('${employeeAvatar}', employee.avatar)
+      .replace('${employeeName}', employee.name)
+      .replace('${employeePosition}', employee.position)
+      .replace('${employeeStore}', employee.store.name)
+      .replace('${attendanceRate}', attendanceRate)
+      .replace('${tasksCompleted}', employee.tasksCompleted)
+      .replace('${performanceScore}', employee.performanceScore + '%')
+      .replace('${ratingStars}', ratingStars)
+      .replace('${employeeActions}', actionsHtml);
+    
+    return template;
+  }
+  
+  // Function to handle employee action clicks
+  function handleEmployeeAction(event) {
+    const actionButton = event.target.closest('.employee-action');
+    if (!actionButton) return;
+    
+    const action = actionButton.getAttribute('data-action');
+    const employeeId = actionButton.getAttribute('data-id');
+    
+    switch (action) {
+      case 'view':
+        viewEmployeeProfile(employeeId);
+        break;
+      case 'edit':
+        editEmployeeProfile(employeeId);
+        break;
+      case 'evaluate':
+        evaluateEmployee(employeeId);
+        break;
+      case 'tasks':
+        viewEmployeeTasks(employeeId);
+        break;
+    }
+  }
+  
+  // Function to get current user role
+  function getUserRole() {
+    return window.auth ? window.auth.getUserRole() : 'employee';
+  }
+  
+  // Initialize employee actions
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add event delegation for employee actions
+    document.addEventListener('click', handleEmployeeAction);
+  });
+</script>
