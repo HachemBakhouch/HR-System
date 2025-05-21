@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluations | Mazzaro Milano RH</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+
+    <style>
+        /* Evaluation specific styles */
+        .evaluation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .evaluation-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .evaluation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .evaluation-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .evaluation-title {
+            font-weight: 600;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .evaluation-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .evaluation-status.pending {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: var(--warning-color);
+        }
+
+        .evaluation-status.completed {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: var(--success-color);
+        }
+
+        .evaluation-status.upcoming {
+            background-color: rgba(23, 162, 184, 0.2);
+            color: var(--info-color);
+        }
+
+        .evaluation-body {
+            padding: var(--spacing-md);
+        }
+
+        .evaluation-info {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .employee-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .employee-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: var(--spacing-md);
+            flex-shrink: 0;
+        }
+
+        .employee-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .employee-details {
+            flex-grow: 1;
+        }
+
+        .employee-name {
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 3px;
+        }
+
+        .employee-position {
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+        }
+
+        .employee-store {
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+        }
+
+        .evaluation-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .evaluation-period,
+        .evaluation-date {
+            display: flex;
+            align-items: center;
+        }
+
+        .evaluation-period i,
+        .evaluation-date i {
+            margin-right: 5px;
+        }
+
+        .evaluation-rating {
+            display: flex;
+            align-items: center;
+            margin-top: var(--spacing-md);
+        }
+
+        .rating-stars {
+            margin-right: var(--spacing-sm);
+            color: #ffc107;
+        }
+
+        .rating-value {
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .rating-category {
+            margin-left: auto;
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+        }
+
+        .evaluation-progress {
+            margin-top: var(--spacing-md);
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-value {
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .progress-value.excellent {
+            background-color: var(--success-color);
+        }
+
+        .progress-value.good {
+            background-color: var(--primary-color);
+        }
+
+        .progress-value.average {
+            background-color: var(--warning-color);
+        }
+
+        .progress-value.poor {
+            background-color: var(--danger-color);
+        }
+
+        .evaluation-footer {
+            display: flex;
+            padding: var(--spacing-md);
+            border-top: 1px solid var(--light-gray);
+            background-color: rgba(59, 89, 152, 0.03);
+        }
+
+        .evaluation-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--medium-gray);
+            margin-right: var(--spacing-md);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .evaluation-action:hover {
+            color: var(--primary-color);
+        }
+
+        .evaluation-action i {
+            margin-right: 5px;
+        }
+
+        .evaluation-tab-content {
+            display: none;
+        }
+
+        .evaluation-tab-content.active {
+            display: block;
+        }
+
+        .evaluation-filters {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .template-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .template-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .template-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .template-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .template-description {
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .template-details {
+            display: flex;
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .template-creation-date {
+            margin-right: var(--spacing-md);
+        }
+
+        .template-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+        }
+
+        .criteria-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .criteria-item:last-child {
+            border-bottom: none;
+        }
+
+        .criteria-name {
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        .criteria-weight {
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+            background-color: rgba(59, 89, 152, 0.1);
+            padding: 3px 8px;
+            border-radius: 50px;
+        }
+
+        .report-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .report-header {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .report-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .report-body {
+            padding: var(--spacing-md);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/img/logo.png" alt="Mazzaro Milano" class="sidebar-logo">
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="index.html" class="sidebar-link">
+                        <i class="fas fa-tachometer-alt sidebar-icon"></i>
+                        <span class="sidebar-text">Tableau de bord</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="employees.html" class="sidebar-link">
+                        <i class="fas fa-users sidebar-icon"></i>
+                        <span class="sidebar-text">Employés</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="tickets.html" class="sidebar-link">
+                        <i class="fas fa-tasks sidebar-icon"></i>
+                        <span class="sidebar-text">Tickets & Tâches</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="attendance.html" class="sidebar-link">
+                        <i class="fas fa-clock sidebar-icon"></i>
+                        <span class="sidebar-text">Pointage & Présence</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="leave.html" class="sidebar-link">
+                        <i class="fas fa-calendar-alt sidebar-icon"></i>
+                        <span class="sidebar-text">Congés</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="calendar.html" class="sidebar-link">
+                        <i class="fas fa-calendar-day sidebar-icon"></i>
+                        <span class="sidebar-text">Calendrier</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="statistics.html" class="sidebar-link">
+                        <i class="fas fa-chart-bar sidebar-icon"></i>
+                        <span class="sidebar-text">Statistiques</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="evaluations.html" class="sidebar-link active">
+                        <i class="fas fa-star sidebar-icon"></i>
+                        <span class="sidebar-text">Évaluations</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="settings.html" class="sidebar-link">
+                        <i class="fas fa-cog sidebar-icon"></i>
+                        <span class="sidebar-text">Paramètres</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <span>Mazzaro Milano RH v1.0</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1 class="page-title">Évaluations</h1>
+
+                <div class="header-actions">
+                    <button class="header-action notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </button>
+
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img src="../assets/img/avatars/admin.jpg" alt="Admin Profile">
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">Admin Mazzaro</span>
+                            <span class="user-role">Super Administrateur</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-toggle"></i>
+
+                        <!-- User Dropdown Menu -->
+                        <div class="dropdown-menu user-dropdown-menu">
+                            <a href="profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i> Mon profil
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Paramètres
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="auth.logout()">
+                                <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Notification Panel -->
+            <div class="notification-panel">
+                <div class="notification-header">
+                    <h3 class="notification-title">Notifications</h3>
+                    <span class="notification-count">5</span>
+                </div>
+                <div class="notification-body">
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Nouvel employé ajouté: <strong>Sarah Trabelsi</strong></p>
+                            <span class="notification-time">Il y a 10 minutes</span>
+                        </div>
+                    </div>
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Retard de <strong>Ahmed Karim</strong> - Boutique Sud</p>
+                            <span class="notification-time">Il y a 1 heure</span>
+                        </div>
+                    </div>
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Nouvelle demande de congé de <strong>Fatma Ben Ali</strong>
+                            </p>
+                            <span class="notification-time">Il y a 3 heures</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="notification-footer">
+                    <a href="notifications.html" class="view-all">Voir toutes les notifications</a>
+                </div>
+            </div>
+
+            <!-- Evaluations Content -->
+            <div class="evaluations-content">
+                <!-- Tabs Navigation -->
+                <ul class="nav-tabs">
+                    <li class="nav-tab active" data-tab="evaluations">Évaluations en cours</li>
+                    <li class="nav-tab" data-tab="templates">Modèles d'évaluation</li>
+                    <li class="nav-tab" data-tab="reports">Rapports</li>
+                </ul>
+
+                <!-- Evaluations Tab Content -->
+                <div class="evaluation-tab-content active" id="evaluations-tab">
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div class="evaluation-filters">
+                            <div>
+                                <select class="form-control" id="status-filter">
+                                    <option value="all">Tous les statuts</option>
+                                    <option value="pending">En attente</option>
+                                    <option value="upcoming">À venir</option>
+                                    <option value="completed">Terminées</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select class="form-control" id="store-filter">
+                                    <option value="all">Toutes les boutiques</option>
+                                    <option value="north">Boutique Nord</option>
+                                    <option value="south">Boutique Sud</option>
+                                    <option value="east">Boutique Est</option>
+                                    <option value="west">Boutique Ouest</option>
+                                    <option value="center">Boutique Centre</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select class="form-control" id="period-filter">
+                                    <option value="all">Toutes les périodes</option>
+                                    <option value="q1-2025">Q1 2025</option>
+                                    <option value="q2-2025" selected>Q2 2025</option>
+                                    <option value="q3-2025">Q3 2025</option>
+                                    <option value="q4-2025">Q4 2025</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" id="newEvaluationBtn">
+                            <i class="fas fa-plus"></i> Nouvelle évaluation
+                        </button>
+                    </div>
+
+                    <!-- Evaluations Grid -->
+                    <div class="evaluation-grid">
+                        <!-- Evaluation Card -->
+                        <div class="evaluation-card">
+                            <div class="evaluation-header">
+                                <h3 class="evaluation-title">Évaluation trimestrielle - Q2 2025</h3>
+                                <div class="evaluation-status pending">En attente</div>
+                            </div>
+                            <div class="evaluation-body">
+                                <div class="employee-info">
+                                    <div class="employee-avatar">
+                                        <img src="../assets/img/avatars/employee.jpg" alt="Ahmed Karim">
+                                    </div>
+                                    <div class="employee-details">
+                                        <h4 class="employee-name">Ahmed Karim</h4>
+                                        <div class="employee-position">Vendeur</div>
+                                        <div class="employee-store">Boutique Sud</div>
+                                    </div>
+                                </div>
+
+                                <div class="evaluation-meta">
+                                    <div class="evaluation-period">
+                                        <i class="fas fa-calendar-week"></i> T2 2025
+                                    </div>
+                                    <div class="evaluation-date">
+                                        <i class="fas fa-clock"></i> À compléter avant: 31/05/2025
+                                    </div>
+                                </div>
+
+                                <div class="evaluation-progress">
+                                    <div class="progress-label">
+                                        <span>Avancement</span>
+                                        <span>65%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-value good" style="width: 65%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="evaluation-footer">
+                                <a href="#" class="evaluation-action" data-action="view">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <a href="#" class="evaluation-action" data-action="edit">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </a>
+                                <a href="#" class="evaluation-action" data-action="send">
+                                    <i class="fas fa-paper-plane"></i> Envoyer
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Evaluation Card -->
+                        <div class="evaluation-card">
+                            <div class="evaluation-header">
+                                <h3 class="evaluation-title">Évaluation trimestrielle - Q2 2025</h3>
+                                <div class="evaluation-status pending">En attente</div>
+                            </div>
+                            <div class="evaluation-body">
+                                <div class="employee-info">
+                                    <div class="employee-avatar">
+                                        <img src="../assets/img/avatars/employee2.jpg" alt="Fatma Ben Ali">
+                                    </div>
+                                    <div class="employee-details">
+                                        <h4 class="employee-name">Fatma Ben Ali</h4>
+                                        <div class="employee-position">Vendeuse</div>
+                                        <div class="employee-store">Boutique Nord</div>
+                                    </div>
+                                </div>
+
+                                <div class="evaluation-meta">
+                                    <div class="evaluation-period">
+                                        <i class="fas fa-calendar-week"></i> T2 2025
+                                    </div>
+                                    <div class="evaluation-date">
+                                        <i class="fas fa-clock"></i> À compléter avant: 31/05/2025
+                                    </div>
+                                </div>
+
+                                <div class="evaluation-progress">
+                                    <div class="progress-label">
+                                        <span>Avancement</span>
+                                        <span>40%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-value average" style="width: 40%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="evaluation-footer">
+                                <a href="#" class="evaluation-action" data-action="view">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <a href="#" class="evaluation-action" data-action="edit">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </a>
+                                <a href="#" class="evaluation-action" data-action="send">
+                                    <i class="fas fa-paper-plane"></i> Envoyer
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Evaluation Card -->
+                        <div class="evaluation-card">
+                            <div class="evaluation-header">
+                                <h3 class="evaluation-title">Évaluation trimestrielle - Q2 2025</h3>
+                                <div class="evaluation-status completed">Terminée</div>
+                            </div>
+                            <div class="evaluation-body">
+                                <div class="employee-info">
+                                    <div class="employee-avatar">
+                                        <img src="../assets/img/avatars/employee3.jpg" alt="Youssef Miled">
+                                    </div>
+                                    <div class="employee-details">
+                                        <h4 class="employee-name">Youssef Miled</h4>
+                                        <div class="employee-position">Vendeur</div>
+                                        <div class="employee-store">Boutique Est</div>
+                                    </div>
+                                </div>
+
+                                <div class="evaluation-meta">
+                                    <div class="evaluation-period">
+                                        <i class="fas fa-calendar-week"></i> T2 2025
+                                    </div>
+                                    <div class="evaluation-date">
+                                        <i class="fas fa-clock"></i> Complétée le: 15/05/2025
+                                    </div>
+                                </div>
+
+                                <div class="evaluation-rating">
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="rating-value">4.5/5</span>
+                                    <span class="rating-category">Excellent</span>
+                                </div>
+                            </div>
+                            <div class="evaluation-footer">
+                                <a href="#" class="evaluation-action" data-action="view">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <a href="#" class="evaluation-action" data-action="download">
+                                    <i class="fas fa-download"></i> Télécharger
+                                </a>
+                                <a href="#" class="evaluation-action" data-action="share">
+                                    <i class="fas fa-share-alt"></i> Partager
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Evaluation Card -->
+                        <div class="evaluation-card">
+                            <div class="evaluation-header">
+                                <h3 class="evaluation-title">Évaluation trimestrielle - Q2 2025</h3>
+                                <div class="evaluation-status completed">Terminée</div>
+                            </div>
+                            <div class="evaluation-body">
+                                <div class="employee-info">
+                                    <div class="employee-avatar">
+                                        <img src="../assets/img/avatars/employee4.jpg" alt="Sarah Trabelsi">
+                                    </div>
+                                    <div class="employee-details">
+                                        <h4 class="employee-name">Sarah Trabelsi</h4>
+                                        <div class="employee-position">Vendeuse</div>
+                                        <div class="employee-store">Boutique Ouest</div>
+                                    </div>
+                                </div>
+
+                                <div class="evaluation-meta">
+                                    <div class="evaluation-period">
+                                        <i class="fas fa-calendar-week"></i> T2 2025
+                                    </div>
+                                    <div class="evaluation-date">
+                                        <i class="fas fa-clock"></i> Complétée le: 16/05/2025
+                                    </div>
+                                </div>
+
+                                <div class="evaluation-rating">
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="rating-value">4.0/5</span>
+                                    <span class="rating-category">Très bon</span>
+                                </div>
+                            </div>
+                            <div class="evaluation-footer">
+                                <a href="#" class="evaluation-action" data-action="view">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <a href="#" class="evaluation-action" data-action="download">
+                                    <i class="fas fa-download"></i> Télécharger
+                                </a>
+                                <a href="#" class="evaluation-action" data-action="share">
+                                    <i class="fas fa-share-alt"></i> Partager
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Evaluation Card -->
+                        <div class="evaluation-card">
+                            <div class="evaluation-header">
+                                <h3 class="evaluation-title">Évaluation trimestrielle - Q2 2025</h3>
+                                <div class="evaluation-status upcoming">À venir</div>
+                            </div>
+                            <div class="evaluation-body">
+                                <div class="employee-info">
+                                    <div class="employee-avatar">
+                                        <img src="../assets/img/avatars/employee5.jpg" alt="Mehdi Selmi">
+                                    </div>
+                                    <div class="employee-details">
+                                        <h4 class="employee-name">Mehdi Selmi</h4>
+                                        <div class="employee-position">Responsable</div>
+                                        <div class="employee-store">Boutique Centre</div>
+                                    </div>
+                                </div>
+
+                                <div class="evaluation-meta">
+                                    <div class="evaluation-period">
+                                        <i class="fas fa-calendar-week"></i> T2 2025
+                                    </div>
+                                    <div class="evaluation-date">
+                                        <i class="fas fa-clock"></i> Prévue pour: 25/05/2025
+                                    </div>
+                                </div>
+
+                                <div class="evaluation-progress">
+                                    <div class="progress-label">
+                                        <span>Préparation</span>
+                                        <span>15%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-value" style="width: 15%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="evaluation-footer">
+                                <a href="#" class="evaluation-action" data-action="view">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <a href="#" class="evaluation-action" data-action="edit">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </a>
+                                <a href="#" class="evaluation-action" data-action="schedule">
+                                    <i class="fas fa-calendar-alt"></i> Planifier
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Evaluation Card -->
+                        <div class="evaluation-card">
+                            <div class="evaluation-header">
+                                <h3 class="evaluation-title">Évaluation trimestrielle - Q2 2025</h3>
+                                <div class="evaluation-status upcoming">À venir</div>
+                            </div>
+                            <div class="evaluation-body">
+                                <div class="employee-info">
+                                    <div class="employee-avatar">
+                                        <img src="../assets/img/avatars/employee6.jpg" alt="Amina Slimani">
+                                    </div>
+                                    <div class="employee-details">
+                                        <h4 class="employee-name">Amina Slimani</h4>
+                                        <div class="employee-position">Responsable</div>
+                                        <div class="employee-store">Boutique Nord</div>
+                                    </div>
+                                </div>
+
+                                <div class="evaluation-meta">
+                                    <div class="evaluation-period">
+                                        <i class="fas fa-calendar-week"></i> T2 2025
+                                    </div>
+                                    <div class="evaluation-date">
+                                        <i class="fas fa-clock"></i> Prévue pour: 27/05/2025
+                                    </div>
+                                </div>
+
+                                <div class="evaluation-progress">
+                                    <div class="progress-label">
+                                        <span>Préparation</span>
+                                        <span>10%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-value" style="width: 10%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="evaluation-footer">
+                                <a href="#" class="evaluation-action" data-action="view">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <a href="#" class="evaluation-action" data-action="edit">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </a>
+                                <a href="#" class="evaluation-action" data-action="schedule">
+                                    <i class="fas fa-calendar-alt"></i> Planifier
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Templates Tab Content -->
+                <div class="evaluation-tab-content" id="templates-tab">
+                    <div class="template-header">
+                        <h3>Modèles d'évaluation</h3>
+                        <button class="btn btn-primary" id="newTemplateBtn">
+                            <i class="fas fa-plus"></i> Nouveau modèle
+                        </button>
+                    </div>
+
+                    <div class="template-list">
+                        <!-- Template Card -->
+                        <div class="template-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="template-title">Évaluation standard des vendeurs</h4>
+                                <div class="template-badge">
+                                    <span class="badge badge-primary">Modèle par défaut</span>
+                                </div>
+                            </div>
+
+                            <p class="template-description">
+                                Modèle standard pour l'évaluation des vendeurs, incluant les critères de performance
+                                commerciale, service client et connaissances produits.
+                            </p>
+
+                            <div class="template-details">
+                                <div class="template-creation-date">
+                                    <i class="fas fa-calendar-alt"></i> Créé le: 15/01/2025
+                                </div>
+                                <div class="template-last-update">
+                                    <i class="fas fa-edit"></i> Dernière mise à jour: 10/03/2025
+                                </div>
+                            </div>
+
+                            <div class="criteria-list">
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Performance commerciale</div>
+                                    <div class="criteria-weight">35%</div>
+                                </div>
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Service client</div>
+                                    <div class="criteria-weight">30%</div>
+                                </div>
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Connaissances produits</div>
+                                    <div class="criteria-weight">20%</div>
+                                </div>
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Travail d'équipe</div>
+                                    <div class="criteria-weight">15%</div>
+                                </div>
+                            </div>
+
+                            <div class="template-actions">
+                                <a href="#" class="btn btn-sm btn-light" data-action="view">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <a href="#" class="btn btn-sm btn-light" data-action="edit">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </a>
+                                <a href="#" class="btn btn-sm btn-light" data-action="duplicate">
+                                    <i class="fas fa-copy"></i> Dupliquer
+                                </a>
+                                <a href="#" class="btn btn-sm btn-primary" data-action="use">
+                                    <i class="fas fa-check"></i> Utiliser
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Template Card -->
+                        <div class="template-card">
+                            <h4 class="template-title">Évaluation des responsables de boutique</h4>
+                            <p class="template-description">
+                                Modèle d'évaluation pour les responsables de boutique, axé sur le leadership, la gestion
+                                d'équipe et les résultats de la boutique.
+                            </p>
+
+                            <div class="template-details">
+                                <div class="template-creation-date">
+                                    <i class="fas fa-calendar-alt"></i> Créé le: 20/01/2025
+                                </div>
+                                <div class="template-last-update">
+                                    <i class="fas fa-edit"></i> Dernière mise à jour: 05/04/2025
+                                </div>
+                            </div>
+
+                            <div class="criteria-list">
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Leadership</div>
+                                    <div class="criteria-weight">25%</div>
+                                </div>
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Gestion d'équipe</div>
+                                    <div class="criteria-weight">25%</div>
+                                </div>
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Performance de la boutique</div>
+                                    <div class="criteria-weight">30%</div>
+                                </div>
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Gestion administrative</div>
+                                    <div class="criteria-weight">20%</div>
+                                </div>
+                            </div>
+
+                            <div class="template-actions">
+                                <a href="#" class="btn btn-sm btn-light" data-action="view">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <a href="#" class="btn btn-sm btn-light" data-action="edit">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </a>
+                                <a href="#" class="btn btn-sm btn-light" data-action="duplicate">
+                                    <i class="fas fa-copy"></i> Dupliquer
+                                </a>
+                                <a href="#" class="btn btn-sm btn-primary" data-action="use">
+                                    <i class="fas fa-check"></i> Utiliser
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Template Card -->
+                        <div class="template-card">
+                            <h4 class="template-title">Évaluation des vendeurs e-commerce</h4>
+                            <p class="template-description">
+                                Modèle spécifique pour les vendeurs travaillant sur la plateforme e-commerce, incluant
+                                des critères adaptés aux ventes en ligne.
+                            </p>
+
+                            <div class="template-details">
+                                <div class="template-creation-date">
+                                    <i class="fas fa-calendar-alt"></i> Créé le: 05/03/2025
+                                </div>
+                                <div class="template-last-update">
+                                    <i class="fas fa-edit"></i> Dernière mise à jour: 05/03/2025
+                                </div>
+                            </div>
+
+                            <div class="criteria-list">
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Gestion des commandes en ligne</div>
+                                    <div class="criteria-weight">30%</div>
+                                </div>
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Support client digital</div>
+                                    <div class="criteria-weight">25%</div>
+                                </div>
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Connaissances techniques</div>
+                                    <div class="criteria-weight">25%</div>
+                                </div>
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Réactivité</div>
+                                    <div class="criteria-weight">20%</div>
+                                </div>
+                            </div>
+
+                            <div class="template-actions">
+                                <a href="#" class="btn btn-sm btn-light" data-action="view">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <a href="#" class="btn btn-sm btn-light" data-action="edit">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </a>
+                                <a href="#" class="btn btn-sm btn-light" data-action="duplicate">
+                                    <i class="fas fa-copy"></i> Dupliquer
+                                </a>
+                                <a href="#" class="btn btn-sm btn-primary" data-action="use">
+                                    <i class="fas fa-check"></i> Utiliser
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Template Card -->
+                        <div class="template-card">
+                            <h4 class="template-title">Évaluation des responsables secteur</h4>
+                            <p class="template-description">
+                                Modèle d'évaluation pour les responsables de secteur, axé sur la stratégie, la
+                                coordination des boutiques et les résultats globaux.
+                            </p>
+
+                            <div class="template-details">
+                                <div class="template-creation-date">
+                                    <i class="fas fa-calendar-alt"></i> Créé le: 10/02/2025
+                                </div>
+                                <div class="template-last-update">
+                                    <i class="fas fa-edit"></i> Dernière mise à jour: 15/04/2025
+                                </div>
+                            </div>
+
+                            <div class="criteria-list">
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Vision stratégique</div>
+                                    <div class="criteria-weight">25%</div>
+                                </div>
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Coordination des boutiques</div>
+                                    <div class="criteria-weight">25%</div>
+                                </div>
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Performance globale du secteur</div>
+                                    <div class="criteria-weight">30%</div>
+                                </div>
+                                <div class="criteria-item">
+                                    <div class="criteria-name">Développement des responsables</div>
+                                    <div class="criteria-weight">20%</div>
+                                </div>
+                            </div>
+
+                            <div class="template-actions">
+                                <a href="#" class="btn btn-sm btn-light" data-action="view">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <a href="#" class="btn btn-sm btn-light" data-action="edit">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </a>
+                                <a href="#" class="btn btn-sm btn-light" data-action="duplicate">
+                                    <i class="fas fa-copy"></i> Dupliquer
+                                </a>
+                                <a href="#" class="btn btn-sm btn-primary" data-action="use">
+                                    <i class="fas fa-check"></i> Utiliser
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Tab Content -->
+                <div class="evaluation-tab-content" id="reports-tab">
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <div class="report-card">
+                                <div class="report-header">
+                                    <h3 class="report-title">Résumé des évaluations - T1 2025</h3>
+                                    <button class="btn btn-sm btn-light">
+                                        <i class="fas fa-download"></i> Exporter
+                                    </button>
+                                </div>
+                                <div class="report-body">
+                                    <div class="chart-container">
+                                        <canvas id="evaluationSummaryChart" height="300"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="report-card">
+                                <div class="report-header">
+                                    <h3 class="report-title">Statistiques globales</h3>
+                                </div>
+                                <div class="report-body">
+                                    <div class="stats-list">
+                                        <div class="stat-item">
+                                            <div class="stat-label">Note moyenne</div>
+                                            <div class="stat-value">4.2/5</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-label">Évaluations complétées</div>
+                                            <div class="stat-value">52/72 (72%)</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-label">Boutique la mieux notée</div>
+                                            <div class="stat-value">Boutique Nord (4.5/5)</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-label">Critère le mieux noté</div>
+                                            <div class="stat-value">Service client (4.6/5)</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-label">Critère à améliorer</div>
+                                            <div class="stat-value">Connaissances produits (3.8/5)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="report-card">
+                                <div class="report-header">
+                                    <h3 class="report-title">Évolution des notes par boutique</h3>
+                                </div>
+                                <div class="report-body">
+                                    <div class="chart-container">
+                                        <canvas id="storeProgressChart" height="300"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="report-card">
+                                <div class="report-header">
+                                    <h3 class="report-title">Comparaison par critère</h3>
+                                </div>
+                                <div class="report-body">
+                                    <div class="chart-container">
+                                        <canvas id="criteriaComparisonChart" height="300"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="report-card mt-4">
+                        <div class="report-header">
+                            <h3 class="report-title">Rapports disponibles</h3>
+                            <button class="btn btn-sm btn-primary">
+                                <i class="fas fa-plus"></i> Nouveau rapport
+                            </button>
+                        </div>
+                        <div class="report-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Titre</th>
+                                            <th>Période</th>
+                                            <th>Boutique</th>
+                                            <th>Date de génération</th>
+                                            <th>Format</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Évaluations trimestrielles - Q1 2025</td>
+                                            <td>T1 2025</td>
+                                            <td>Toutes</td>
+                                            <td>05/04/2025</td>
+                                            <td>PDF, Excel</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-download"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-share-alt"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Performance vendeurs - Q1 2025</td>
+                                            <td>T1 2025</td>
+                                            <td>Boutique Sud</td>
+                                            <td>10/04/2025</td>
+                                            <td>PDF</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-download"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-share-alt"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Analyse comparative des boutiques</td>
+                                            <td>2024-2025</td>
+                                            <td>Toutes</td>
+                                            <td>15/04/2025</td>
+                                            <td>PDF, Excel, PPT</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-download"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-share-alt"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Évolution des performances</td>
+                                            <td>2023-2025</td>
+                                            <td>Boutique Nord</td>
+                                            <td>20/04/2025</td>
+                                            <td>PDF</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-download"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-share-alt"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rapport service client</td>
+                                            <td>T1 2025</td>
+                                            <td>Toutes</td>
+                                            <td>25/04/2025</td>
+                                            <td>PDF, Excel</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-download"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light">
+                                                        <i class="fas fa-share-alt"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- Add Evaluation Modal -->
+    <div class="modal-overlay" id="evaluationModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="evaluationModalTitle">Nouvelle évaluation</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="evaluationForm">
+                    <div class="form-group">
+                        <label for="evaluationTitle" class="form-label">Titre</label>
+                        <input type="text" id="evaluationTitle" class="form-control"
+                            value="Évaluation trimestrielle - Q2 2025" required>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="evaluationTemplate" class="form-label">Modèle d'évaluation</label>
+                        <select id="evaluationTemplate" class="form-control" required>
+                            <option value="">Sélectionner un modèle</option>
+                            <option value="standard">Évaluation standard des vendeurs</option>
+                            <option value="manager">Évaluation des responsables de boutique</option>
+                            <option value="ecommerce">Évaluation des vendeurs e-commerce</option>
+                            <option value="sector">Évaluation des responsables secteur</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="evaluationPeriod" class="form-label">Période d'évaluation</label>
+                        <select id="evaluationPeriod" class="form-control" required>
+                            <option value="q1-2025">Q1 2025</option>
+                            <option value="q2-2025" selected>Q2 2025</option>
+                            <option value="q3-2025">Q3 2025</option>
+                            <option value="q4-2025">Q4 2025</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="evaluationEmployees" class="form-label">Employés à évaluer</label>
+                        <select id="evaluationEmployees" class="form-control" multiple required>
+                            <option value="all">Tous les employés</option>
+                            <option value="store-north">Boutique Nord</option>
+                            <option value="store-south">Boutique Sud</option>
+                            <option value="store-east">Boutique Est</option>
+                            <option value="store-west">Boutique Ouest</option>
+                            <option value="store-center">Boutique Centre</option>
+                            <option value="emp1">Ahmed Karim - Vendeur</option>
+                            <option value="emp2">Fatma Ben Ali - Vendeuse</option>
+                            <option value="emp3">Youssef Miled - Vendeur</option>
+                            <option value="emp4">Sarah Trabelsi - Vendeuse</option>
+                            <option value="emp5">Mehdi Selmi - Responsable</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="evaluationEvaluator" class="form-label">Évaluateur</label>
+                        <select id="evaluationEvaluator" class="form-control" required>
+                            <option value="">Sélectionner un évaluateur</option>
+                            <option value="admin">Admin Mazzaro</option>
+                            <option value="manager-north">Manager Nord</option>
+                            <option value="manager-south">Manager Sud</option>
+                            <option value="manager-east">Manager Est</option>
+                            <option value="manager-west">Manager Ouest</option>
+                            <option value="manager-center">Manager Centre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="evaluationDeadline" class="form-label">Date limite</label>
+                        <input type="date" id="evaluationDeadline" class="form-control" value="2025-05-31" required>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="evaluationInstructions" class="form-label">Instructions spécifiques
+                            (optionnel)</label>
+                        <textarea id="evaluationInstructions" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-check mt-3">
+                        <input type="checkbox" id="evaluationNotify" class="form-check-input" checked>
+                        <label for="evaluationNotify" class="form-check-label">Notifier les employés concernés</label>
+                    </div>
+
+                    <div class="form-check mt-3">
+                        <input type="checkbox" id="evaluationAutoSchedule" class="form-check-input">
+                        <label for="evaluationAutoSchedule" class="form-check-label">Planifier automatiquement les
+                            entretiens</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light modal-cancel">Annuler</button>
+                <button class="btn btn-primary" id="saveEvaluationBtn">Créer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Template Modal -->
+    <div class="modal-overlay" id="templateModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="templateModalTitle">Nouveau modèle d'évaluation</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="templateForm">
+                    <div class="form-group">
+                        <label for="templateTitle" class="form-label">Titre</label>
+                        <input type="text" id="templateTitle" class="form-control" required>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="templateDescription" class="form-label">Description</label>
+                        <textarea id="templateDescription" class="form-control" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="templateType" class="form-label">Type de poste</label>
+                        <select id="templateType" class="form-control" required>
+                            <option value="">Sélectionner un type</option>
+                            <option value="seller">Vendeur</option>
+                            <option value="manager">Responsable de boutique</option>
+                            <option value="sector">Responsable de secteur</option>
+                            <option value="ecommerce">Vendeur e-commerce</option>
+                            <option value="admin">Administratif</option>
+                        </select>
+                    </div>
+
+                    <div class="criteria-container mt-3">
+                        <label class="form-label">Critères d'évaluation</label>
+
+                        <div class="criteria-form-items">
+                            <div class="criteria-form-item">
+                                <div class="d-flex align-items-center mb-2">
+                                    <input type="text" class="form-control" placeholder="Nom du critère" required>
+                                    <input type="number" class="form-control ms-2" placeholder="Poids (%)" min="1"
+                                        max="100" style="width: 100px;" required>
+                                    <button type="button" class="btn btn-sm btn-light ms-2 criteria-remove-btn"
+                                        disabled>
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                <textarea class="form-control" rows="2" placeholder="Description du critère"></textarea>
+                            </div>
+
+                            <div class="criteria-form-item mt-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <input type="text" class="form-control" placeholder="Nom du critère" required>
+                                    <input type="number" class="form-control ms-2" placeholder="Poids (%)" min="1"
+                                        max="100" style="width: 100px;" required>
+                                    <button type="button" class="btn btn-sm btn-light ms-2 criteria-remove-btn">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                <textarea class="form-control" rows="2" placeholder="Description du critère"></textarea>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-sm btn-light mt-3" id="addCriteriaBtn">
+                            <i class="fas fa-plus"></i> Ajouter un critère
+                        </button>
+                    </div>
+
+                    <div class="form-check mt-3">
+                        <input type="checkbox" id="templateDefault" class="form-check-input">
+                        <label for="templateDefault" class="form-check-label">Définir comme modèle par défaut pour ce
+                            type de poste</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light modal-cancel">Annuler</button>
+                <button class="btn btn-primary" id="saveTemplateBtn">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/evaluations.js"></script>
+    <script src="../assets/js/auth.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab switching
+            const tabButtons = document.querySelectorAll('.nav-tab');
+            const tabContents = document.querySelectorAll('.evaluation-tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Remove active class from all buttons
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    // Hide all tab contents
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Show the corresponding tab content
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Initialize charts for Reports tab
+            initializeCharts();
+
+            // New Evaluation Button
+            const newEvaluationBtn = document.getElementById('newEvaluationBtn');
+            if (newEvaluationBtn) {
+                newEvaluationBtn.addEventListener('click', function () {
+                    document.getElementById('evaluationModal').classList.add('active');
+                });
+            }
+
+            // New Template Button
+            const newTemplateBtn = document.getElementById('newTemplateBtn');
+            if (newTemplateBtn) {
+                newTemplateBtn.addEventListener('click', function () {
+                    document.getElementById('templateModal').classList.add('active');
+                });
+            }
+
+            // Close modals
+            const modalCloseButtons = document.querySelectorAll('.modal-close, .modal-cancel');
+            modalCloseButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Close any open modal
+                    document.querySelectorAll('.modal-overlay').forEach(modal => {
+                        modal.classList.remove('active');
+                    });
+                });
+            });
+
+            // Add criteria button
+            const addCriteriaBtn = document.getElementById('addCriteriaBtn');
+            if (addCriteriaBtn) {
+                addCriteriaBtn.addEventListener('click', function () {
+                    const criteriaContainer = document.querySelector('.criteria-form-items');
+                    const newCriteria = document.createElement('div');
+                    newCriteria.className = 'criteria-form-item mt-3';
+                    newCriteria.innerHTML = `
+           <div class="d-flex align-items-center mb-2">
+             <input type="text" class="form-control" placeholder="Nom du critère" required>
+             <input type="number" class="form-control ms-2" placeholder="Poids (%)" min="1" max="100" style="width: 100px;" required>
+             <button type="button" class="btn btn-sm btn-light ms-2 criteria-remove-btn">
+               <i class="fas fa-trash"></i>
+             </button>
+           </div>
+           <textarea class="form-control" rows="2" placeholder="Description du critère"></textarea>
+         `;
+                    criteriaContainer.appendChild(newCriteria);
+
+                    // Add event listener to the new remove button
+                    const removeBtn = newCriteria.querySelector('.criteria-remove-btn');
+                    removeBtn.addEventListener('click', function () {
+                        criteriaContainer.removeChild(newCriteria);
+                    });
+                });
+            }
+
+            // Existing remove criteria buttons
+            const criteriaRemoveBtns = document.querySelectorAll('.criteria-remove-btn');
+            criteriaRemoveBtns.forEach(button => {
+                if (!button.disabled) {
+                    button.addEventListener('click', function () {
+                        const criteriaItem = this.closest('.criteria-form-item');
+                        criteriaItem.parentNode.removeChild(criteriaItem);
+                    });
+                }
+            });
+
+            // Save Evaluation Button
+            const saveEvaluationBtn = document.getElementById('saveEvaluationBtn');
+            if (saveEvaluationBtn) {
+                saveEvaluationBtn.addEventListener('click', function () {
+                    // Validate form
+                    const form = document.getElementById('evaluationForm');
+                    if (form.checkValidity()) {
+                        // In a real app, this would save the evaluation data
+                        document.getElementById('evaluationModal').classList.remove('active');
+
+                        // Show success notification
+                        showNotification('Évaluation créée', 'L\'évaluation a été créée avec succès.');
+                    } else {
+                        form.reportValidity();
+                    }
+                });
+            }
+
+            // Save Template Button
+            const saveTemplateBtn = document.getElementById('saveTemplateBtn');
+            if (saveTemplateBtn) {
+                saveTemplateBtn.addEventListener('click', function () {
+                    // Validate form
+                    const form = document.getElementById('templateForm');
+                    if (form.checkValidity()) {
+                        // In a real app, this would save the template data
+                        document.getElementById('templateModal').classList.remove('active');
+
+                        // Show success notification
+                        showNotification('Modèle enregistré', 'Le modèle d\'évaluation a été enregistré avec succès.');
+                    } else {
+                        form.reportValidity();
+                    }
+                });
+            }
+
+            // Evaluation actions
+            const evaluationActions = document.querySelectorAll('.evaluation-action');
+            evaluationActions.forEach(action => {
+                action.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const actionType = this.getAttribute('data-action');
+
+                    switch (actionType) {
+                        case 'view':
+                            // In a real app, this would open the evaluation details view
+                            showNotification('Affichage de l\'évaluation', 'Visualisation des détails de l\'évaluation.');
+                            break;
+                        case 'edit':
+                            // In a real app, this would open the evaluation editing form
+                            showNotification('Modification de l\'évaluation', 'Ouverture du formulaire de modification.');
+                            break;
+                        case 'send':
+                            // In a real app, this would send the evaluation to the employee
+                            showNotification('Évaluation envoyée', 'L\'évaluation a été envoyée à l\'employé.');
+                            break;
+                        case 'download':
+                            // In a real app, this would download the evaluation
+                            showNotification('Téléchargement', 'L\'évaluation est en cours de téléchargement.');
+                            break;
+                        case 'share':
+                            // In a real app, this would open sharing options
+                            showNotification('Partage', 'Options de partage de l\'évaluation.');
+                            break;
+                        case 'schedule':
+                            // In a real app, this would open scheduling options
+                            showNotification('Planification', 'Ouverture des options de planification de l\'entretien d\'évaluation.');
+                            break;
+                    }
+                });
+            });
+
+            // Template actions
+            const templateActions = document.querySelectorAll('.template-actions a');
+            templateActions.forEach(action => {
+                action.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const actionType = this.getAttribute('data-action');
+
+                    switch (actionType) {
+                        case 'view':
+                            // In a real app, this would open the template details view
+                            showNotification('Affichage du modèle', 'Visualisation des détails du modèle d\'évaluation.');
+                            break;
+                        case 'edit':
+                            // In a real app, this would open the template editing form
+                            showNotification('Modification du modèle', 'Ouverture du formulaire de modification du modèle.');
+                            break;
+                        case 'duplicate':
+                            // In a real app, this would duplicate the template
+                            showNotification('Duplication', 'Le modèle a été dupliqué avec succès.');
+                            break;
+                        case 'use':
+                            // In a real app, this would select this template for a new evaluation
+                            document.getElementById('evaluationTemplate').value = 'standard';
+                            document.getElementById('templateModal').classList.remove('active');
+                            document.getElementById('evaluationModal').classList.add('active');
+                            break;
+                    }
+                });
+            });
+
+            // Helper function to show notifications
+            function showNotification(title, message) {
+                // Create notification element
+                const notificationEl = document.createElement('div');
+                notificationEl.className = 'notification-toast';
+                notificationEl.innerHTML = `
+         <div class="notification-toast-header">
+           <strong>${title}</strong>
+           <button type="button" class="notification-close">&times;</button>
+         </div>
+         <div class="notification-toast-body">
+           ${message}
+         </div>
+       `;
+
+                // Append to body
+                document.body.appendChild(notificationEl);
+
+                // Show notification
+                setTimeout(() => {
+                    notificationEl.classList.add('show');
+                }, 100);
+
+                // Auto close after 5 seconds
+                setTimeout(() => {
+                    notificationEl.classList.remove('show');
+
+                    // Remove from DOM after animation
+                    setTimeout(() => {
+                        notificationEl.remove();
+                    }, 300);
+                }, 5000);
+
+                // Close button event
+                const closeBtn = notificationEl.querySelector('.notification-close');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', function () {
+                        notificationEl.classList.remove('show');
+
+                        // Remove from DOM after animation
+                        setTimeout(() => {
+                            notificationEl.remove();
+                        }, 300);
+                    });
+                }
+            }
+
+            // Function to initialize charts
+            function initializeCharts() {
+                // Evaluation Summary Chart
+                const summaryChart = document.getElementById('evaluationSummaryChart');
+                if (summaryChart) {
+                    const ctx = summaryChart.getContext('2d');
+
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Boutique Nord', 'Boutique Sud', 'Boutique Est', 'Boutique Ouest', 'Boutique Centre'],
+                            datasets: [
+                                {
+                                    label: 'Note moyenne',
+                                    data: [4.5, 4.2, 4.0, 4.3, 4.1],
+                                    backgroundColor: 'rgba(59, 89, 152, 0.7)',
+                                    borderColor: 'rgba(59, 89, 152, 1)',
+                                    borderWidth: 1,
+                                    borderRadius: 4
+                                },
+                                {
+                                    label: 'Objectif',
+                                    data: [4.2, 4.2, 4.2, 4.2, 4.2],
+                                    type: 'line',
+                                    fill: false,
+                                    borderColor: 'rgba(237, 69, 15, 0.7)',
+                                    borderDash: [5, 5],
+                                    pointBackgroundColor: 'rgba(237, 69, 15, 1)',
+                                    tension: 0.1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                    labels: {
+                                        usePointStyle: true,
+                                        padding: 15
+                                    }
+                                },
+                                tooltip: {
+                                    mode: 'index',
+                                    intersect: false
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: false,
+                                    min: 3,
+                                    max: 5,
+                                    ticks: {
+                                        stepSize: 0.5
+                                    }
+                                }
+                            },
+                            interaction: {
+                                mode: 'index',
+                                intersect: false
+                            }
+                        }
+                    });
+                }
+
+                // Store Progress Chart
+                const progressChart = document.getElementById('storeProgressChart');
+                if (progressChart) {
+                    const ctx = progressChart.getContext('2d');
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024', 'Q1 2025'],
+                            datasets: [
+                                {
+                                    label: 'Boutique Nord',
+                                    data: [4.0, 4.1, 4.3, 4.4, 4.5],
+                                    borderColor: 'rgba(59, 89, 152, 1)',
+                                    backgroundColor: 'rgba(59, 89, 152, 0.1)',
+                                    tension: 0.4,
+                                    fill: true
+                                },
+                                {
+                                    label: 'Boutique Sud',
+                                    data: [3.8, 3.9, 4.0, 4.1, 4.2],
+                                    borderColor: 'rgba(237, 69, 15, 1)',
+                                    backgroundColor: 'rgba(237, 69, 15, 0.1)',
+                                    tension: 0.4,
+                                    fill: true
+                                },
+                                {
+                                    label: 'Boutique Est',
+                                    data: [3.7, 3.8, 3.9, 3.9, 4.0],
+                                    borderColor: 'rgba(40, 167, 69, 1)',
+                                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                                    tension: 0.4,
+                                    fill: true
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                    labels: {
+                                        usePointStyle: true,
+                                        padding: 15
+                                    }
+                                },
+                                tooltip: {
+                                    mode: 'index',
+                                    intersect: false
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: false,
+                                    min: 3.5,
+                                    max: 5,
+                                    ticks: {
+                                        stepSize: 0.5
+                                    }
+                                }
+                            },
+                            interaction: {
+                                mode: 'index',
+                                intersect: false
+                            }
+                        }
+                    });
+                }
+
+                // Criteria Comparison Chart
+                const criteriaChart = document.getElementById('criteriaComparisonChart');
+                if (criteriaChart) {
+                    const ctx = criteriaChart.getContext('2d');
+
+                    new Chart(ctx, {
+                        type: 'radar',
+                        data: {
+                            labels: ['Performance commerciale', 'Service client', 'Connaissances produits', 'Travail d\'équipe', 'Ponctualité'],
+                            datasets: [
+                                {
+                                    label: 'Boutique Nord',
+                                    data: [4.4, 4.7, 4.2, 4.5, 4.6],
+                                    borderColor: 'rgba(59, 89, 152, 1)',
+                                    backgroundColor: 'rgba(59, 89, 152, 0.2)',
+                                    pointBackgroundColor: 'rgba(59, 89, 152, 1)',
+                                    pointRadius: 4
+                                },
+                                {
+                                    label: 'Boutique Sud',
+                                    data: [4.3, 4.5, 3.8, 4.2, 4.1],
+                                    borderColor: 'rgba(237, 69, 15, 1)',
+                                    backgroundColor: 'rgba(237, 69, 15, 0.2)',
+                                    pointBackgroundColor: 'rgba(237, 69, 15, 1)',
+                                    pointRadius: 4
+                                },
+                                {
+                                    label: 'Moyenne',
+                                    data: [4.2, 4.6, 3.8, 4.1, 4.3],
+                                    borderColor: 'rgba(40, 167, 69, 1)',
+                                    backgroundColor: 'rgba(40, 167, 69, 0.2)',
+                                    pointBackgroundColor: 'rgba(40, 167, 69, 1)',
+                                    pointRadius: 4
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                    labels: {
+                                        usePointStyle: true,
+                                        padding: 15
+                                    }
+                                }
+                            },
+                            scales: {
+                                r: {
+                                    angleLines: {
+                                        display: true
+                                    },
+                                    suggestedMin: 3,
+                                    suggestedMax: 5
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
