@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pointage & Présence | Mazzaro Milano RH</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/img/logo.png" alt="Mazzaro Milano" class="sidebar-logo">
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="index.html" class="sidebar-link">
+                        <i class="fas fa-tachometer-alt sidebar-icon"></i>
+                        <span class="sidebar-text">Tableau de bord</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="employees.html" class="sidebar-link">
+                        <i class="fas fa-users sidebar-icon"></i>
+                        <span class="sidebar-text">Employés</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="tickets.html" class="sidebar-link">
+                        <i class="fas fa-tasks sidebar-icon"></i>
+                        <span class="sidebar-text">Tickets & Tâches</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="attendance.html" class="sidebar-link active">
+                        <i class="fas fa-clock sidebar-icon"></i>
+                        <span class="sidebar-text">Pointage & Présence</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="leave.html" class="sidebar-link">
+                        <i class="fas fa-calendar-alt sidebar-icon"></i>
+                        <span class="sidebar-text">Congés</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="calendar.html" class="sidebar-link">
+                        <i class="fas fa-calendar-day sidebar-icon"></i>
+                        <span class="sidebar-text">Calendrier</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="statistics.html" class="sidebar-link">
+                        <i class="fas fa-chart-bar sidebar-icon"></i>
+                        <span class="sidebar-text">Statistiques</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="evaluations.html" class="sidebar-link">
+                        <i class="fas fa-star sidebar-icon"></i>
+                        <span class="sidebar-text">Évaluations</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="settings.html" class="sidebar-link">
+                        <i class="fas fa-cog sidebar-icon"></i>
+                        <span class="sidebar-text">Paramètres</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <span>Mazzaro Milano RH v1.0</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1 class="page-title">Pointage & Présence</h1>
+
+                <div class="header-actions">
+                    <button class="header-action notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </button>
+
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img src="../assets/img/avatars/admin.jpg" alt="Admin Profile">
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">Admin Mazzaro</span>
+                            <span class="user-role">Super Administrateur</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-toggle"></i>
+
+                        <!-- User Dropdown Menu -->
+                        <div class="dropdown-menu user-dropdown-menu">
+                            <a href="profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i> Mon profil
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Paramètres
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="auth.logout()">
+                                <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Notification Panel -->
+            <div class="notification-panel">
+                <div class="notification-header">
+                    <h3 class="notification-title">Notifications</h3>
+                    <span class="notification-count">5</span>
+                </div>
+                <div class="notification-body">
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Nouvel employé ajouté: <strong>Sarah Trabelsi</strong></p>
+                            <span class="notification-time">Il y a 10 minutes</span>
+                        </div>
+                    </div>
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Retard de <strong>Ahmed Karim</strong> - Boutique Sud</p>
+                            <span class="notification-time">Il y a 1 heure</span>
+                        </div>
+                    </div>
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Nouvelle demande de congé de <strong>Fatma Ben Ali</strong>
+                            </p>
+                            <span class="notification-time">Il y a 3 heures</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="notification-footer">
+                    <a href="notifications.html" class="view-all">Voir toutes les notifications</a>
+                </div>
+            </div>
+
+            <!-- Attendance Content -->
+            <div class="attendance-content">
+                <!-- Filters and Actions -->
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <div class="d-flex">
+                            <div class="me-2">
+                                <label for="dateFilter" class="form-label">Date</label>
+                                <input type="date" id="dateFilter" class="form-control" value="2025-05-20">
+                            </div>
+                            <div>
+                                <label for="storeFilter" class="form-label">Boutique</label>
+                                <select id="storeFilter" class="form-control">
+                                    <option value="all">Toutes les boutiques</option>
+                                    <option value="north">Boutique Nord</option>
+                                    <option value="south">Boutique Sud</option>
+                                    <option value="east">Boutique Est</option>
+                                    <option value="west">Boutique Ouest</option>
+                                    <option value="center">Boutique Centre</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <button class="btn btn-primary" id="manualAttendanceBtn">
+                            <i class="fas fa-plus"></i> Pointage manuel
+                        </button>
+                        <button class="btn btn-light" id="exportAttendanceBtn">
+                            <i class="fas fa-download"></i> Exporter
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Attendance Stats -->
+                <div class="row mb-4">
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon primary">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 class="stat-value">65/72</h3>
+                                <p class="stat-label">Employés présents</p>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i> 90.3% taux de présence
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon warning">
+                                <i class="fas fa-hourglass-half"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 class="stat-value">7</h3>
+                                <p class="stat-label">Employés en retard</p>
+                                <div class="stat-change negative">
+                                    <i class="fas fa-arrow-up"></i> +2 vs hier
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon danger">
+                                <i class="fas fa-user-times"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 class="stat-value">5</h3>
+                                <p class="stat-label">Employés absents</p>
+                                <div class="stat-change">
+                                    <i class="fas fa-minus"></i> Identique à hier
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon info">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 class="stat-value">2</h3>
+                                <p class="stat-label">Employés en congé</p>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-down"></i> -1 vs hier
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendance Chart -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Taux de présence - Mai 2025</h3>
+                                <div class="card-actions">
+                                    <select id="chartViewFilter" class="form-control">
+                                        <option value="daily">Vue journalière</option>
+                                        <option value="weekly">Vue hebdomadaire</option>
+                                        <option value="monthly">Vue mensuelle</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container" style="height: 300px;">
+                                    <canvas id="attendanceChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendance List -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Pointages du jour - 20/05/2025</h3>
+                                <div class="card-actions">
+                                    <div class="input-group">
+                                        <input type="search" class="form-control" placeholder="Rechercher un employé..."
+                                            id="searchAttendance">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-search"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Employé</th>
+                                                <th>Boutique</th>
+                                                <th>Arrivée</th>
+                                                <th>Départ</th>
+                                                <th>Temps de présence</th>
+                                                <th>Statut</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="employee-avatar me-2">
+                                                            <img src="../assets/img/avatars/employee.jpg"
+                                                                alt="Ahmed Karim">
+                                                        </div>
+                                                        <div>
+                                                            <div class="employee-name">Ahmed Karim</div>
+                                                            <div class="employee-position">Vendeur</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Boutique Sud</td>
+                                                <td>08:45 <span class="late-badge">+15min</span></td>
+                                                <td>--:--</td>
+                                                <td>En cours (3h 35min)</td>
+                                                <td><span class="badge bg-warning">En retard</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-light" data-action="edit"
+                                                        data-id="att-1">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light" data-action="note"
+                                                        data-id="att-1">
+                                                        <i class="fas fa-sticky-note"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="employee-avatar me-2">
+                                                            <img src="../assets/img/avatars/employee2.jpg"
+                                                                alt="Fatma Ben Ali">
+                                                        </div>
+                                                        <div>
+                                                            <div class="employee-name">Fatma Ben Ali</div>
+                                                            <div class="employee-position">Vendeuse</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Boutique Sud</td>
+                                                <td>08:30</td>
+                                                <td>--:--</td>
+                                                <td>En cours (3h 50min)</td>
+                                                <td><span class="badge bg-success">Présent</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-light" data-action="edit"
+                                                        data-id="att-2">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light" data-action="note"
+                                                        data-id="att-2">
+                                                        <i class="fas fa-sticky-note"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="employee-avatar me-2">
+                                                            <img src="../assets/img/avatars/employee3.jpg"
+                                                                alt="Youssef Miled">
+                                                        </div>
+                                                        <div>
+                                                            <div class="employee-name">Youssef Miled</div>
+                                                            <div class="employee-position">Vendeur</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Boutique Sud</td>
+                                                <td>08:28</td>
+                                                <td>--:--</td>
+                                                <td>En cours (3h 52min)</td>
+                                                <td><span class="badge bg-success">Présent</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-light" data-action="edit"
+                                                        data-id="att-3">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light" data-action="note"
+                                                        data-id="att-3">
+                                                        <i class="fas fa-sticky-note"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="employee-avatar me-2">
+                                                            <img src="../assets/img/avatars/employee4.jpg"
+                                                                alt="Sarah Trabelsi">
+                                                        </div>
+                                                        <div>
+                                                            <div class="employee-name">Sarah Trabelsi</div>
+                                                            <div class="employee-position">Vendeuse</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Boutique Nord</td>
+                                                <td>08:25</td>
+                                                <td>--:--</td>
+                                                <td>En cours (3h 55min)</td>
+                                                <td><span class="badge bg-success">Présent</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-light" data-action="edit"
+                                                        data-id="att-4">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light" data-action="note"
+                                                        data-id="att-4">
+                                                        <i class="fas fa-sticky-note"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="employee-avatar me-2">
+                                                            <img src="../assets/img/avatars/employee5.jpg"
+                                                                alt="Mehdi Selmi">
+                                                        </div>
+                                                        <div>
+                                                            <div class="employee-name">Mehdi Selmi</div>
+                                                            <div class="employee-position">Responsable</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Boutique Nord</td>
+                                                <td>08:15</td>
+                                                <td>--:--</td>
+                                                <td>En cours (4h 05min)</td>
+                                                <td><span class="badge bg-success">Présent</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-light" data-action="edit"
+                                                        data-id="att-5">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light" data-action="note"
+                                                        data-id="att-5">
+                                                        <i class="fas fa-sticky-note"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="employee-avatar me-2">
+                                                            <img src="../assets/img/avatars/employee6.jpg"
+                                                                alt="Amina Slimani">
+                                                        </div>
+                                                        <div>
+                                                            <div class="employee-name">Amina Slimani</div>
+                                                            <div class="employee-position">Vendeuse</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Boutique Est</td>
+                                                <td>--:--</td>
+                                                <td>--:--</td>
+                                                <td>--</td>
+                                                <td><span class="badge bg-danger">Absent</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-light" data-action="edit"
+                                                        data-id="att-6">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light" data-action="note"
+                                                        data-id="att-6">
+                                                        <i class="fas fa-sticky-note"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="employee-avatar me-2">
+                                                            <img src="../assets/img/avatars/employee7.jpg"
+                                                                alt="Karim Maaloul">
+                                                        </div>
+                                                        <div>
+                                                            <div class="employee-name">Karim Maaloul</div>
+                                                            <div class="employee-position">Vendeur</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Boutique Centre</td>
+                                                <td>--:--</td>
+                                                <td>--:--</td>
+                                                <td>--</td>
+                                                <td><span class="badge bg-info">Congé</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-light" data-action="edit"
+                                                        data-id="att-7">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-light" data-action="note"
+                                                        data-id="att-7">
+                                                        <i class="fas fa-sticky-note"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination justify-content-center mb-0">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">Précédent</a>
+                                        </li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">Suivant</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendance Alerts -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Alertes de présence</h3>
+                                <div class="card-actions">
+                                    <button class="btn btn-sm btn-light" id="refreshAlertsBtn">
+                                        <i class="fas fa-sync-alt"></i> Rafraîchir
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush">
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Ahmed Karim est arrivé en retard</h5>
+                                            <small class="text-muted">Il y a 3h 35min</small>
+                                        </div>
+                                        <p class="mb-1">Retard de 15 minutes à la Boutique Sud</p>
+                                        <small class="text-muted">3ème retard ce mois-ci</small>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Amina Slimani est absente</h5>
+                                            <small class="text-muted">Toute la journée</small>
+                                        </div>
+                                        <p class="mb-1">Absence non justifiée à la Boutique Est</p>
+                                        <small class="text-muted">2ème absence ce mois-ci</small>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Plusieurs retards à la Boutique Ouest</h5>
+                                            <small class="text-muted">Aujourd'hui</small>
+                                        </div>
+                                        <p class="mb-1">5 employés arrivés en retard aujourd'hui</p>
+                                        <small class="text-muted">Tendance à surveiller</small>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Heures supplémentaires importantes hier</h5>
+                                            <small class="text-muted">Hier</small>
+                                        </div>
+                                        <p class="mb-1">4 employés avec plus de 2 heures supplémentaires à la Boutique
+                                            Nord</p>
+                                        <small class="text-muted">À valider avec le responsable</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- Manual Attendance Modal -->
+    <div class="modal-overlay" id="manualAttendanceModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Pointage manuel</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="manualAttendanceForm">
+                    <div class="form-group">
+                        <label for="employeeSelect" class="form-label">Employé</label>
+                        <select id="employeeSelect" class="form-control" required>
+                            <option value="">Sélectionner un employé</option>
+                            <option value="emp1">Ahmed Karim - Vendeur (Boutique Sud)</option>
+                            <option value="emp2">Fatma Ben Ali - Vendeuse (Boutique Sud)</option>
+                            <option value="emp3">Youssef Miled - Vendeur (Boutique Sud)</option>
+                            <option value="emp4">Sarah Trabelsi - Vendeuse (Boutique Nord)</option>
+                            <option value="emp5">Mehdi Selmi - Responsable (Boutique Nord)</option>
+                            <option value="emp6">Amina Slimani - Vendeuse (Boutique Est)</option>
+                            <option value="emp7">Karim Maaloul - Vendeur (Boutique Centre)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="attendanceDate" class="form-label">Date</label>
+                        <input type="date" id="attendanceDate" class="form-control" value="2025-05-20" required>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="clockInTime" class="form-label">Heure d'arrivée</label>
+                                <input type="time" id="clockInTime" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="clockOutTime" class="form-label">Heure de départ</label>
+                                <input type="time" id="clockOutTime" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="attendanceStatus" class="form-label">Statut</label>
+                        <select id="attendanceStatus" class="form-control" required>
+                            <option value="present">Présent</option>
+                            <option value="late">En retard</option>
+                            <option value="absent">Absent</option>
+                            <option value="leave">Congé</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="attendanceNote" class="form-label">Remarque</label>
+                        <textarea id="attendanceNote" class="form-control" rows="3"
+                            placeholder="Ajoutez une remarque (optionnel)..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light modal-cancel">Annuler</button>
+                <button class="btn btn-primary" id="saveAttendanceBtn">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Attendance Modal -->
+    <div class="modal-overlay" id="editAttendanceModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Modifier le pointage</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editAttendanceForm">
+                    <div class="form-group">
+                        <label class="form-label">Employé</label>
+                        <div id="editEmployeeName" class="form-control-static">Ahmed Karim - Vendeur (Boutique Sud)
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="editAttendanceDate" class="form-label">Date</label>
+                        <div id="editAttendanceDate" class="form-control-static">20/05/2025</div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="editClockInTime" class="form-label">Heure d'arrivée</label>
+                                <input type="time" id="editClockInTime" class="form-control" value="08:45">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="editClockOutTime" class="form-label">Heure de départ</label>
+                                <input type="time" id="editClockOutTime" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="editAttendanceStatus" class="form-label">Statut</label>
+                        <select id="editAttendanceStatus" class="form-control" required>
+                            <option value="present">Présent</option>
+                            <option value="late" selected>En retard</option>
+                            <option value="absent">Absent</option>
+                            <option value="leave">Congé</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="editAttendanceNote" class="form-label">Remarque</label>
+                        <textarea id="editAttendanceNote" class="form-control" rows="3"
+                            placeholder="Ajoutez une remarque (optionnel)...">Retard de 15 minutes</textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light modal-cancel">Annuler</button>
+                <button class="btn btn-primary" id="updateAttendanceBtn">Mettre à jour</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Note Modal -->
+    <div class="modal-overlay" id="addNoteModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Ajouter une note</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addNoteForm">
+                    <div class="form-group">
+                        <label class="form-label">Employé</label>
+                        <div id="noteEmployeeName" class="form-control-static">Ahmed Karim - Vendeur (Boutique Sud)
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label class="form-label">Date</label>
+                        <div id="noteAttendanceDate" class="form-control-static">20/05/2025</div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="attendanceNoteText" class="form-label">Note</label>
+                        <textarea id="attendanceNoteText" class="form-control" rows="5"
+                            placeholder="Ajoutez une note détaillée..."></textarea>
+                    </div>
+
+                    <div class="form-check mt-3">
+                        <input type="checkbox" id="notifyEmployee" class="form-check-input">
+                        <label for="notifyEmployee" class="form-check-label">Notifier l'employé</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light modal-cancel">Annuler</button>
+                <button class="btn btn-primary" id="saveNoteBtn">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/attendance.js"></script>
+    <script src="../assets/js/auth.js"></script>
+
+    <!-- Attendance Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize attendance chart
+            const attendanceChartEl = document.getElementById('attendanceChart');
+            if (attendanceChartEl) {
+                const ctx = attendanceChartEl.getContext('2d');
+
+                // Daily data for May 2025
+                const days = Array.from({ length: 20 }, (_, i) => i + 1);
+
+                // Presence data as percentages
+                const presentData = [
+                    92, 91, 94, 90, 93, // 1-5
+                    89, 92, 95, 93, 91, // 6-10
+                    88, 90, 87, 93, 92, // 11-15
+                    94, 91, 93, 89, 90  // 16-20
+                ];
+
+                // Late data as percentages
+                const lateData = [
+                    5, 6, 4, 7, 5, // 1-5
+                    8, 5, 3, 5, 7, // 6-10
+                    9, 7, 8, 5, 6, // 11-15
+                    4, 6, 5, 8, 7  // 16-20
+                ];
+
+                // Absent data as percentages
+                const absentData = [
+                    3, 3, 2, 3, 2, // 1-5
+                    3, 3, 2, 2, 2, // 6-10
+                    3, 3, 5, 2, 2, // 11-15
+                    2, 3, 2, 3, 3  // 16-20
+                ];
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: days,
+                        datasets: [
+                            {
+                                label: 'Présents',
+                                data: presentData,
+                                backgroundColor: 'rgba(40, 167, 69, 0.7)',
+                                borderColor: 'rgba(40, 167, 69, 1)',
+                                borderWidth: 1,
+                                borderRadius: 4
+                            },
+                            {
+                                label: 'En retard',
+                                data: lateData,
+                                backgroundColor: 'rgba(255, 193, 7, 0.7)',
+                                borderColor: 'rgba(255, 193, 7, 1)',
+                                borderWidth: 1,
+                                borderRadius: 4
+                            },
+                            {
+                                label: 'Absents',
+                                data: absentData,
+                                backgroundColor: 'rgba(220, 53, 69, 0.7)',
+                                borderColor: 'rgba(220, 53, 69, 1)',
+                                borderWidth: 1,
+                                borderRadius: 4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                stacked: true,
+                                grid: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Jours du mois'
+                                }
+                            },
+                            y: {
+                                stacked: true,
+                                min: 0,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: 'Pourcentage'
+                                },
+                                ticks: {
+                                    callback: function (value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 15
+                                }
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.dataset.label + ': ' + context.parsed.y + '%';
+                                    }
+                                }
+                            }
+                        },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                });
+            }
+
+            // Toggle chart view
+            const chartViewFilter = document.getElementById('chartViewFilter');
+            if (chartViewFilter) {
+                chartViewFilter.addEventListener('change', function () {
+                    // In a real app, this would update the chart data based on the selected view
+                    showNotification('Vue modifiée', 'Les données du graphique ont été mises à jour.');
+                });
+            }
+
+            // Manual Attendance Button
+            const manualAttendanceBtn = document.getElementById('manualAttendanceBtn');
+            if (manualAttendanceBtn) {
+                manualAttendanceBtn.addEventListener('click', function () {
+                    showModal('manualAttendanceModal');
+                });
+            }
+
+            // Search Attendance
+            const searchAttendance = document.getElementById('searchAttendance');
+            if (searchAttendance) {
+                searchAttendance.addEventListener('input', function () {
+                    const searchValue = this.value.toLowerCase();
+                    const rows = document.querySelectorAll('tbody tr');
+
+                    rows.forEach(row => {
+                        const employeeName = row.querySelector('.employee-name').textContent.toLowerCase();
+                        const employeePosition = row.querySelector('.employee-position').textContent.toLowerCase();
+                        const boutique = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+                        if (employeeName.includes(searchValue) || employeePosition.includes(searchValue) || boutique.includes(searchValue)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
+            }
+
+            // Export Attendance Button
+            const exportAttendanceBtn = document.getElementById('exportAttendanceBtn');
+            if (exportAttendanceBtn) {
+                exportAttendanceBtn.addEventListener('click', function () {
+                    // In a real app, this would export the attendance data
+                    showNotification('Export', 'Les données de présence ont été exportées avec succès.');
+                });
+            }
+
+            // Edit Attendance Buttons
+            const editButtons = document.querySelectorAll('[data-action="edit"]');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const attendanceId = this.getAttribute('data-id');
+
+                    // In a real app, this would fetch the attendance data for editing
+                    // For this prototype, we'll just show the modal with some sample data
+
+                    showModal('editAttendanceModal');
+                });
+            });
+
+            // Add Note Buttons
+            const noteButtons = document.querySelectorAll('[data-action="note"]');
+            noteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const attendanceId = this.getAttribute('data-id');
+
+                    // In a real app, this would fetch the employee data
+                    // For this prototype, we'll just show the modal with some sample data
+
+                    showModal('addNoteModal');
+                });
+            });
+
+            // Save Attendance Button
+            const saveAttendanceBtn = document.getElementById('saveAttendanceBtn');
+            if (saveAttendanceBtn) {
+                saveAttendanceBtn.addEventListener('click', function () {
+                    // Basic validation
+                    const form = document.getElementById('manualAttendanceForm');
+                    if (!form.checkValidity()) {
+                        form.reportValidity();
+                        return;
+                    }
+
+                    // In a real app, this would save the attendance data to the server
+
+                    hideModal('manualAttendanceModal');
+
+                    // Show success notification
+                    showNotification('Pointage enregistré', 'Le pointage manuel a été enregistré avec succès.');
+                });
+            }
+
+            // Update Attendance Button
+            const updateAttendanceBtn = document.getElementById('updateAttendanceBtn');
+            if (updateAttendanceBtn) {
+                updateAttendanceBtn.addEventListener('click', function () {
+                    // Basic validation
+                    const form = document.getElementById('editAttendanceForm');
+                    if (!form.checkValidity()) {
+                        form.reportValidity();
+                        return;
+                    }
+
+                    // In a real app, this would update the attendance data on the server
+
+                    hideModal('editAttendanceModal');
+
+                    // Show success notification
+                    showNotification('Pointage mis à jour', 'Le pointage a été mis à jour avec succès.');
+                });
+            }
+
+            // Save Note Button
+            const saveNoteBtn = document.getElementById('saveNoteBtn');
+            if (saveNoteBtn) {
+                saveNoteBtn.addEventListener('click', function () {
+                    // Basic validation
+                    const noteText = document.getElementById('attendanceNoteText').value;
+                    if (!noteText.trim()) {
+                        alert('Veuillez saisir une note.');
+                        return;
+                    }
+
+                    // In a real app, this would save the note to the server
+
+                    hideModal('addNoteModal');
+
+                    // Show success notification
+                    showNotification('Note ajoutée', 'La note a été ajoutée avec succès.');
+                });
+            }
+
+            // Refresh Alerts Button
+            const refreshAlertsBtn = document.getElementById('refreshAlertsBtn');
+            if (refreshAlertsBtn) {
+                refreshAlertsBtn.addEventListener('click', function () {
+                    // In a real app, this would refresh the alerts from the server
+                    showNotification('Alertes', 'Les alertes ont été rafraîchies.');
+                });
+            }
+
+            // Date filter change
+            const dateFilter = document.getElementById('dateFilter');
+            if (dateFilter) {
+                dateFilter.addEventListener('change', function () {
+                    // In a real app, this would update the attendance data based on the selected date
+                    showNotification('Date modifiée', 'Les données de présence ont été mises à jour pour la date sélectionnée.');
+                });
+            }
+
+            // Store filter change
+            const storeFilter = document.getElementById('storeFilter');
+            if (storeFilter) {
+                storeFilter.addEventListener('change', function () {
+                    // In a real app, this would update the attendance data based on the selected store
+                    showNotification('Boutique modifiée', 'Les données de présence ont été mises à jour pour la boutique sélectionnée.');
+                });
+            }
+
+            // Modal Functions
+            function showModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.add('active');
+                }
+            }
+
+            function hideModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.remove('active');
+                }
+            }
+
+            // Close modals when clicking outside or on close button
+            const modalOverlays = document.querySelectorAll('.modal-overlay');
+            modalOverlays.forEach(overlay => {
+                overlay.addEventListener('click', function (e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+
+                const closeBtn = overlay.querySelector('.modal-close');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', function () {
+                        overlay.classList.remove('active');
+                    });
+                }
+
+                const cancelBtn = overlay.querySelector('.modal-cancel');
+                if (cancelBtn) {
+                    cancelBtn.addEventListener('click', function () {
+                        overlay.classList.remove('active');
+                    });
+                }
+            });
+
+            // Notification function
+            function showNotification(title, message) {
+                // Create notification container if it doesn't exist
+                let notifContainer = document.querySelector('.notification-container');
+                if (!notifContainer) {
+                    notifContainer = document.createElement('div');
+                    notifContainer.className = 'notification-container';
+                    document.body.appendChild(notifContainer);
+                }
+
+                // Create notification
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+
+                // Add notification content
+                notification.innerHTML = `
+          <div class="notification-header">
+            <h4>${title}</h4>
+            <button class="notification-close">&times;</button>
+          </div>
+          <div class="notification-body">
+            ${message}
+          </div>
+        `;
+
+                // Add notification to container
+                notifContainer.appendChild(notification);
+
+                // Show notification
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 10);
+
+                // Close button
+                const closeBtn = notification.querySelector('.notification-close');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        notification.classList.remove('show');
+                        setTimeout(() => {
+                            notification.remove();
+                        }, 300);
+                    });
+                }
+
+                // Auto close after 5 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }, 5000);
+            }
+
+            // Update current time
+            function updateCurrentTime() {
+                const now = new Date();
+
+                // In a real app, this would update the displayed time in the header
+                // and update the current attendance durations
+            }
+
+            // Update time every minute
+            setInterval(updateCurrentTime, 60000);
+            updateCurrentTime();
+        });
+    </script>
+</body>
+
+</html>

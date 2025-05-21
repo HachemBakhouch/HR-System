@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tickets & Tâches | Mazzaro Milano RH</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="../assets/img/logo.png" alt="Mazzaro Milano" class="sidebar-logo">
+        <button class="sidebar-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-item">
+          <a href="index.html" class="sidebar-link">
+            <i class="fas fa-tachometer-alt sidebar-icon"></i>
+            <span class="sidebar-text">Tableau de bord</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="employees.html" class="sidebar-link">
+            <i class="fas fa-users sidebar-icon"></i>
+            <span class="sidebar-text">Employés</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="tickets.html" class="sidebar-link active">
+            <i class="fas fa-tasks sidebar-icon"></i>
+            <span class="sidebar-text">Tickets & Tâches</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="attendance.html" class="sidebar-link">
+            <i class="fas fa-clock sidebar-icon"></i>
+            <span class="sidebar-text">Pointage & Présence</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="leave.html" class="sidebar-link">
+            <i class="fas fa-calendar-alt sidebar-icon"></i>
+            <span class="sidebar-text">Congés</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="calendar.html" class="sidebar-link">
+            <i class="fas fa-calendar-day sidebar-icon"></i>
+            <span class="sidebar-text">Calendrier</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="statistics.html" class="sidebar-link">
+            <i class="fas fa-chart-bar sidebar-icon"></i>
+            <span class="sidebar-text">Statistiques</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="evaluations.html" class="sidebar-link">
+            <i class="fas fa-star sidebar-icon"></i>
+            <span class="sidebar-text">Évaluations</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="settings.html" class="sidebar-link">
+            <i class="fas fa-cog sidebar-icon"></i>
+            <span class="sidebar-text">Paramètres</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <span>Mazzaro Milano RH v1.0</span>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <h1 class="page-title">Tickets & Tâches</h1>
+
+        <div class="header-actions">
+          <button class="header-action notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">5</span>
+          </button>
+
+          <div class="user-profile">
+            <div class="user-avatar">
+              <img src="../assets/img/avatars/admin.jpg" alt="Admin Profile">
+            </div>
+            <div class="user-info">
+              <span class="user-name">Admin Mazzaro</span>
+              <span class="user-role">Super Administrateur</span>
+            </div>
+            <i class="fas fa-chevron-down dropdown-toggle"></i>
+
+            <!-- User Dropdown Menu -->
+            <div class="dropdown-menu user-dropdown-menu">
+              <a href="profile.html" class="dropdown-item">
+                <i class="fas fa-user"></i> Mon profil
+              </a>
+              <a href="settings.html" class="dropdown-item">
+                <i class="fas fa-cog"></i> Paramètres
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item" onclick="auth.logout()">
+                <i class="fas fa-sign-out-alt"></i> Se déconnecter
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Notification Panel -->
+      <div class="notification-panel">
+        <div class="notification-header">
+          <h3 class="notification-title">Notifications</h3>
+          <span class="notification-count">5</span>
+        </div>
+        <div class="notification-body">
+          <div class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <div class="notification-content">
+              <p class="notification-message">Nouvel employé ajouté: <strong>Sarah Trabelsi</strong></p>
+              <span class="notification-time">Il y a 10 minutes</span>
+            </div>
+          </div>
+          <div class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="notification-content">
+              <p class="notification-message">Retard de <strong>Ahmed Karim</strong> - Boutique Sud</p>
+              <span class="notification-time">Il y a 1 heure</span>
+            </div>
+          </div>
+          <div class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div class="notification-content">
+              <p class="notification-message">Nouvelle demande de congé de <strong>Fatma Ben Ali</strong></p>
+              <span class="notification-time">Il y a 3 heures</span>
+            </div>
+          </div>
+        </div>
+        <div class="notification-footer">
+          <a href="notifications.html" class="view-all">Voir toutes les notifications</a>
+        </div>
+      </div>
+
+      <!-- Tickets Content -->
+      <div class="tickets-content">
+        <!-- Filters and Actions -->
+        <div class="row mb-4">
+          <div class="col-md-6 mb-3 mb-md-0">
+            <div class="search-box">
+              <i class="fas fa-search search-icon"></i>
+              <input type="search" class="form-control" placeholder="Rechercher un ticket...">
+            </div>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <button class="btn btn-primary" id="createTicketBtn">
+              <i class="fas fa-plus"></i> Créer un ticket
+            </button>
+            <button class="btn btn-light" id="filterBtn">
+              <i class="fas fa-filter"></i> Filtres
+            </button>
+            <button class="btn btn-light" id="exportBtn">
+              <i class="fas fa-download"></i> Exporter
+            </button>
+          </div>
+        </div>
+
+        <!-- Filters Panel (hidden by default) -->
+        <div class="filters-panel mb-4" style="display: none;">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Filtres</h3>
+              <button class="btn btn-sm btn-light" id="closeFiltersBtn">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="statusFilter" class="form-label">Statut</label>
+                    <select id="statusFilter" class="form-control">
+                      <option value="all">Tous les statuts</option>
+                      <option value="new">Nouveau</option>
+                      <option value="in-progress">En cours</option>
+                      <option value="review">En révision</option>
+                      <option value="completed">Terminé</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="priorityFilter" class="form-label">Priorité</label>
+                    <select id="priorityFilter" class="form-control">
+                      <option value="all">Toutes les priorités</option>
+                      <option value="high">Haute</option>
+                      <option value="medium">Moyenne</option>
+                      <option value="low">Basse</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="storeFilter" class="form-label">Boutique</label>
+                    <select id="storeFilter" class="form-control">
+                      <option value="all">Toutes les boutiques</option>
+                      <option value="north">Boutique Nord</option>
+                      <option value="south">Boutique Sud</option>
+                      <option value="east">Boutique Est</option>
+                      <option value="west">Boutique Ouest</option>
+                      <option value="center">Boutique Centre</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="dateFilter" class="form-label">Date</label>
+                    <select id="dateFilter" class="form-control">
+                      <option value="all">Toutes les dates</option>
+                      <option value="today">Aujourd'hui</option>
+                      <option value="week">Cette semaine</option>
+                      <option value="month">Ce mois</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="assigneeFilter" class="form-label">Assigné à</label>
+                    <select id="assigneeFilter" class="form-control">
+                      <option value="all">Tous les employés</option>
+                      <option value="unassigned">Non assigné</option>
+                      <option value="emp1">Ahmed Karim</option>
+                      <option value="emp2">Fatma Ben Ali</option>
+                      <option value="emp3">Youssef Miled</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="tagsFilter" class="form-label">Tags</label>
+                    <select id="tagsFilter" class="form-control" multiple>
+                      <option value="tag1">Inventaire</option>
+                      <option value="tag2">Formation</option>
+                      <option value="tag3">Promotion</option>
+                      <option value="tag4">Marketing</option>
+                      <option value="tag5">Maintenance</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-actions mt-3 text-end">
+                <button class="btn btn-light" id="resetFiltersBtn">Réinitialiser</button>
+                <button class="btn btn-primary" id="applyFiltersBtn">Appliquer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tickets Overview -->
+        <div class="row mb-4">
+          <div class="col-md-3 col-sm-6 mb-3">
+            <div class="stat-card">
+              <div class="stat-icon primary">
+                <i class="fas fa-tasks"></i>
+              </div>
+              <div class="stat-info">
+                <h3 class="stat-value">35</h3>
+                <p class="stat-label">Total des tickets</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-3">
+            <div class="stat-card">
+              <div class="stat-icon info">
+                <i class="fas fa-spinner"></i>
+              </div>
+              <div class="stat-info">
+                <h3 class="stat-value">18</h3>
+                <p class="stat-label">En cours</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-3">
+            <div class="stat-card">
+              <div class="stat-icon warning">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <div class="stat-info">
+                <h3 class="stat-value">7</h3>
+                <p class="stat-label">Haute priorité</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-3">
+            <div class="stat-card">
+              <div class="stat-icon success">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="stat-info">
+                <h3 class="stat-value">15</h3>
+                <p class="stat-label">Terminés ce mois</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kanban Board -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Tableau des tâches</h3>
+                <div class="card-actions">
+                  <select id="viewSelect" class="form-control">
+                    <option value="kanban">Vue Kanban</option>
+                    <option value="list">Vue Liste</option>
+                  </select>
+                </div>
+              </div>
+              <div class="card-body p-3">
+                <div class="kanban-board">
+                  <div class="kanban-container">
+                    <!-- Kanban Column: New -->
+                    <div class="kanban-column">
+                      <div class="kanban-column-header bg-primary">
+                        <h3 class="kanban-column-title">Nouveaux</h3>
+                        <span class="kanban-column-count">5</span>
+                      </div>
+                      <div class="kanban-items">
+                        <div class="kanban-item" draggable="true" data-id="ticket-1">
+                          <div class="kanban-item-header">
+                            <span class="ticket-id">#TASK-2025-001</span>
+                            <span class="ticket-priority high"><i class="fas fa-flag"></i></span>
+                          </div>
+                          <h4 class="kanban-item-title">Mise en place des promotions saisonnières</h4>
+                          <p class="kanban-item-description">Mettre en place les promotions d'été dans toutes les
+                            boutiques.</p>
+                          <div class="kanban-item-meta">
+                            <div class="ticket-due-date">
+                              <i class="fas fa-calendar-alt"></i> 25/05/2025
+                            </div>
+                            <div class="ticket-assignees">
+                              <div class="ticket-assignee">
+                                <img src="../assets/img/avatars/employee.jpg" alt="Assignee">
+                              </div>
+                              <div class="ticket-assignee">
+                                <img src="../assets/img/avatars/employee2.jpg" alt="Assignee">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="kanban-item-footer">
+                            <span class="ticket-store">Boutique Sud</span>
+                            <button class="btn btn-sm btn-light" data-action="view" data-id="ticket-1">
+                              <i class="fas fa-eye"></i>
+                            </button>
+                          </div>
+                        </div>
+
+                        <div class="kanban-item" draggable="true" data-id="ticket-2">
+                          <div class="kanban-item-header">
+                            <span class="ticket-id">#TASK-2025-002</span>
+                            <span class="ticket-priority medium"><i class="fas fa-flag"></i></span>
+                          </div>
+                          <h4 class="kanban-item-title">Formation des nouveaux employés</h4>
+                          <p class="kanban-item-description">Former les nouveaux vendeurs sur les procédures et
+                            produits.</p>
+                          <div class="kanban-item-meta">
+                            <div class="ticket-due-date">
+                              <i class="fas fa-calendar-alt"></i> 28/05/2025
+                            </div>
+                            <div class="ticket-assignees">
+                              <div class="ticket-assignee">
+                                <img src="../assets/img/avatars/employee5.jpg" alt="Assignee">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="kanban-item-footer">
+                            <span class="ticket-store">Boutique Nord</span>
+                            <button class="btn btn-sm btn-light" data-action="view" data-id="ticket-2">
+                              <i class="fas fa-eye"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Kanban Column: In Progress -->
+                    <div class="kanban-column">
+                      <div class="kanban-column-header bg-info">
+                        <h3 class="kanban-column-title">En cours</h3>
+                        <span class="kanban-column-count">3</span>
+                      </div>
+                      <div class="kanban-items">
+                        <div class="kanban-item" draggable="true" data-id="ticket-3">
+                          <div class="kanban-item-header">
+                            <span class="ticket-id">#TASK-2025-003</span>
+                            <span class="ticket-priority high"><i class="fas fa-flag"></i></span>
+                          </div>
+                          <h4 class="kanban-item-title">Inventaire mensuel</h4>
+                          <p class="kanban-item-description">Réaliser l'inventaire mensuel et mettre à jour le stock.
+                          </p>
+                          <div class="kanban-item-meta">
+                            <div class="ticket-due-date">
+                              <i class="fas fa-calendar-alt"></i> 22/05/2025
+                            </div>
+                            <div class="ticket-assignees">
+                              <div class="ticket-assignee">
+                                <img src="../assets/img/avatars/employee3.jpg" alt="Assignee">
+                              </div>
+                              <div class="ticket-assignee">
+                                <img src="../assets/img/avatars/employee6.jpg" alt="Assignee">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="kanban-item-footer">
+                            <span class="ticket-store">Boutique Est</span>
+                            <button class="btn btn-sm btn-light" data-action="view" data-id="ticket-3">
+                              <i class="fas fa-eye"></i>
+                            </button>
+                          </div>
+                        </div>
+
+                        <div class="kanban-item" draggable="true" data-id="ticket-4">
+                          <div class="kanban-item-header">
+                            <span class="ticket-id">#TASK-2025-004</span>
+                            <span class="ticket-priority medium"><i class="fas fa-flag"></i></span>
+                          </div>
+                          <h4 class="kanban-item-title">Préparation des évaluations trimestrielles</h4>
+                          <p class="kanban-item-description">Préparer les documents d'évaluation des employés pour le Q2
+                            2025.</p>
+                          <div class="kanban-item-meta">
+                            <div class="ticket-due-date">
+                              <i class="fas fa-calendar-alt"></i> 31/05/2025
+                            </div>
+                            <div class="ticket-assignees">
+                              <div class="ticket-assignee">
+                                <img src="../assets/img/avatars/sector.jpg" alt="Assignee">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="kanban-item-footer">
+                            <span class="ticket-store">Toutes les boutiques</span>
+                            <button class="btn btn-sm btn-light" data-action="view" data-id="ticket-4">
+                              <i class="fas fa-eye"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Kanban Column: In Review -->
+                    <div class="kanban-column">
+                      <div class="kanban-column-header bg-warning">
+                        <h3 class="kanban-column-title">En révision</h3>
+                        <span class="kanban-column-count">2</span>
+                      </div>
+                      <div class="kanban-items">
+                        <div class="kanban-item" draggable="true" data-id="ticket-5">
+                          <div class="kanban-item-header">
+                            <span class="ticket-id">#TASK-2025-005</span>
+                            <span class="ticket-priority low"><i class="fas fa-flag"></i></span>
+                          </div>
+                          <h4 class="kanban-item-title">Mise à jour du catalogue produits</h4>
+                          <p class="kanban-item-description">Mettre à jour les fiches produits avec les nouvelles
+                            collections.</p>
+                          <div class="kanban-item-meta">
+                            <div class="ticket-due-date">
+                              <i class="fas fa-calendar-alt"></i> 18/05/2025
+                            </div>
+                            <div class="ticket-assignees">
+                              <div class="ticket-assignee">
+                                <img src="../assets/img/avatars/employee4.jpg" alt="Assignee">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="kanban-item-footer">
+                            <span class="ticket-store">Boutique Centre</span>
+                            <button class="btn btn-sm btn-light" data-action="view" data-id="ticket-5">
+                              <i class="fas fa-eye"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Kanban Column: Completed -->
+                    <div class="kanban-column">
+                      <div class="kanban-column-header bg-success">
+                        <h3 class="kanban-column-title">Terminés</h3>
+                        <span class="kanban-column-count">4</span>
+                      </div>
+                      <div class="kanban-items">
+                        <div class="kanban-item" draggable="true" data-id="ticket-6">
+                          <div class="kanban-item-header">
+                            <span class="ticket-id">#TASK-2025-006</span>
+                            <span class="ticket-priority high"><i class="fas fa-flag"></i></span>
+                          </div>
+                          <h4 class="kanban-item-title">Formation logiciel de caisse</h4>
+                          <p class="kanban-item-description">Former tous les employés au nouveau système de caisse.</p>
+                          <div class="kanban-item-meta">
+                            <div class="ticket-due-date">
+                              <i class="fas fa-calendar-alt"></i> 15/05/2025
+                            </div>
+                            <div class="ticket-assignees">
+                              <div class="ticket-assignee">
+                                <img src="../assets/img/avatars/employee5.jpg" alt="Assignee">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="kanban-item-footer">
+                            <span class="ticket-store">Toutes les boutiques</span>
+                            <button class="btn btn-sm btn-light" data-action="view" data-id="ticket-6">
+                              <i class="fas fa-eye"></i>
+                            </button>
+                          </div>
+                        </div>
+
+                        <div class="kanban-item" draggable="true" data-id="ticket-7">
+                          <div class="kanban-item-header">
+                            <span class="ticket-id">#TASK-2025-007</span>
+                            <span class="ticket-priority medium"><i class="fas fa-flag"></i></span>
+                          </div>
+                          <h4 class="kanban-item-title">Réorganisation des vitrines</h4>
+                          <p class="kanban-item-description">Mettre en place la nouvelle disposition des vitrines.</p>
+                          <div class="kanban-item-meta">
+                            <div class="ticket-due-date">
+                              <i class="fas fa-calendar-alt"></i> 10/05/2025
+                            </div>
+                            <div class="ticket-assignees">
+                              <div class="ticket-assignee">
+                                <img src="../assets/img/avatars/employee.jpg" alt="Assignee">
+                              </div>
+                              <div class="ticket-assignee">
+                                <img src="../assets/img/avatars/employee2.jpg" alt="Assignee">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="kanban-item-footer">
+                            <span class="ticket-store">Boutique Sud</span>
+                            <button class="btn btn-sm btn-light" data-action="view" data-id="ticket-7">
+                              <i class="fas fa-eye"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar Overlay (Mobile) -->
+  <div class="sidebar-overlay"></div>
+
+  <!-- Create/Edit Ticket Modal -->
+  <div class="modal-overlay" id="ticketModal">
+    <div class="modal" style="max-width: 700px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Créer un ticket</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="ticketForm">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="ticketTitle" class="form-label">Titre</label>
+                <input type="text" id="ticketTitle" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="ticketPriority" class="form-label">Priorité</label>
+                <select id="ticketPriority" class="form-control" required>
+                  <option value="low">Basse</option>
+                  <option value="medium" selected>Moyenne</option>
+                  <option value="high">Haute</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="ticketDescription" class="form-label">Description</label>
+            <textarea id="ticketDescription" class="form-control" rows="4" required></textarea>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="ticketStore" class="form-label">Boutique</label>
+                <select id="ticketStore" class="form-control" required>
+                  <option value="">Sélectionner une boutique</option>
+                  <option value="all">Toutes les boutiques</option>
+                  <option value="north">Boutique Nord</option>
+                  <option value="south">Boutique Sud</option>
+                  <option value="east">Boutique Est</option>
+                  <option value="west">Boutique Ouest</option>
+                  <option value="center">Boutique Centre</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="ticketDueDate" class="form-label">Date d'échéance</label>
+                <input type="date" id="ticketDueDate" class="form-control" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label">Assignés</label>
+                <div class="assignee-selector">
+                  <div class="selected-assignees mb-2">
+                    <!-- Selected assignees will appear here -->
+                  </div>
+                  <select id="ticketAssignees" class="form-control" multiple>
+                    <option value="emp1" data-avatar="../assets/img/avatars/employee.jpg">Ahmed Karim - Vendeur</option>
+                    <option value="emp2" data-avatar="../assets/img/avatars/employee2.jpg">Fatma Ben Ali - Vendeuse
+                    </option>
+                    <option value="emp3" data-avatar="../assets/img/avatars/employee3.jpg">Youssef Miled - Vendeur
+                    </option>
+                    <option value="emp4" data-avatar="../assets/img/avatars/employee4.jpg">Sarah Trabelsi - Vendeuse
+                    </option>
+                    <option value="emp5" data-avatar="../assets/img/avatars/employee5.jpg">Mehdi Selmi - Responsable
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="ticketTags" class="form-label">Tags</label>
+                <select id="ticketTags" class="form-control" multiple>
+                  <option value="tag1">Inventaire</option>
+                  <option value="tag2">Formation</option>
+                  <option value="tag3">Promotion</option>
+                  <option value="tag4">Marketing</option>
+                  <option value="tag5">Maintenance</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="ticketStatus" class="form-label">Statut</label>
+                <select id="ticketStatus" class="form-control" required>
+                  <option value="new" selected>Nouveau</option>
+                  <option value="in-progress">En cours</option>
+                  <option value="review">En révision</option>
+                  <option value="completed">Terminé</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="ticketAttachments" class="form-label">Pièces jointes</label>
+            <div class="file-upload-container">
+              <input type="file" id="ticketAttachments" class="form-control" multiple>
+            </div>
+            <div class="attached-files mt-2">
+              <!-- Attached files will appear here -->
+            </div>
+          </div>
+
+          <div class="form-group mt-3">
+            <div class="form-check">
+              <input type="checkbox" id="notifyAssignees" class="form-check-input" checked>
+              <label for="notifyAssignees" class="form-check-label">Notifier les assignés</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-light modal-cancel">Annuler</button>
+        <button class="btn btn-primary" id="saveTicketBtn">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Ticket Modal -->
+  <div class="modal-overlay" id="viewTicketModal">
+    <div class="modal" style="max-width: 800px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="viewTicketTitle">Détails du ticket</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="ticket-details">
+          <div class="ticket-header">
+            <div class="ticket-meta-info">
+              <div class="ticket-id" id="viewTicketId">#TASK-2025-001</div>
+              <div class="ticket-status" id="viewTicketStatus">
+                <span class="badge bg-info">En cours</span>
+              </div>
+            </div>
+            <div class="ticket-priority" id="viewTicketPriority">
+              <span class="badge bg-danger">Priorité haute</span>
+            </div>
+          </div>
+
+          <div class="ticket-description mt-3">
+            <h4>Description</h4>
+            <p id="viewTicketDescription">Mettre en place les promotions d'été dans toutes les boutiques.</p>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <div class="detail-group">
+                <div class="detail-label">Boutique</div>
+                <div class="detail-value" id="viewTicketStore">Boutique Sud</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="detail-group">
+                <div class="detail-label">Date d'échéance</div>
+                <div class="detail-value" id="viewTicketDueDate">25/05/2025</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <div class="detail-group">
+                <div class="detail-label">Créé par</div>
+                <div class="detail-value" id="viewTicketCreator">Admin Mazzaro</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="detail-group">
+                <div class="detail-label">Date de création</div>
+                <div class="detail-value" id="viewTicketCreatedDate">15/05/2025</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket-assignees mt-3">
+            <h4>Assignés</h4>
+            <div class="assignee-list" id="viewTicketAssignees">
+              <div class="assignee-item">
+                <div class="assignee-avatar">
+                  <img src="../assets/img/avatars/employee.jpg" alt="Ahmed Karim">
+                </div>
+                <div class="assignee-name">Ahmed Karim</div>
+              </div>
+              <div class="assignee-item">
+                <div class="assignee-avatar">
+                  <img src="../assets/img/avatars/employee2.jpg" alt="Fatma Ben Ali">
+                </div>
+                <div class="assignee-name">Fatma Ben Ali</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket-tags mt-3">
+            <h4>Tags</h4>
+            <div class="tags-list" id="viewTicketTags">
+              <span class="tag">Promotion</span>
+              <span class="tag">Marketing</span>
+            </div>
+          </div>
+
+          <div class="ticket-progress mt-3">
+            <h4>Progression</h4>
+            <div class="progress-container">
+              <div class="progress-bar">
+                <div class="progress" id="viewTicketProgress" style="width: 30%;"></div>
+              </div>
+              <span class="progress-text">30%</span>
+            </div>
+          </div>
+
+          <div class="ticket-attachments mt-3">
+            <h4>Pièces jointes</h4>
+            <div class="attachments-list" id="viewTicketAttachments">
+              <div class="attachment-item">
+                <div class="attachment-icon">
+                  <i class="fas fa-file-pdf"></i>
+                </div>
+                <div class="attachment-name">Guide_Promotions_Été_2025.pdf</div>
+                <div class="attachment-actions">
+                  <button class="btn btn-sm btn-light">
+                    <i class="fas fa-download"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="attachment-item">
+                <div class="attachment-icon">
+                  <i class="fas fa-file-image"></i>
+                </div>
+                <div class="attachment-name">Visuel_Promo_Été.jpg</div>
+                <div class="attachment-actions">
+                  <button class="btn btn-sm btn-light">
+                    <i class="fas fa-download"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket-activity mt-4">
+            <h4>Activité</h4>
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-user">
+                  <div class="activity-avatar">
+                    <img src="../assets/img/avatars/admin.jpg" alt="Admin">
+                  </div>
+                </div>
+                <div class="activity-content">
+                  <div class="activity-header">
+                    <div class="activity-name">Admin Mazzaro</div>
+                    <div class="activity-date">15/05/2025 10:30</div>
+                  </div>
+                  <div class="activity-text">
+                    <p>Ticket créé et assigné à Ahmed Karim et Fatma Ben Ali.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-user">
+                  <div class="activity-avatar">
+                    <img src="../assets/img/avatars/employee.jpg" alt="Employee">
+                  </div>
+                </div>
+                <div class="activity-content">
+                  <div class="activity-header">
+                    <div class="activity-name">Ahmed Karim</div>
+                    <div class="activity-date">16/05/2025 14:15</div>
+                  </div>
+                  <div class="activity-text">
+                    <p>J'ai commencé à travailler sur la mise en place des promotions dans le rayon femmes.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-user">
+                  <div class="activity-avatar">
+                    <img src="../assets/img/avatars/employee2.jpg" alt="Employee">
+                  </div>
+                </div>
+                <div class="activity-content">
+                  <div class="activity-header">
+                    <div class="activity-name">Fatma Ben Ali</div>
+                    <div class="activity-date">17/05/2025 09:45</div>
+                  </div>
+                  <div class="activity-text">
+                    <p>J'ai terminé la mise en place dans le rayon hommes. Je vais m'occuper des accessoires maintenant.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="add-comment mt-3">
+              <form id="commentForm">
+                <div class="form-group">
+                  <label for="newComment" class="form-label">Ajouter un commentaire</label>
+                  <textarea id="newComment" class="form-control" rows="2" placeholder="Votre commentaire..."></textarea>
+                </div>
+                <div class="form-group mt-2">
+                  <div class="d-flex align-items-center">
+                    <div class="me-3">
+                      <input type="file" id="commentAttachment" class="form-control-file">
+                    </div>
+                    <div>
+                      <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Envoyer
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-light" data-action="close">Fermer</button>
+        <button class="btn btn-success" data-action="complete" id="completeTicketBtn">
+          <i class="fas fa-check"></i> Marquer comme terminé
+        </button>
+        <button class="btn btn-primary" data-action="edit" id="editTicketBtn">
+          <i class="fas fa-edit"></i> Modifier
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/tickets.js"></script>
+  <script src="../assets/js/auth.js"></script>
+
+  <!-- Tickets Management Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Show/Hide Filters Panel
+      const filterBtn = document.getElementById('filterBtn');
+      const closeFiltersBtn = document.getElementById('closeFiltersBtn');
+      const filtersPanel = document.querySelector('.filters-panel');
+
+      if (filterBtn && filtersPanel) {
+        filterBtn.addEventListener('click', function () {
+          filtersPanel.style.display = 'block';
+        });
+      }
+
+      if (closeFiltersBtn && filtersPanel) {
+        closeFiltersBtn.addEventListener('click', function () {
+          filtersPanel.style.display = 'none';
+        });
+      }
+
+      // Apply Filters
+      const applyFiltersBtn = document.getElementById('applyFiltersBtn');
+      if (applyFiltersBtn) {
+        applyFiltersBtn.addEventListener('click', function () {
+          // In a real app, this would apply the filters
+          filtersPanel.style.display = 'none';
+
+          // Show notification
+          showNotification('Filtres appliqués', 'Les filtres ont été appliqués avec succès.');
+        });
+      }
+
+      // Reset Filters
+      const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+      if (resetFiltersBtn) {
+        resetFiltersBtn.addEventListener('click', function () {
+          // Reset filter form
+          document.getElementById('statusFilter').value = 'all';
+          document.getElementById('priorityFilter').value = 'all';
+          document.getElementById('storeFilter').value = 'all';
+          document.getElementById('dateFilter').value = 'all';
+          document.getElementById('assigneeFilter').value = 'all';
+
+          // In a real app, this would reset the displayed data
+        });
+      }
+
+      // Create Ticket Button
+      const createTicketBtn = document.getElementById('createTicketBtn');
+      if (createTicketBtn) {
+        createTicketBtn.addEventListener('click', function () {
+          // Reset form
+          document.getElementById('ticketForm').reset();
+
+          // Set today's date and due date one week from now
+          const today = new Date();
+          const dueDate = new Date();
+          dueDate.setDate(today.getDate() + 7);
+
+          // Format for input[type="date"] is YYYY-MM-DD
+          document.getElementById('ticketDueDate').value = dueDate.toISOString().split('T')[0];
+
+          // Update modal title
+          document.querySelector('#ticketModal .modal-title').textContent = 'Créer un ticket';
+
+          // Show modal
+          showModal('ticketModal');
+        });
+      }
+
+      // Save Ticket Button
+      const saveTicketBtn = document.getElementById('saveTicketBtn');
+      if (saveTicketBtn) {
+        saveTicketBtn.addEventListener('click', function () {
+          // Basic validation
+          const form = document.getElementById('ticketForm');
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
+          // In a real app, this would save the ticket data to the server
+
+          hideModal('ticketModal');
+
+          // Show success notification
+          showNotification('Ticket enregistré', 'Le ticket a été enregistré avec succès.');
+        });
+      }
+
+      // View Ticket Buttons
+      const viewButtons = document.querySelectorAll('[data-action="view"]');
+      viewButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const ticketId = this.getAttribute('data-id');
+
+          // In a real app, this would fetch ticket data from the server
+          // For this prototype, we'll just show the modal with some sample data
+
+          // Show modal
+          showModal('viewTicketModal');
+        });
+      });
+
+      // Edit Ticket Button in View Modal
+      const editTicketBtn = document.getElementById('editTicketBtn');
+      if (editTicketBtn) {
+        editTicketBtn.addEventListener('click', function () {
+          // In a real app, this would populate the edit form with ticket data
+
+          // Hide view modal
+          hideModal('viewTicketModal');
+
+          // Show edit modal
+          // Update modal title
+          document.querySelector('#ticketModal .modal-title').textContent = 'Modifier le ticket';
+
+          // Populate form with sample data
+          document.getElementById('ticketTitle').value = 'Mise en place des promotions saisonnières';
+          document.getElementById('ticketDescription').value = 'Mettre en place les promotions d\'été dans toutes les boutiques.';
+          document.getElementById('ticketPriority').value = 'high';
+          document.getElementById('ticketStore').value = 'south';
+          document.getElementById('ticketStatus').value = 'in-progress';
+
+          // Set the due date
+          const dueDate = new Date('2025-05-25');
+          document.getElementById('ticketDueDate').value = dueDate.toISOString().split('T')[0];
+
+          // Show modal
+          showModal('ticketModal');
+        });
+      }
+
+      // Complete Ticket Button
+      const completeTicketBtn = document.getElementById('completeTicketBtn');
+      if (completeTicketBtn) {
+        completeTicketBtn.addEventListener('click', function () {
+          // In a real app, this would update the ticket status to "completed"
+
+          // Update UI to show completed
+          document.getElementById('viewTicketStatus').innerHTML = '<span class="badge bg-success">Terminé</span>';
+
+          // Update button text and disable it
+          this.innerHTML = '<i class="fas fa-check-circle"></i> Terminé';
+          this.disabled = true;
+          this.classList.remove('btn-success');
+          this.classList.add('btn-outline-success');
+
+          // Show notification
+          showNotification('Ticket terminé', 'Le ticket a été marqué comme terminé.');
+        });
+      }
+
+      // Drag and Drop for Kanban Items
+      const kanbanItems = document.querySelectorAll('.kanban-item');
+      const kanbanColumns = document.querySelectorAll('.kanban-items');
+
+      kanbanItems.forEach(item => {
+        item.addEventListener('dragstart', function (e) {
+          e.dataTransfer.setData('text/plain', this.getAttribute('data-id'));
+          this.classList.add('dragging');
+        });
+
+        item.addEventListener('dragend', function () {
+          this.classList.remove('dragging');
+        });
+      });
+
+      kanbanColumns.forEach(column => {
+        column.addEventListener('dragover', function (e) {
+          e.preventDefault();
+          this.classList.add('drag-over');
+        });
+
+        column.addEventListener('dragleave', function () {
+          this.classList.remove('drag-over');
+        });
+
+        column.addEventListener('drop', function (e) {
+          e.preventDefault();
+          this.classList.remove('drag-over');
+
+          const ticketId = e.dataTransfer.getData('text/plain');
+          const draggedItem = document.querySelector(`[data-id="${ticketId}"]`);
+
+          // In a real app, this would update the ticket status on the server
+
+          // Move item to this column
+          this.appendChild(draggedItem);
+
+          // Update counters
+          updateKanbanCounters();
+
+          // Show notification
+          showNotification('Ticket déplacé', 'Le statut du ticket a été mis à jour.');
+        });
+      });
+
+      // Function to update kanban column counters
+      function updateKanbanCounters() {
+        const columns = document.querySelectorAll('.kanban-column');
+
+        columns.forEach(column => {
+          const itemsCount = column.querySelectorAll('.kanban-item').length;
+          const countElement = column.querySelector('.kanban-column-count');
+
+          if (countElement) {
+            countElement.textContent = itemsCount;
+          }
+        });
+      }
+
+      // Toggle between Kanban and List View
+      const viewSelect = document.getElementById('viewSelect');
+      if (viewSelect) {
+        viewSelect.addEventListener('change', function () {
+          const selectedView = this.value;
+
+          if (selectedView === 'list') {
+            // In a real app, this would switch to list view
+            showNotification('Changement de vue', 'Fonctionnalité à implémenter: Vue Liste');
+          }
+        });
+      }
+
+      // Comment Form Submission
+      const commentForm = document.getElementById('commentForm');
+      if (commentForm) {
+        commentForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          const commentText = document.getElementById('newComment').value;
+
+          if (commentText.trim() === '') {
+            return;
+          }
+
+          // In a real app, this would send the comment to the server
+
+          // Clear the form
+          this.reset();
+
+          // Add the comment to the activity list (in a real app, this would be done after server confirmation)
+          const activityList = document.querySelector('.activity-list');
+
+          const now = new Date();
+          const formattedDate = now.toLocaleDateString('fr-FR') + ' ' + now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+
+          const newComment = document.createElement('div');
+          newComment.className = 'activity-item';
+          newComment.innerHTML = `
+            <div class="activity-user">
+              <div class="activity-avatar">
+                <img src="../assets/img/avatars/admin.jpg" alt="Admin">
+              </div>
+            </div>
+            <div class="activity-content">
+              <div class="activity-header">
+                <div class="activity-name">Admin Mazzaro</div>
+                <div class="activity-date">${formattedDate}</div>
+              </div>
+              <div class="activity-text">
+                <p>${commentText}</p>
+              </div>
+            </div>
+          `;
+
+          activityList.appendChild(newComment);
+
+          // Show notification
+          showNotification('Commentaire ajouté', 'Votre commentaire a été ajouté avec succès.');
+        });
+      }
+
+      // Modal Functions
+      function showModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+          modal.classList.add('active');
+        }
+      }
+
+      function hideModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+          modal.classList.remove('active');
+        }
+      }
+
+      // Close modals when clicking outside or on close button
+      const modalOverlays = document.querySelectorAll('.modal-overlay');
+      modalOverlays.forEach(overlay => {
+        overlay.addEventListener('click', function (e) {
+          if (e.target === this) {
+            this.classList.remove('active');
+          }
+        });
+
+        const closeBtn = overlay.querySelector('.modal-close');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function () {
+            overlay.classList.remove('active');
+          });
+        }
+
+        const cancelBtn = overlay.querySelector('.modal-cancel');
+        if (cancelBtn) {
+          cancelBtn.addEventListener('click', function () {
+            overlay.classList.remove('active');
+          });
+        }
+
+        const closeActionBtn = overlay.querySelector('[data-action="close"]');
+        if (closeActionBtn) {
+          closeActionBtn.addEventListener('click', function () {
+            overlay.classList.remove('active');
+          });
+        }
+      });
+
+      // Export Button
+      const exportBtn = document.getElementById('exportBtn');
+      if (exportBtn) {
+        exportBtn.addEventListener('click', function () {
+          // In a real app, this would export the tickets data
+          showNotification('Export', 'Les données ont été exportées avec succès.');
+        });
+      }
+
+      // Notification function
+      function showNotification(title, message) {
+        // Create notification container if it doesn't exist
+        let notifContainer = document.querySelector('.notification-container');
+        if (!notifContainer) {
+          notifContainer = document.createElement('div');
+          notifContainer.className = 'notification-container';
+          document.body.appendChild(notifContainer);
+        }
+
+        // Create notification
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+
+        // Add notification content
+        notification.innerHTML = `
+          <div class="notification-header">
+            <h4>${title}</h4>
+            <button class="notification-close">&times;</button>
+          </div>
+          <div class="notification-body">
+            ${message}
+          </div>
+        `;
+
+        // Add notification to container
+        notifContainer.appendChild(notification);
+
+        // Show notification
+        setTimeout(() => {
+          notification.classList.add('show');
+        }, 10);
+
+        // Close button
+        const closeBtn = notification.querySelector('.notification-close');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+              notification.remove();
+            }, 300);
+          });
+        }
+
+        // Auto close after 5 seconds
+        setTimeout(() => {
+          notification.classList.remove('show');
+          setTimeout(() => {
+            notification.remove();
+          }, 300);
+        }, 5000);
+      }
+    });
+  </script>
+</body>
+
+</html>
