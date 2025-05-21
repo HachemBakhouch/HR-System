@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiques | Mazzaro Milano RH</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/img/logo.png" alt="Mazzaro Milano" class="sidebar-logo">
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="index.html" class="sidebar-link">
+                        <i class="fas fa-tachometer-alt sidebar-icon"></i>
+                        <span class="sidebar-text">Tableau de bord</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="employees.html" class="sidebar-link">
+                        <i class="fas fa-users sidebar-icon"></i>
+                        <span class="sidebar-text">Employés</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="tickets.html" class="sidebar-link">
+                        <i class="fas fa-tasks sidebar-icon"></i>
+                        <span class="sidebar-text">Tickets & Tâches</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="attendance.html" class="sidebar-link">
+                        <i class="fas fa-clock sidebar-icon"></i>
+                        <span class="sidebar-text">Pointage & Présence</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="leave.html" class="sidebar-link">
+                        <i class="fas fa-calendar-alt sidebar-icon"></i>
+                        <span class="sidebar-text">Congés</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="calendar.html" class="sidebar-link">
+                        <i class="fas fa-calendar-day sidebar-icon"></i>
+                        <span class="sidebar-text">Calendrier</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="statistics.html" class="sidebar-link active">
+                        <i class="fas fa-chart-bar sidebar-icon"></i>
+                        <span class="sidebar-text">Statistiques</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="evaluations.html" class="sidebar-link">
+                        <i class="fas fa-star sidebar-icon"></i>
+                        <span class="sidebar-text">Évaluations</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="settings.html" class="sidebar-link">
+                        <i class="fas fa-cog sidebar-icon"></i>
+                        <span class="sidebar-text">Paramètres</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <span>Mazzaro Milano RH v1.0</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1 class="page-title">Statistiques</h1>
+
+                <div class="header-actions">
+                    <button class="header-action notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </button>
+
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img src="../assets/img/avatars/admin.jpg" alt="Admin Profile">
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">Admin Mazzaro</span>
+                            <span class="user-role">Super Administrateur</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-toggle"></i>
+
+                        <!-- User Dropdown Menu -->
+                        <div class="dropdown-menu user-dropdown-menu">
+                            <a href="profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i> Mon profil
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Paramètres
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="auth.logout()">
+                                <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Notification Panel -->
+            <div class="notification-panel">
+                <div class="notification-header">
+                    <h3 class="notification-title">Notifications</h3>
+                    <span class="notification-count">5</span>
+                </div>
+                <div class="notification-body">
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Nouvel employé ajouté: <strong>Sarah Trabelsi</strong></p>
+                            <span class="notification-time">Il y a 10 minutes</span>
+                        </div>
+                    </div>
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Retard de <strong>Ahmed Karim</strong> - Boutique Sud</p>
+                            <span class="notification-time">Il y a 1 heure</span>
+                        </div>
+                    </div>
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Nouvelle demande de congé de <strong>Fatma Ben Ali</strong>
+                            </p>
+                            <span class="notification-time">Il y a 3 heures</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Tâche complétée: <strong>Inventaire mensuel</strong></p>
+                            <span class="notification-time">Hier, 16:45</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Nouvelle évaluation pour <strong>Boutique Nord</strong></p>
+                            <span class="notification-time">Hier, 10:20</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="notification-footer">
+                    <a href="notifications.html" class="view-all">Voir toutes les notifications</a>
+                </div>
+            </div>
+
+            <!-- Statistics Content -->
+            <div class="statistics-content">
+                <!-- Filter Controls -->
+                <div class="filters-container mb-4">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="d-flex flex-wrap">
+                                <div class="form-group me-3 mb-3">
+                                    <label for="date-range" class="form-label">Période</label>
+                                    <select id="date-range" class="form-control">
+                                        <option value="this-month">Ce mois (Mai 2025)</option>
+                                        <option value="last-month">Mois précédent (Avril 2025)</option>
+                                        <option value="this-quarter">Ce trimestre (T2 2025)</option>
+                                        <option value="last-quarter">Trimestre précédent (T1 2025)</option>
+                                        <option value="this-year">Cette année (2025)</option>
+                                        <option value="last-year">Année précédente (2024)</option>
+                                        <option value="custom">Période personnalisée</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group me-3 mb-3">
+                                    <label for="sector-filter" class="form-label">Secteur</label>
+                                    <select id="sector-filter" class="form-control">
+                                        <option value="all">Tous les secteurs</option>
+                                        <option value="north">Secteur Nord</option>
+                                        <option value="south">Secteur Sud</option>
+                                        <option value="east">Secteur Est</option>
+                                        <option value="west">Secteur Ouest</option>
+                                        <option value="center">Secteur Centre</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="store-filter" class="form-label">Boutique</label>
+                                    <select id="store-filter" class="form-control">
+                                        <option value="all">Toutes les boutiques</option>
+                                        <optgroup label="Secteur Nord">
+                                            <option value="north-1">Boutique Nord - Centre Commercial</option>
+                                            <option value="north-2">Boutique Nord - Avenue Principale</option>
+                                            <option value="north-3">Boutique Nord - Galerie Marchande</option>
+                                        </optgroup>
+                                        <optgroup label="Secteur Sud">
+                                            <option value="south-1">Boutique Sud - Centre Ville</option>
+                                            <option value="south-2">Boutique Sud - Zone Commerciale</option>
+                                        </optgroup>
+                                        <optgroup label="Secteur Est">
+                                            <option value="east-1">Boutique Est - Marina</option>
+                                            <option value="east-2">Boutique Est - Centre Commercial</option>
+                                        </optgroup>
+                                        <optgroup label="Secteur Ouest">
+                                            <option value="west-1">Boutique Ouest - Boulevard Principal</option>
+                                            <option value="west-2">Boutique Ouest - Quartier Résidentiel</option>
+                                            <option value="west-3">Boutique Ouest - Zone Touristique</option>
+                                        </optgroup>
+                                        <optgroup label="Secteur Centre">
+                                            <option value="center-1">Boutique Centre - Médina</option>
+                                            <option value="center-2">Boutique Centre - Avenue Bourguiba</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 text-end">
+                            <div class="form-group mb-3" style="margin-top: 32px;">
+                                <button class="btn btn-primary me-2">
+                                    <i class="fas fa-sync-alt"></i> Actualiser
+                                </button>
+                                <button class="btn btn-light">
+                                    <i class="fas fa-download"></i> Exporter
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Custom Date Range (hidden by default) -->
+                    <div class="row custom-date-range" style="display: none;">
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="form-group me-3">
+                                    <label for="date-start" class="form-label">Date de début</label>
+                                    <input type="date" id="date-start" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="date-end" class="form-label">Date de fin</label>
+                                    <input type="date" id="date-end" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Stats -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon primary">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 class="stat-value">72</h3>
+                                <p class="stat-label">Employés actifs</p>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i> +4.3% vs période précédente
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon secondary">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 class="stat-value">92.4%</h3>
+                                <p class="stat-label">Taux de présence</p>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i> +1.2% vs période précédente
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon success">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 class="stat-value">85.7%</h3>
+                                <p class="stat-label">Taux d'accomplissement</p>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i> +2.8% vs période précédente
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon info">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 class="stat-value">98.2%</h3>
+                                <p class="stat-label">Performance moyenne</p>
+                                <div class="stat-change positive">
+                                    <i class="fas fa-arrow-up"></i> +1.5% vs période précédente
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Charts -->
+                <div class="row mt-4">
+                    <div class="col-md-8">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3 class="chart-title">Performance par secteur</h3>
+                                <div class="chart-actions">
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-light active"
+                                            data-view="performance">Performance</button>
+                                        <button class="btn btn-sm btn-light" data-view="presence">Présence</button>
+                                        <button class="btn btn-sm btn-light" data-view="tasks">Tâches</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="sectorPerformanceChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3 class="chart-title">Répartition des employés</h3>
+                                <div class="chart-actions">
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-light active" data-view="sector">Par
+                                            secteur</button>
+                                        <button class="btn btn-sm btn-light" data-view="role">Par rôle</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="employeeDistributionChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Charts -->
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3 class="chart-title">Évolution des présences</h3>
+                                <div class="chart-actions">
+                                    <button class="btn btn-sm btn-light">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="attendanceEvolutionChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3 class="chart-title">Évolution des tâches</h3>
+                                <div class="chart-actions">
+                                    <button class="btn btn-sm btn-light">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="tasksEvolutionChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Stats Table -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Statistiques détaillées par boutique</h3>
+                                <div class="card-actions">
+                                    <button class="btn btn-sm btn-light">
+                                        <i class="fas fa-download"></i> Exporter
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Boutique</th>
+                                                <th>Secteur</th>
+                                                <th>Employés</th>
+                                                <th>Taux de présence</th>
+                                                <th>Retards</th>
+                                                <th>Tâches complétées</th>
+                                                <th>Performance</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Boutique Nord - Centre Commercial</td>
+                                                <td>Nord</td>
+                                                <td>9</td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar bg-success" style="width: 98%;"></div>
+                                                        <span>98%</span>
+                                                    </div>
+                                                </td>
+                                                <td>2.1%</td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar" style="width: 95%;"></div>
+                                                        <span>95%</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar" style="width: 92%;"></div>
+                                                        <span>92%</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-light">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light">
+                                                            <i class="fas fa-download"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Boutique Sud - Centre Ville</td>
+                                                <td>Sud</td>
+                                                <td>8</td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar bg-success" style="width: 95%;"></div>
+                                                        <span>95%</span>
+                                                    </div>
+                                                </td>
+                                                <td>3.5%</td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar" style="width: 88%;"></div>
+                                                        <span>88%</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar" style="width: 90%;"></div>
+                                                        <span>90%</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-light">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light">
+                                                            <i class="fas fa-download"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Boutique Est - Marina</td>
+                                                <td>Est</td>
+                                                <td>7</td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar bg-success" style="width: 94%;"></div>
+                                                        <span>94%</span>
+                                                    </div>
+                                                </td>
+                                                <td>2.8%</td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar" style="width: 92%;"></div>
+                                                        <span>92%</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar" style="width: 89%;"></div>
+                                                        <span>89%</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-light">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light">
+                                                            <i class="fas fa-download"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Boutique Ouest - Zone Touristique</td>
+                                                <td>Ouest</td>
+                                                <td>8</td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar bg-warning" style="width: 87%;"></div>
+                                                        <span>87%</span>
+                                                    </div>
+                                                </td>
+                                                <td>5.2%</td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar" style="width: 85%;"></div>
+                                                        <span>85%</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar" style="width: 86%;"></div>
+                                                        <span>86%</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-light">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light">
+                                                            <i class="fas fa-download"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Boutique Centre - Médina</td>
+                                                <td>Centre</td>
+                                                <td>7</td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar bg-success" style="width: 96%;"></div>
+                                                        <span>96%</span>
+                                                    </div>
+                                                </td>
+                                                <td>1.5%</td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar" style="width: 94%;"></div>
+                                                        <span>94%</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="progress-small">
+                                                        <div class="progress-bar" style="width: 93%;"></div>
+                                                        <span>93%</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-light">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light">
+                                                            <i class="fas fa-download"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+    <script src="../assets/js/auth.js"></script>
+
+    <!-- Statistics-specific Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Handle date range selector
+            const dateRangeSelect = document.getElementById('date-range');
+            const customDateRange = document.querySelector('.custom-date-range');
+
+            if (dateRangeSelect && customDateRange) {
+                dateRangeSelect.addEventListener('change', function () {
+                    if (this.value === 'custom') {
+                        customDateRange.style.display = 'block';
+                    } else {
+                        customDateRange.style.display = 'none';
+                    }
+                });
+            }
+
+            // Initialize Sector Performance Chart
+            const sectorPerformanceChart = document.getElementById('sectorPerformanceChart');
+            if (sectorPerformanceChart) {
+                const ctx = sectorPerformanceChart.getContext('2d');
+
+                // Data for the chart
+                const sectors = ['Nord', 'Sud', 'Est', 'Ouest', 'Centre'];
+                const performanceData = [92, 90, 89, 86, 93];
+                const presenceData = [98, 95, 94, 87, 96];
+                const tasksData = [95, 88, 92, 85, 94];
+
+                // Create chart
+                const sectorChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: sectors,
+                        datasets: [
+                            {
+                                label: 'Performance',
+                                data: performanceData,
+                                backgroundColor: 'rgba(59, 89, 152, 0.7)',
+                                borderColor: 'rgba(59, 89, 152, 1)',
+                                borderWidth: 1,
+                                borderRadius: 4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.dataset.label + ': ' + context.parsed.y + '%';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 80,
+                                max: 100,
+                                ticks: {
+                                    callback: function (value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Handle chart view toggles
+                const chartViewButtons = document.querySelectorAll('.chart-actions [data-view]');
+                chartViewButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        // Update active button state
+                        document.querySelectorAll('.chart-actions [data-view]').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        this.classList.add('active');
+
+                        // Update chart data based on view
+                        const view = this.getAttribute('data-view');
+                        let data = performanceData;
+
+                        if (view === 'presence') {
+                            data = presenceData;
+                            sectorChart.data.datasets[0].label = 'Présence';
+                        } else if (view === 'tasks') {
+                            data = tasksData;
+                            sectorChart.data.datasets[0].label = 'Tâches complétées';
+                        } else {
+                            sectorChart.data.datasets[0].label = 'Performance';
+                        }
+
+                        sectorChart.data.datasets[0].data = data;
+                        sectorChart.update();
+                    });
+                });
+            }
+
+            // Initialize Employee Distribution Chart
+            const employeeDistributionChart = document.getElementById('employeeDistributionChart');
+            if (employeeDistributionChart) {
+                const ctx = employeeDistributionChart.getContext('2d');
+
+                // Data for the chart
+                const sectorData = {
+                    labels: ['Nord', 'Sud', 'Est', 'Ouest', 'Centre'],
+                    datasets: [{
+                        data: [24, 15, 16, 19, 14],
+                        backgroundColor: [
+                            'rgba(59, 89, 152, 0.7)',
+                            'rgba(237, 69, 15, 0.7)',
+                            'rgba(40, 167, 69, 0.7)',
+                            'rgba(23, 162, 184, 0.7)',
+                            'rgba(255, 193, 7, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 89, 152, 1)',
+                            'rgba(237, 69, 15, 1)',
+                            'rgba(40, 167, 69, 1)',
+                            'rgba(23, 162, 184, 1)',
+                            'rgba(255, 193, 7, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                };
+
+                const roleData = {
+                    labels: ['Vendeurs', 'Gestionnaires', 'Responsables boutique', 'Resp. secteur', 'Admin'],
+                    datasets: [{
+                        data: [52, 8, 12, 5, 3],
+                        backgroundColor: [
+                            'rgba(59, 89, 152, 0.7)',
+                            'rgba(237, 69, 15, 0.7)',
+                            'rgba(40, 167, 69, 0.7)',
+                            'rgba(23, 162, 184, 0.7)',
+                            'rgba(255, 193, 7, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 89, 152, 1)',
+                            'rgba(237, 69, 15, 1)',
+                            'rgba(40, 167, 69, 1)',
+                            'rgba(23, 162, 184, 1)',
+                            'rgba(255, 193, 7, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                };
+
+                // Create chart
+                const distributionChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: sectorData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 20
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.label + ': ' + context.formattedValue + ' employés';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Handle chart view toggles
+                const distributionViewButtons = document.querySelectorAll('.chart-actions [data-view]');
+                distributionViewButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        // Update active button state
+                        document.querySelectorAll('[data-view]', this.parentNode).forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        this.classList.add('active');
+
+                        // Update chart data based on view
+                        const view = this.getAttribute('data-view');
+
+                        if (view === 'role') {
+                            distributionChart.data = roleData;
+                        } else {
+                            distributionChart.data = sectorData;
+                        }
+
+                        distributionChart.update();
+                    });
+                });
+            }
+
+            // Initialize Attendance Evolution Chart
+            const attendanceEvolutionChart = document.getElementById('attendanceEvolutionChart');
+            if (attendanceEvolutionChart) {
+                const ctx = attendanceEvolutionChart.getContext('2d');
+
+                // Data for the chart
+                const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai'];
+                const presentData = [91.2, 90.8, 92.4, 91.5, 92.4];
+                const lateData = [4.5, 4.8, 3.9, 4.2, 3.8];
+                const absentData = [4.3, 4.4, 3.7, 4.3, 3.8];
+
+                // Create chart
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: months,
+                        datasets: [
+                            {
+                                label: 'Présents',
+                                data: presentData,
+                                borderColor: 'rgba(40, 167, 69, 1)',
+                                backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            },
+                            {
+                                label: 'En retard',
+                                data: lateData,
+                                borderColor: 'rgba(255, 193, 7, 1)',
+                                backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            },
+                            {
+                                label: 'Absents',
+                                data: absentData,
+                                borderColor: 'rgba(220, 53, 69, 1)',
+                                backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 15
+                                }
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.dataset.label + ': ' + context.parsed.y + '%';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                stacked: false,
+                                ticks: {
+                                    callback: function (value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                });
+            }
+
+            // Initialize Tasks Evolution Chart
+            const tasksEvolutionChart = document.getElementById('tasksEvolutionChart');
+            if (tasksEvolutionChart) {
+                const ctx = tasksEvolutionChart.getContext('2d');
+
+                // Data for the chart
+                const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai'];
+                const completedData = [82, 84, 85, 83, 86];
+                const inProgressData = [12, 11, 10, 12, 9];
+                const newData = [6, 5, 5, 5, 5];
+
+                // Create chart
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: months,
+                        datasets: [
+                            {
+                                label: 'Terminées',
+                                data: completedData,
+                                backgroundColor: 'rgba(40, 167, 69, 0.7)',
+                                borderColor: 'rgba(40, 167, 69, 1)',
+                                borderWidth: 1,
+                                borderRadius: 4,
+                                stack: 'tasks'
+                            },
+                            {
+                                label: 'En cours',
+                                data: inProgressData,
+                                backgroundColor: 'rgba(255, 193, 7, 0.7)',
+                                borderColor: 'rgba(255, 193, 7, 1)',
+                                borderWidth: 1,
+                                borderRadius: 4,
+                                stack: 'tasks'
+                            },
+                            {
+                                label: 'Nouvelles',
+                                data: newData,
+                                backgroundColor: 'rgba(23, 162, 184, 0.7)',
+                                borderColor: 'rgba(23, 162, 184, 1)',
+                                borderWidth: 1,
+                                borderRadius: 4,
+                                stack: 'tasks'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 15
+                                }
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.dataset.label + ': ' + context.parsed.y + '%';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                stacked: true
+                            },
+                            y: {
+                                stacked: true,
+                                ticks: {
+                                    callback: function (value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                });
+            }
+
+            // Filter handling - simulated for demonstration
+            const sectorFilter = document.getElementById('sector-filter');
+            const storeFilter = document.getElementById('store-filter');
+
+            if (sectorFilter && storeFilter) {
+                // Sector filter change event
+                sectorFilter.addEventListener('change', function () {
+                    const selectedSector = this.value;
+
+                    // Enable/disable store options based on selected sector
+                    const storeOptions = storeFilter.querySelectorAll('option');
+                    const optGroups = storeFilter.querySelectorAll('optgroup');
+
+                    if (selectedSector === 'all') {
+                        // Enable all options when "All sectors" is selected
+                        optGroups.forEach(group => {
+                            group.disabled = false;
+                        });
+                    } else {
+                        // Enable only options from the selected sector
+                        optGroups.forEach(group => {
+                            if (group.label.includes(selectedSector.charAt(0).toUpperCase() + selectedSector.slice(1))) {
+                                group.disabled = false;
+                            } else {
+                                group.disabled = true;
+                            }
+                        });
+
+                        // Reset store selection to "All stores"
+                        storeFilter.value = 'all';
+                    }
+
+                    // In a real app, this would trigger a data reload
+                    // For this prototype, we'll just show a notification
+                    showNotification('Filtre mis à jour', 'Les données ont été actualisées selon les filtres sélectionnés');
+                });
+
+                // Store filter change event
+                storeFilter.addEventListener('change', function () {
+                    // In a real app, this would trigger a data reload
+                    // For this prototype, we'll just show a notification
+                    showNotification('Filtre mis à jour', 'Les données ont été actualisées selon les filtres sélectionnés');
+                });
+            }
+
+            // Notification function
+            function showNotification(title, message) {
+                // Create notification container if it doesn't exist
+                let notifContainer = document.querySelector('.notification-container');
+                if (!notifContainer) {
+                    notifContainer = document.createElement('div');
+                    notifContainer.className = 'notification-container';
+                    document.body.appendChild(notifContainer);
+                }
+
+                // Create notification
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+
+                // Add notification content
+                notification.innerHTML = `
+         <div class="notification-header">
+           <h4>${title}</h4>
+           <button class="notification-close">&times;</button>
+         </div>
+         <div class="notification-body">
+           ${message}
+         </div>
+       `;
+
+                // Add notification to container
+                notifContainer.appendChild(notification);
+
+                // Show notification
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 10);
+
+                // Close button
+                const closeBtn = notification.querySelector('.notification-close');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        notification.classList.remove('show');
+                        setTimeout(() => {
+                            notification.remove();
+                        }, 300);
+                    });
+                }
+
+                // Auto close after 5 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramètres | Mazzaro Milano RH</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/img/logo.png" alt="Mazzaro Milano" class="sidebar-logo">
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="index.html" class="sidebar-link">
+                        <i class="fas fa-tachometer-alt sidebar-icon"></i>
+                        <span class="sidebar-text">Tableau de bord</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="employees.html" class="sidebar-link">
+                        <i class="fas fa-users sidebar-icon"></i>
+                        <span class="sidebar-text">Employés</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="tickets.html" class="sidebar-link">
+                        <i class="fas fa-tasks sidebar-icon"></i>
+                        <span class="sidebar-text">Tickets & Tâches</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="attendance.html" class="sidebar-link">
+                        <i class="fas fa-clock sidebar-icon"></i>
+                        <span class="sidebar-text">Pointage & Présence</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="leave.html" class="sidebar-link">
+                        <i class="fas fa-calendar-alt sidebar-icon"></i>
+                        <span class="sidebar-text">Congés</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="calendar.html" class="sidebar-link">
+                        <i class="fas fa-calendar-day sidebar-icon"></i>
+                        <span class="sidebar-text">Calendrier</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="statistics.html" class="sidebar-link">
+                        <i class="fas fa-chart-bar sidebar-icon"></i>
+                        <span class="sidebar-text">Statistiques</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="evaluations.html" class="sidebar-link">
+                        <i class="fas fa-star sidebar-icon"></i>
+                        <span class="sidebar-text">Évaluations</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="settings.html" class="sidebar-link active">
+                        <i class="fas fa-cog sidebar-icon"></i>
+                        <span class="sidebar-text">Paramètres</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <span>Mazzaro Milano RH v1.0</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1 class="page-title">Paramètres du système</h1>
+
+                <div class="header-actions">
+                    <button class="header-action notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </button>
+
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img src="../assets/img/avatars/admin.jpg" alt="Admin Profile">
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">Admin Mazzaro</span>
+                            <span class="user-role">Super Administrateur</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-toggle"></i>
+
+                        <!-- User Dropdown Menu -->
+                        <div class="dropdown-menu user-dropdown-menu">
+                            <a href="profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i> Mon profil
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Paramètres
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="auth.logout()">
+                                <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Notification Panel -->
+            <div class="notification-panel">
+                <div class="notification-header">
+                    <h3 class="notification-title">Notifications</h3>
+                    <span class="notification-count">5</span>
+                </div>
+                <div class="notification-body">
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Nouvel employé ajouté: <strong>Sarah Trabelsi</strong></p>
+                            <span class="notification-time">Il y a 10 minutes</span>
+                        </div>
+                    </div>
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Retard de <strong>Ahmed Karim</strong> - Boutique Sud</p>
+                            <span class="notification-time">Il y a 1 heure</span>
+                        </div>
+                    </div>
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Nouvelle demande de congé de <strong>Fatma Ben Ali</strong>
+                            </p>
+                            <span class="notification-time">Il y a 3 heures</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Tâche complétée: <strong>Inventaire mensuel</strong></p>
+                            <span class="notification-time">Hier, 16:45</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Nouvelle évaluation pour <strong>Boutique Nord</strong></p>
+                            <span class="notification-time">Hier, 10:20</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="notification-footer">
+                    <a href="notifications.html" class="view-all">Voir toutes les notifications</a>
+                </div>
+            </div>
+
+            <!-- Settings Content -->
+            <div class="settings-content">
+                <!-- Settings Navigation Tabs -->
+                <div class="nav-tabs">
+                    <div class="nav-tab active" data-tab="general">Général</div>
+                    <div class="nav-tab" data-tab="users">Utilisateurs</div>
+                    <div class="nav-tab" data-tab="permissions">Permissions</div>
+                    <div class="nav-tab" data-tab="notifications">Notifications</div>
+                    <div class="nav-tab" data-tab="system">Système</div>
+                    <div class="nav-tab" data-tab="backup">Sauvegarde</div>
+                    <div class="nav-tab" data-tab="logs">Journaux</div>
+                </div>
+
+                <!-- Settings Tab Content -->
+                <div class="tab-content">
+                    <!-- General Settings Tab -->
+                    <div class="tab-pane active" id="general">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Paramètres généraux</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="generalSettingsForm">
+                                    <div class="form-section">
+                                        <h4 class="section-title">Informations de l'entreprise</h4>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="company_name" class="form-label">Nom de
+                                                        l'entreprise</label>
+                                                    <input type="text" id="company_name" class="form-control"
+                                                        value="Mazzaro Milano">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="company_slogan" class="form-label">Slogan</label>
+                                                    <input type="text" id="company_slogan" class="form-control"
+                                                        value="La mode italienne accessible">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="company_email" class="form-label">Email de
+                                                        contact</label>
+                                                    <input type="email" id="company_email" class="form-control"
+                                                        value="contact@mazzaro-milano.tn">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="company_phone" class="form-label">Téléphone</label>
+                                                    <input type="tel" id="company_phone" class="form-control"
+                                                        value="+216 71 234 567">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="company_address" class="form-label">Adresse</label>
+                                            <textarea id="company_address" class="form-control"
+                                                rows="3">Rue de la méditerranée, Jardin d'El Menzah 2 Mnihla, 2094 Arianna, Tunisie</textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="company_logo" class="form-label">Logo</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="company_logo">
+                                                <label class="custom-file-label" for="company_logo">Choisir un
+                                                    fichier</label>
+                                            </div>
+                                            <div class="logo-preview mt-2">
+                                                <img src="../assets/img/logo.png" alt="Company Logo" height="60">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-section mt-4">
+                                        <h4 class="section-title">Paramètres régionaux</h4>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="language" class="form-label">Langue par défaut</label>
+                                                    <select id="language" class="form-control">
+                                                        <option value="fr" selected>Français</option>
+                                                        <option value="en">Anglais</option>
+                                                        <option value="ar">Arabe</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="timezone" class="form-label">Fuseau horaire</label>
+                                                    <select id="timezone" class="form-control">
+                                                        <option value="Europe/Paris" selected>Europe/Paris (GMT+1)
+                                                        </option>
+                                                        <option value="Europe/London">Europe/London (GMT+0)</option>
+                                                        <option value="Africa/Tunis">Africa/Tunis (GMT+1)</option>
+                                                        <option value="America/New_York">America/New_York (GMT-5)
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="date_format" class="form-label">Format de date</label>
+                                                    <select id="date_format" class="form-control">
+                                                        <option value="DD/MM/YYYY" selected>DD/MM/YYYY</option>
+                                                        <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                                                        <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="currency" class="form-label">Devise</label>
+                                                    <select id="currency" class="form-control">
+                                                        <option value="TND" selected>Dinar Tunisien (TND)</option>
+                                                        <option value="EUR">Euro (EUR)</option>
+                                                        <option value="USD">Dollar américain (USD)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="first_day" class="form-label">Premier jour de la
+                                                        semaine</label>
+                                                    <select id="first_day" class="form-control">
+                                                        <option value="1" selected>Lundi</option>
+                                                        <option value="0">Dimanche</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-section mt-4">
+                                        <h4 class="section-title">Paramètres de l'interface</h4>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="theme" class="form-label">Thème</label>
+                                                    <select id="theme" class="form-control">
+                                                        <option value="light" selected>Clair</option>
+                                                        <option value="dark">Sombre</option>
+                                                        <option value="auto">Automatique (selon système)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="items_per_page" class="form-label">Éléments par
+                                                        page</label>
+                                                    <select id="items_per_page" class="form-control">
+                                                        <option value="10">10</option>
+                                                        <option value="20" selected>20</option>
+                                                        <option value="50">50</option>
+                                                        <option value="100">100</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="enable_animations" checked>
+                                                <label class="custom-control-label" for="enable_animations">Activer les
+                                                    animations</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="show_help_tips"
+                                                    checked>
+                                                <label class="custom-control-label" for="show_help_tips">Afficher les
+                                                    conseils d'aide</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save"></i> Enregistrer les modifications
+                                        </button>
+                                        <button type="reset" class="btn btn-light">
+                                            <i class="fas fa-undo"></i> Réinitialiser
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Users Settings Tab -->
+                    <div class="tab-pane" id="users">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h3 class="card-title">Gestion des utilisateurs</h3>
+                                <button class="btn btn-primary btn-sm" id="addUserBtn">
+                                    <i class="fas fa-plus"></i> Ajouter un utilisateur
+                                </button>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nom d'utilisateur</th>
+                                                <th>Nom complet</th>
+                                                <th>Email</th>
+                                                <th>Rôle</th>
+                                                <th>Statut</th>
+                                                <th>Dernière connexion</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>admin</td>
+                                                <td>Admin Mazzaro</td>
+                                                <td>admin@mazzaro-milano.tn</td>
+                                                <td><span class="badge badge-primary">Super Admin</span></td>
+                                                <td><span class="badge badge-success">Actif</span></td>
+                                                <td>19/05/2025 09:14</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-light" data-action="edit"
+                                                            data-id="1">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light"
+                                                            data-action="reset-password" data-id="1">
+                                                            <i class="fas fa-key"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>sector_nord</td>
+                                                <td>Manager Nord</td>
+                                                <td>manager.nord@mazzaro-milano.tn</td>
+                                                <td><span class="badge badge-info">Responsable Secteur</span></td>
+                                                <td><span class="badge badge-success">Actif</span></td>
+                                                <td>18/05/2025 14:22</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-light" data-action="edit"
+                                                            data-id="2">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light"
+                                                            data-action="reset-password" data-id="2">
+                                                            <i class="fas fa-key"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light" data-action="disable"
+                                                            data-id="2">
+                                                            <i class="fas fa-ban"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>boutique_sud</td>
+                                                <td>Manager Boutique Sud</td>
+                                                <td>manager.sud@mazzaro-milano.tn</td>
+                                                <td><span class="badge badge-secondary">Responsable Boutique</span></td>
+                                                <td><span class="badge badge-success">Actif</span></td>
+                                                <td>18/05/2025 17:56</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-light" data-action="edit"
+                                                            data-id="3">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light"
+                                                            data-action="reset-password" data-id="3">
+                                                            <i class="fas fa-key"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light" data-action="disable"
+                                                            data-id="3">
+                                                            <i class="fas fa-ban"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>employee1</td>
+                                                <td>Ahmed Karim</td>
+                                                <td>ahmed.k@mazzaro-milano.tn</td>
+                                                <td><span class="badge badge-secondary">Employé</span></td>
+                                                <td><span class="badge badge-success">Actif</span></td>
+                                                <td>19/05/2025 08:30</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-light" data-action="edit"
+                                                            data-id="4">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light"
+                                                            data-action="reset-password" data-id="4">
+                                                            <i class="fas fa-key"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light" data-action="disable"
+                                                            data-id="4">
+                                                            <i class="fas fa-ban"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>employee2</td>
+                                                <td>Fatma Ben Ali</td>
+                                                <td>fatma.b@mazzaro-milano.tn</td>
+                                                <td><span class="badge badge-secondary">Employé</span></td>
+                                                <td><span class="badge badge-warning">Inactif</span></td>
+                                                <td>17/05/2025 16:45</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-light" data-action="edit"
+                                                            data-id="5">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light"
+                                                            data-action="reset-password" data-id="5">
+                                                            <i class="fas fa-key"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-light" data-action="enable"
+                                                            data-id="5">
+                                                            <i class="fas fa-check"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card-footer">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination justify-content-center m-0">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">Précédent</a>
+                                            </li>
+                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">Suivant</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Permissions Settings Tab -->
+                    <div class="tab-pane" id="permissions">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Gestion des permissions</h3>
+                                <div class="card-actions">
+                                    <select class="form-control">
+                                        <option value="" selected>Sélectionner un rôle</option>
+                                        <option value="admin">Super Admin</option>
+                                        <option value="sector">Responsable Secteur</option>
+                                        <option value="store">Responsable Boutique</option>
+                                        <option value="employee">Employé</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form id="permissionsForm">
+                                    <div class="permissions-grid">
+                                        <h4>Paramètres par défaut pour: <span class="role-name">Super Admin</span></h4>
+
+                                        <div class="permission-section">
+                                            <h5 class="section-title">Gestion des employés</h5>
+
+                                            <div class="permission-group">
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_view_employees" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_view_employees">Voir les employés</label>
+                                                    </div>
+                                                </div>
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_add_employees" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_add_employees">Ajouter des employés</label>
+                                                    </div>
+                                                </div>
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_edit_employees" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_edit_employees">Modifier des employés</label>
+                                                    </div>
+                                                </div>
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_delete_employees" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_delete_employees">Supprimer des employés</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="permission-section">
+                                            <h5 class="section-title">Gestion des présences</h5>
+
+                                            <div class="permission-group">
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_view_attendance" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_view_attendance">Voir les présences</label>
+                                                    </div>
+                                                </div>
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_edit_attendance" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_edit_attendance">Modifier les présences</label>
+                                                    </div>
+                                                </div>
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_export_attendance" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_export_attendance">Exporter les présences</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="permission-section">
+                                            <h5 class="section-title">Gestion des congés</h5>
+
+                                            <div class="permission-group">
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_view_leave" checked disabled>
+                                                        <label class="custom-control-label" for="perm_view_leave">Voir
+                                                            les congés</label>
+                                                    </div>
+                                                </div>
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_approve_leave" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_approve_leave">Approuver les congés</label>
+                                                    </div>
+                                                </div>
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_reject_leave" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_reject_leave">Refuser les congés</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="permission-section">
+                                            <h5 class="section-title">Gestion des tâches</h5>
+
+                                            <div class="permission-group">
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_view_tickets" checked disabled>
+                                                        <label class="custom-control-label" for="perm_view_tickets">Voir
+                                                            les tâches</label>
+                                                    </div>
+                                                </div>
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_create_tickets" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_create_tickets">Créer des tâches</label>
+                                                    </div>
+                                                </div>
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_assign_tickets" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_assign_tickets">Assigner des tâches</label>
+                                                    </div>
+                                                </div>
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_close_tickets" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_close_tickets">Clôturer des tâches</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="permission-section">
+                                            <h5 class="section-title">Statistiques et rapports</h5>
+
+                                            <div class="permission-group">
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_view_stats" checked disabled>
+                                                        <label class="custom-control-label" for="perm_view_stats">Voir
+                                                            les statistiques</label>
+                                                    </div>
+                                                </div>
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_export_reports" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_export_reports">Exporter les rapports</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="permission-section">
+                                            <h5 class="section-title">Paramètres système</h5>
+
+                                            <div class="permission-group">
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_view_settings" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_view_settings">Voir les paramètres</label>
+                                                    </div>
+                                                </div>
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_edit_settings" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_edit_settings">Modifier les paramètres</label>
+                                                    </div>
+                                                </div>
+                                                <div class="permission-item">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="perm_manage_users" checked disabled>
+                                                        <label class="custom-control-label"
+                                                            for="perm_manage_users">Gérer les utilisateurs</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-footer">
+                                <p class="text-muted">Note: Les permissions du Super Admin ne peuvent pas être
+                                    modifiées.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Settings Tab -->
+                    <div class="tab-pane" id="notifications">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Paramètres de notifications</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="notificationsForm">
+                                    <div class="notification-settings">
+                                        <div class="notification-section">
+                                            <h4 class="section-title">Notifications par email</h4>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="email_server" class="form-label">Serveur
+                                                            SMTP</label>
+                                                        <input type="text" id="email_server" class="form-control"
+                                                            value="smtp.mazzaro-milano.tn">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="email_port" class="form-label">Port</label>
+                                                        <input type="number" id="email_port" class="form-control"
+                                                            value="587">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="email_security" class="form-label">Sécurité</label>
+                                                        <select id="email_security" class="form-control">
+                                                            <option value="tls" selected>TLS</option>
+                                                            <option value="ssl">SSL</option>
+                                                            <option value="none">Aucune</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="email_username" class="form-label">Nom
+                                                            d'utilisateur</label>
+                                                        <input type="text" id="email_username" class="form-control"
+                                                            value="notifications@mazzaro-milano.tn">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="email_password" class="form-label">Mot de
+                                                            passe</label>
+                                                        <input type="password" id="email_password" class="form-control"
+                                                            value="********">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="email_from" class="form-label">De (adresse email)</label>
+                                                <input type="email" id="email_from" class="form-control"
+                                                    value="notifications@mazzaro-milano.tn">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="email_name" class="form-label">De (nom affiché)</label>
+                                                <input type="text" id="email_name" class="form-control"
+                                                    value="Mazzaro Milano RH">
+                                            </div>
+
+                                            <div class="form-group mt-3">
+                                                <button type="button"
+                                                    class="btn btn-sm btn-outline-primary test-email-btn">
+                                                    <i class="fas fa-paper-plane"></i> Envoyer un email de test
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="notification-section mt-4">
+                                            <h4 class="section-title">Événements à notifier</h4>
+
+                                            <div class="notification-events">
+                                                <h5>Employés</h5>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_employee_created" checked>
+                                                                <label class="custom-control-label"
+                                                                    for="notify_employee_created">Nouvel employé
+                                                                    ajouté</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_employee_updated" checked>
+                                                                <label class="custom-control-label"
+                                                                    for="notify_employee_updated">Fiche employé mise à
+                                                                    jour</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_employee_terminated">
+                                                                <label class="custom-control-label"
+                                                                    for="notify_employee_terminated">Fin de contrat
+                                                                    employé</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h5 class="mt-3">Présence</h5>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_attendance_late" checked>
+                                                                <label class="custom-control-label"
+                                                                    for="notify_attendance_late">Retard employé</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_attendance_absent" checked>
+                                                                <label class="custom-control-label"
+                                                                    for="notify_attendance_absent">Absence
+                                                                    employé</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_attendance_overtime">
+                                                                <label class="custom-control-label"
+                                                                    for="notify_attendance_overtime">Heures
+                                                                    supplémentaires</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h5 class="mt-3">Congés</h5>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_leave_requested" checked>
+                                                                <label class="custom-control-label"
+                                                                    for="notify_leave_requested">Nouvelle
+                                                                    demande</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_leave_approved" checked>
+                                                                <label class="custom-control-label"
+                                                                    for="notify_leave_approved">Demande
+                                                                    approuvée</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_leave_rejected" checked>
+                                                                <label class="custom-control-label"
+                                                                    for="notify_leave_rejected">Demande refusée</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_leave_canceled">
+                                                                <label class="custom-control-label"
+                                                                    for="notify_leave_canceled">Demande annulée</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h5 class="mt-3">Tâches</h5>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_task_assigned" checked>
+                                                                <label class="custom-control-label"
+                                                                    for="notify_task_assigned">Tâche assignée</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_task_completed" checked>
+                                                                <label class="custom-control-label"
+                                                                    for="notify_task_completed">Tâche terminée</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_task_overdue" checked>
+                                                                <label class="custom-control-label"
+                                                                    for="notify_task_overdue">Tâche en retard</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_task_comment">
+                                                                <label class="custom-control-label"
+                                                                    for="notify_task_comment">Nouveau
+                                                                    commentaire</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h5 class="mt-3">Système</h5>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_system_backup" checked>
+                                                                <label class="custom-control-label"
+                                                                    for="notify_system_backup">Sauvegarde du
+                                                                    système</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_system_error" checked>
+                                                                <label class="custom-control-label"
+                                                                    for="notify_system_error">Erreur système</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="notify_system_update" checked>
+                                                                <label class="custom-control-label"
+                                                                    for="notify_system_update">Mise à jour du
+                                                                    système</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions mt-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save"></i> Enregistrer les modifications
+                                        </button>
+                                        <button type="reset" class="btn btn-light">
+                                            <i class="fas fa-undo"></i> Réinitialiser
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Settings Tab -->
+                    <div class="tab-pane" id="system">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Paramètres système</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="systemSettingsForm">
+                                    <div class="system-section">
+                                        <h4 class="section-title">Informations système</h4>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="info-group">
+                                                    <label class="info-label">Version de l'application:</label>
+                                                    <div class="info-value">1.0.0</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="info-group">
+                                                    <label class="info-label">Date d'installation:</label>
+                                                    <div class="info-value">01/01/2025</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="info-group">
+                                                    <label class="info-label">Serveur:</label>
+                                                    <div class="info-value">Apache/2.4.52</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="info-group">
+                                                    <label class="info-label">PHP Version:</label>
+                                                    <div class="info-value">8.1.5</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="info-group">
+                                                    <label class="info-label">Base de données:</label>
+                                                    <div class="info-value">MySQL 8.0.28</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="info-group">
+                                                    <label class="info-label">Taille de la base de données:</label>
+                                                    <div class="info-value">124.5 MB</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="system-actions mt-3">
+                                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-sync"></i> Vérifier les mises à jour
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">
+                                                <i class="fas fa-info-circle"></i> Informations détaillées
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="system-section mt-4">
+                                        <h4 class="section-title">Configuration de la base de données</h4>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="db_host" class="form-label">Hôte</label>
+                                                    <input type="text" id="db_host" class="form-control"
+                                                        value="localhost">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="db_port" class="form-label">Port</label>
+                                                    <input type="number" id="db_port" class="form-control" value="3306">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="db_name" class="form-label">Nom de la base</label>
+                                                    <input type="text" id="db_name" class="form-control"
+                                                        value="mazzaro_rh">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="db_username" class="form-label">Utilisateur</label>
+                                                    <input type="text" id="db_username" class="form-control"
+                                                        value="mazzaro_user">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="db_password" class="form-label">Mot de passe</label>
+                                                    <input type="password" id="db_password" class="form-control"
+                                                        value="********">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="db_optimize"
+                                                    checked>
+                                                <label class="custom-control-label" for="db_optimize">Optimiser
+                                                    automatiquement la base de données hebdomadaire</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="system-actions mt-3">
+                                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-database"></i> Tester la connexion
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">
+                                                <i class="fas fa-broom"></i> Optimiser maintenant
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="system-section mt-4">
+                                        <h4 class="section-title">Paramètres de cache et performances</h4>
+
+                                        <div class="form-group">
+                                            <label for="cache_driver" class="form-label">Système de cache</label>
+                                            <select id="cache_driver" class="form-control">
+                                                <option value="file" selected>Fichier</option>
+                                                <option value="redis">Redis</option>
+                                                <option value="memcached">Memcached</option>
+                                                <option value="none">Aucun</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="cache_lifetime" class="form-label">Durée de vie du cache
+                                                (minutes)</label>
+                                            <input type="number" id="cache_lifetime" class="form-control" value="60">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="cache_enable"
+                                                    checked>
+                                                <label class="custom-control-label" for="cache_enable">Activer le
+                                                    cache</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="minify_assets"
+                                                    checked>
+                                                <label class="custom-control-label" for="minify_assets">Minifier les
+                                                    ressources CSS et JavaScript</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="system-actions mt-3">
+                                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-trash"></i> Vider le cache
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="system-section mt-4">
+                                        <h4 class="section-title">Journalisation et débogage</h4>
+
+                                        <div class="form-group">
+                                            <label for="log_level" class="form-label">Niveau de journalisation</label>
+                                            <select id="log_level" class="form-control">
+                                                <option value="debug">Debug</option>
+                                                <option value="info" selected>Info</option>
+                                                <option value="warning">Warning</option>
+                                                <option value="error">Error</option>
+                                                <option value="critical">Critical</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="debug_mode">
+                                                <label class="custom-control-label" for="debug_mode">Activer le mode
+                                                    débogage</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="error_reporting"
+                                                    checked>
+                                                <label class="custom-control-label" for="error_reporting">Activer le
+                                                    rapport d'erreurs</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="log_rotation"
+                                                    checked>
+                                                <label class="custom-control-label" for="log_rotation">Rotation
+                                                    automatique des journaux</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions mt-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save"></i> Enregistrer les modifications
+                                        </button>
+                                        <button type="reset" class="btn btn-light">
+                                            <i class="fas fa-undo"></i> Réinitialiser
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Backup Settings Tab -->
+                    <div class="tab-pane" id="backup">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h3 class="card-title">Gestion des sauvegardes</h3>
+                                <button class="btn btn-primary btn-sm" id="createBackupBtn">
+                                    <i class="fas fa-plus"></i> Créer une sauvegarde
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="backup-settings mb-4">
+                                    <h4 class="section-title">Paramètres de sauvegarde automatique</h4>
+
+                                    <form id="backupSettingsForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="auto_backup" checked>
+                                                        <label class="custom-control-label" for="auto_backup">Activer
+                                                            les sauvegardes automatiques</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="backup_frequency" class="form-label">Fréquence</label>
+                                                    <select id="backup_frequency" class="form-control">
+                                                        <option value="daily">Quotidienne</option>
+                                                        <option value="weekly" selected>Hebdomadaire</option>
+                                                        <option value="biweekly">Bihebdomadaire</option>
+                                                        <option value="monthly">Mensuelle</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="backup_time" class="form-label">Heure</label>
+                                                    <input type="time" id="backup_time" class="form-control"
+                                                        value="03:00">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="backup_retention" class="form-label">Conservation
+                                                        (jours)</label>
+                                                    <input type="number" id="backup_retention" class="form-control"
+                                                        value="30">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label">Éléments à sauvegarder</label>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="backup_database"
+                                                    checked>
+                                                <label class="custom-control-label" for="backup_database">Base de
+                                                    données</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="backup_files"
+                                                    checked>
+                                                <label class="custom-control-label" for="backup_files">Fichiers du
+                                                    système</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="backup_uploads"
+                                                    checked>
+                                                <label class="custom-control-label" for="backup_uploads">Fichiers
+                                                    téléchargés</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="backup_logs">
+                                                <label class="custom-control-label" for="backup_logs">Fichiers
+                                                    journaux</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="backup_destination" class="form-label">Destination</label>
+                                            <select id="backup_destination" class="form-control">
+                                                <option value="local" selected>Stockage local</option>
+                                                <option value="cloud">Cloud (Google Drive)</option>
+                                                <option value="ftp">Serveur FTP</option>
+                                                <option value="sftp">Serveur SFTP</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-save"></i> Enregistrer les modifications
+                                            </button>
+                                            <button type="reset" class="btn btn-light">
+                                                <i class="fas fa-undo"></i> Réinitialiser
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="backup-history">
+                                    <h4 class="section-title">Historique des sauvegardes</h4>
+
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nom</th>
+                                                    <th>Date</th>
+                                                    <th>Taille</th>
+                                                    <th>Type</th>
+                                                    <th>Statut</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>backup_20250519_030005.zip</td>
+                                                    <td>19/05/2025 03:00</td>
+                                                    <td>145.8 MB</td>
+                                                    <td>Automatique</td>
+                                                    <td><span class="badge badge-success">Réussi</span></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm btn-light" data-action="download">
+                                                                <i class="fas fa-download"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-light" data-action="restore">
+                                                                <i class="fas fa-undo"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-light" data-action="delete">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>backup_20250512_030005.zip</td>
+                                                    <td>12/05/2025 03:00</td>
+                                                    <td>143.5 MB</td>
+                                                    <td>Automatique</td>
+                                                    <td><span class="badge badge-success">Réussi</span></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm btn-light" data-action="download">
+                                                                <i class="fas fa-download"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-light" data-action="restore">
+                                                                <i class="fas fa-undo"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-light" data-action="delete">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>backup_20250510_143022.zip</td>
+                                                    <td>10/05/2025 14:30</td>
+                                                    <td>142.9 MB</td>
+                                                    <td>Manuel</td>
+                                                    <td><span class="badge badge-success">Réussi</span></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm btn-light" data-action="download">
+                                                                <i class="fas fa-download"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-light" data-action="restore">
+                                                                <i class="fas fa-undo"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-light" data-action="delete">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>backup_20250505_030005.zip</td>
+                                                    <td>05/05/2025 03:00</td>
+                                                    <td>140.2 MB</td>
+                                                    <td>Automatique</td>
+                                                    <td><span class="badge badge-success">Réussi</span></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm btn-light" data-action="download">
+                                                                <i class="fas fa-download"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-light" data-action="restore">
+                                                                <i class="fas fa-undo"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-light" data-action="delete">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>backup_20250428_030005.zip</td>
+                                                    <td>28/04/2025 03:00</td>
+                                                    <td>138.7 MB</td>
+                                                    <td>Automatique</td>
+                                                    <td><span class="badge badge-success">Réussi</span></td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm btn-light" data-action="download">
+                                                                <i class="fas fa-download"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-light" data-action="restore">
+                                                                <i class="fas fa-undo"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-light" data-action="delete">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Logs Settings Tab -->
+                    <div class="tab-pane" id="logs">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h3 class="card-title">Journaux système</h3>
+                                <div class="header-actions">
+                                    <select id="log-type" class="form-control">
+                                        <option value="all" selected>Tous les journaux</option>
+                                        <option value="info">Informations</option>
+                                        <option value="warning">Avertissements</option>
+                                        <option value="error">Erreurs</option>
+                                        <option value="auth">Authentification</option>
+                                        <option value="activity">Activité utilisateur</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="logs-container">
+                                    <div class="log-item level-info">
+                                        <div class="log-timestamp">19/05/2025 09:15:22</div>
+                                        <div class="log-level">INFO</div>
+                                        <div class="log-source">System</div>
+                                        <div class="log-message">Application démarrée correctement.</div>
+                                    </div>
+                                    <div class="log-item level-info">
+                                        <div class="log-timestamp">19/05/2025 09:14:18</div>
+                                        <div class="log-level">INFO</div>
+                                        <div class="log-source">Auth</div>
+                                        <div class="log-message">Utilisateur 'admin' connecté. IP: 192.168.1.10</div>
+                                    </div>
+                                    <div class="log-item level-warning">
+                                        <div class="log-timestamp">19/05/2025 08:30:45</div>
+                                        <div class="log-level">WARNING</div>
+                                        <div class="log-source">Database</div>
+                                        <div class="log-message">Requête lente détectée: SELECT * FROM employees WHERE
+                                            department_id = 5 (2.3 secondes)</div>
+                                    </div>
+                                    <div class="log-item level-error">
+                                        <div class="log-timestamp">19/05/2025 03:15:10</div>
+                                        <div class="log-level">ERROR</div>
+                                        <div class="log-source">Email</div>
+                                        <div class="log-message">Échec d'envoi d'email à fatma.b@mazzaro-milano.tn: SMTP
+                                            connection failed.</div>
+                                    </div>
+                                    <div class="log-item level-info">
+                                        <div class="log-timestamp">19/05/2025 03:00:05</div>
+                                        <div class="log-level">INFO</div>
+                                        <div class="log-source">Backup</div>
+                                        <div class="log-message">Sauvegarde automatique 'backup_20250519_030005.zip'
+                                            créée avec succès. Taille: 145.8 MB</div>
+                                    </div>
+                                    <div class="log-item level-info">
+                                        <div class="log-timestamp">18/05/2025 17:56:32</div>
+                                        <div class="log-level">INFO</div>
+                                        <div class="log-source">Auth</div>
+                                        <div class="log-message">Utilisateur 'boutique_sud' connecté. IP: 192.168.1.15
+                                        </div>
+                                    </div>
+                                    <div class="log-item level-info">
+                                        <div class="log-timestamp">18/05/2025 14:22:11</div>
+                                        <div class="log-level">INFO</div>
+                                        <div class="log-source">Auth</div>
+                                        <div class="log-message">Utilisateur 'sector_nord' connecté. IP: 192.168.1.12
+                                        </div>
+                                    </div>
+                                    <div class="log-item level-warning">
+                                        <div class="log-timestamp">18/05/2025 10:45:23</div>
+                                        <div class="log-level">WARNING</div>
+                                        <div class="log-source">Auth</div>
+                                        <div class="log-message">Tentative de connexion échouée pour l'utilisateur
+                                            'employee3'. IP: 192.168.1.18</div>
+                                    </div>
+                                    <div class="log-item level-info">
+                                        <div class="log-timestamp">18/05/2025 10:08:36</div>
+                                        <div class="log-level">INFO</div>
+                                        <div class="log-source">User</div>
+                                        <div class="log-message">Nouvel employé 'Sarah Trabelsi' ajouté par
+                                            l'utilisateur 'admin'.</div>
+                                    </div>
+                                    <div class="log-item level-error">
+                                        <div class="log-timestamp">17/05/2025 22:15:43</div>
+                                        <div class="log-level">ERROR</div>
+                                        <div class="log-source">System</div>
+                                        <div class="log-message">Espace disque critique: moins de 10% d'espace libre
+                                            disponible.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash"></i> Vider les journaux
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-download"></i> Exporter les journaux
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- Add User Modal -->
+    <div class="modal-overlay" id="addUserModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Ajouter un utilisateur</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addUserForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="new_username" class="form-label">Nom d'utilisateur</label>
+                                <input type="text" id="new_username" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="new_email" class="form-label">Email</label>
+                                <input type="email" id="new_email" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="new_first_name" class="form-label">Prénom</label>
+                                <input type="text" id="new_first_name" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="new_last_name" class="form-label">Nom</label>
+                                <input type="text" id="new_last_name" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="new_password" class="form-label">Mot de passe</label>
+                                <input type="password" id="new_password" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="new_confirm_password" class="form-label">Confirmer le mot de passe</label>
+                                <input type="password" id="new_confirm_password" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new_role" class="form-label">Rôle</label>
+                        <select id="new_role" class="form-control" required>
+                            <option value="">Sélectionner un rôle</option>
+                            <option value="admin">Super Admin</option>
+                            <option value="sector">Responsable Secteur</option>
+                            <option value="store">Responsable Boutique</option>
+                            <option value="employee">Employé</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="sectorField" style="display: none;">
+                        <label for="new_sector" class="form-label">Secteur</label>
+                        <select id="new_sector" class="form-control">
+                            <option value="">Sélectionner un secteur</option>
+                            <option value="north">Secteur Nord</option>
+                            <option value="south">Secteur Sud</option>
+                            <option value="east">Secteur Est</option>
+                            <option value="west">Secteur Ouest</option>
+                            <option value="center">Secteur Centre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="storeField" style="display: none;">
+                        <label for="new_store" class="form-label">Boutique</label>
+                        <select id="new_store" class="form-control">
+                            <option value="">Sélectionner une boutique</option>
+                            <option value="north_mall">Boutique Nord - Centre Commercial</option>
+                            <option value="north_avenue">Boutique Nord - Avenue Principale</option>
+                            <option value="north_gallery">Boutique Nord - Galerie Marchande</option>
+                            <option value="south_mall">Boutique Sud - Centre Commercial</option>
+                            <option value="south_avenue">Boutique Sud - Avenue Principale</option>
+                            <option value="east_mall">Boutique Est - Centre Commercial</option>
+                            <option value="east_avenue">Boutique Est - Avenue Principale</option>
+                            <option value="west_mall">Boutique Ouest - Centre Commercial</option>
+                            <option value="west_avenue">Boutique Ouest - Avenue Principale</option>
+                            <option value="west_gallery">Boutique Ouest - Galerie Marchande</option>
+                            <option value="center_mall">Boutique Centre - Centre Commercial</option>
+                            <option value="center_avenue">Boutique Centre - Avenue Principale</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="new_active" checked>
+                            <label class="custom-control-label" for="new_active">Compte actif</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="new_send_email" checked>
+                            <label class="custom-control-label" for="new_send_email">Envoyer un email avec les
+                                identifiants</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light" data-dismiss="modal">Annuler</button>
+                <button class="btn btn-primary" id="saveUserBtn">Ajouter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div class="modal-overlay" id="resetPasswordModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Réinitialiser le mot de passe</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="resetPasswordForm">
+                    <div class="form-group">
+                        <p>Vous êtes sur le point de réinitialiser le mot de passe de l'utilisateur <strong
+                                id="resetUsername">username</strong>.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reset_password" class="form-label">Nouveau mot de passe</label>
+                        <input type="password" id="reset_password" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reset_confirm_password" class="form-label">Confirmer le mot de passe</label>
+                        <input type="password" id="reset_confirm_password" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="reset_send_email" checked>
+                            <label class="custom-control-label" for="reset_send_email">Envoyer un email avec le nouveau
+                                mot de passe</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light" data-dismiss="modal">Annuler</button>
+                <button class="btn btn-primary" id="savePasswordBtn">Réinitialiser</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Backup Modal -->
+    <div class="modal-overlay" id="createBackupModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Créer une sauvegarde</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="createBackupForm">
+                    <div class="form-group">
+                        <label class="form-label">Éléments à sauvegarder</label>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="manual_backup_database" checked>
+                            <label class="custom-control-label" for="manual_backup_database">Base de données</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="manual_backup_files" checked>
+                            <label class="custom-control-label" for="manual_backup_files">Fichiers du système</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="manual_backup_uploads" checked>
+                            <label class="custom-control-label" for="manual_backup_uploads">Fichiers téléchargés</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="manual_backup_logs">
+                            <label class="custom-control-label" for="manual_backup_logs">Fichiers journaux</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="manual_backup_destination" class="form-label">Destination</label>
+                        <select id="manual_backup_destination" class="form-control">
+                            <option value="local" selected>Stockage local</option>
+                            <option value="cloud">Cloud (Google Drive)</option>
+                            <option value="ftp">Serveur FTP</option>
+                            <option value="sftp">Serveur SFTP</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="backup_description" class="form-label">Description (optionnel)</label>
+                        <textarea id="backup_description" class="form-control" rows="3"
+                            placeholder="Description de cette sauvegarde..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light" data-dismiss="modal">Annuler</button>
+                <button class="btn btn-primary" id="startBackupBtn">Créer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Restore Backup Modal -->
+    <div class="modal-overlay" id="restoreBackupModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Restaurer une sauvegarde</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="restoreBackupForm">
+                    <div class="form-group">
+                        <div class="alert alert-warning">
+                            <strong>Attention!</strong> La restauration remplacera toutes les données actuelles. Cette
+                            action est irréversible.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <p>Vous êtes sur le point de restaurer la sauvegarde <strong
+                                id="backupName">backup_20250519_030005.zip</strong> créée le <strong
+                                id="backupDate">19/05/2025 03:00</strong>.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="confirm_restore" required>
+                            <label class="custom-control-label" for="confirm_restore">Je comprends que cette action est
+                                irréversible et je souhaite continuer.</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light" data-dismiss="modal">Annuler</button>
+                <button class="btn btn-danger" id="confirmRestoreBtn" disabled>Restaurer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/settings.js"></script>
+    <script src="../assets/js/auth.js"></script>
+
+    <!-- Settings Specific Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab navigation
+            const tabs = document.querySelectorAll('.nav-tab');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabPanes.forEach(p => p.classList.remove('active'));
+
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+
+                    // Show corresponding tab pane
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Form submissions
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // In a real app, this would submit the form via AJAX
+                    // For this prototype, we'll just show a success message
+
+                    showNotification('Paramètres enregistrés', 'Les modifications ont été enregistrées avec succès.');
+                });
+            });
+
+            // Role change handler
+            const roleSelect = document.getElementById('new_role');
+            const sectorField = document.getElementById('sectorField');
+            const storeField = document.getElementById('storeField');
+
+            if (roleSelect) {
+                roleSelect.addEventListener('change', function () {
+                    const role = this.value;
+
+                    if (role === 'sector') {
+                        sectorField.style.display = 'block';
+                        storeField.style.display = 'none';
+                    } else if (role === 'store' || role === 'employee') {
+                        sectorField.style.display = 'none';
+                        storeField.style.display = 'block';
+                    } else {
+                        sectorField.style.display = 'none';
+                        storeField.style.display = 'none';
+                    }
+                });
+            }
+
+            // Confirm restore checkbox handler
+            const confirmRestoreCheckbox = document.getElementById('confirm_restore');
+
+
+            if (confirmRestoreCheckbox && confirmRestoreBtn) {
+                confirmRestoreCheckbox.addEventListener('change', function () {
+                    confirmRestoreBtn.disabled = !this.checked;
+                });
+            }
+
+            // Filter logs
+            const logTypeSelect = document.getElementById('log-type');
+            const logItems = document.querySelectorAll('.log-item');
+
+            if (logTypeSelect) {
+                logTypeSelect.addEventListener('change', function () {
+                    const logType = this.value;
+
+                    logItems.forEach(item => {
+                        if (logType === 'all') {
+                            item.style.display = 'flex';
+                        } else {
+                            const itemType = item.querySelector('.log-level').textContent.toLowerCase();
+                            const itemSource = item.querySelector('.log-source').textContent.toLowerCase();
+
+                            if (logType === 'info' && itemType === 'info') {
+                                item.style.display = 'flex';
+                            } else if (logType === 'warning' && itemType === 'warning') {
+                                item.style.display = 'flex';
+                            } else if (logType === 'error' && itemType === 'error') {
+                                item.style.display = 'flex';
+                            } else if (logType === 'auth' && itemSource === 'auth') {
+                                item.style.display = 'flex';
+                            } else if (logType === 'activity' && (itemSource === 'user' || itemSource === 'activity')) {
+                                item.style.display = 'flex';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            }
+
+            // Modal handlers
+            const modalTriggers = document.querySelectorAll('[data-action]');
+
+            modalTriggers.forEach(trigger => {
+                trigger.addEventListener('click', function () {
+                    const action = this.getAttribute('data-action');
+                    const id = this.getAttribute('data-id');
+
+                    if (action === 'edit') {
+                        // Edit user functionality would go here
+                        console.log(`Edit user with ID: ${id}`);
+                    } else if (action === 'reset-password') {
+                        // Show reset password modal
+                        const modal = document.getElementById('resetPasswordModal');
+                        const usernameEl = document.getElementById('resetUsername');
+
+                        // In a real app, we would fetch the username from the server
+                        if (id === "1") usernameEl.textContent = "admin";
+                        if (id === "2") usernameEl.textContent = "sector_nord";
+                        if (id === "3") usernameEl.textContent = "boutique_sud";
+                        if (id === "4") usernameEl.textContent = "employee1";
+                        if (id === "5") usernameEl.textContent = "employee2";
+
+                        modal.classList.add('active');
+                    } else if (action === 'disable') {
+                        // In a real app, this would make an AJAX call to disable the user
+                        // For this prototype, we'll just show a notification
+                        showNotification('Utilisateur désactivé', 'L\'utilisateur a été désactivé avec succès.');
+                    } else if (action === 'enable') {
+                        // In a real app, this would make an AJAX call to enable the user
+                        // For this prototype, we'll just show a notification
+                        showNotification('Utilisateur activé', 'L\'utilisateur a été activé avec succès.');
+                    } else if (action === 'download') {
+                        // In a real app, this would download the backup
+                        // For this prototype, we'll just show a notification
+                        showNotification('Téléchargement démarré', 'Le téléchargement de la sauvegarde a commencé.');
+                    } else if (action === 'restore') {
+                        // Show restore backup modal
+                        const modal = document.getElementById('restoreBackupModal');
+                        modal.classList.add('active');
+                    } else if (action === 'delete') {
+                        // In a real app, this would make an AJAX call to delete the backup
+                        // For this prototype, we'll just show a notification
+                        if (confirm('Êtes-vous sûr de vouloir supprimer cette sauvegarde ?')) {
+                            showNotification('Sauvegarde supprimée', 'La sauvegarde a été supprimée avec succès.');
+                        }
+                    }
+                });
+            });
+
+            // Add user button
+            const addUserBtn = document.getElementById('addUserBtn');
+            if (addUserBtn) {
+                addUserBtn.addEventListener('click', function () {
+                    const modal = document.getElementById('addUserModal');
+                    modal.classList.add('active');
+                });
+            }
+
+            // Create backup button
+            const createBackupBtn = document.getElementById('createBackupBtn');
+            if (createBackupBtn) {
+                createBackupBtn.addEventListener('click', function () {
+                    const modal = document.getElementById('createBackupModal');
+                    modal.classList.add('active');
+                });
+            }
+
+            // Modal close buttons
+            const modalCloseButtons = document.querySelectorAll('.modal-close, [data-dismiss="modal"]');
+            modalCloseButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const modal = this.closest('.modal-overlay');
+                    modal.classList.remove('active');
+                });
+            });
+
+            // Save user button
+            const saveUserBtn = document.getElementById('saveUserBtn');
+            if (saveUserBtn) {
+                saveUserBtn.addEventListener('click', function () {
+                    // In a real app, this would submit the form via AJAX
+                    // For this prototype, we'll just show a notification
+                    showNotification('Utilisateur ajouté', 'Le nouvel utilisateur a été créé avec succès.');
+
+                    // Close the modal
+                    const modal = this.closest('.modal-overlay');
+                    modal.classList.remove('active');
+                });
+            }
+
+            // Save password button
+            const savePasswordBtn = document.getElementById('savePasswordBtn');
+            if (savePasswordBtn) {
+                savePasswordBtn.addEventListener('click', function () {
+                    // In a real app, this would submit the form via AJAX
+                    // For this prototype, we'll just show a notification
+                    showNotification('Mot de passe réinitialisé', 'Le mot de passe a été réinitialisé avec succès.');
+
+                    // Close the modal
+                    const modal = this.closest('.modal-overlay');
+                    modal.classList.remove('active');
+                });
+            }
+
+            // Start backup button
+            const startBackupBtn = document.getElementById('startBackupBtn');
+            if (startBackupBtn) {
+                startBackupBtn.addEventListener('click', function () {
+                    // In a real app, this would submit the form via AJAX
+                    // For this prototype, we'll just show a notification
+                    showNotification('Sauvegarde en cours', 'La création de la sauvegarde a commencé. Vous serez notifié une fois terminée.');
+
+                    // Close the modal
+                    const modal = this.closest('.modal-overlay');
+                    modal.classList.remove('active');
+
+                    // Simulate backup completion after 3 seconds
+                    setTimeout(() => {
+                        showNotification('Sauvegarde terminée', 'La sauvegarde a été créée avec succès.');
+                    }, 3000);
+                });
+            }
+
+            // Confirm restore button
+            const confirmRestoreBtn = document.getElementById('confirmRestoreBtn');
+            if (confirmRestoreBtn) {
+                confirmRestoreBtn.addEventListener('click', function () {
+                    // In a real app, this would submit the form via AJAX
+                    // For this prototype, we'll just show a notification
+                    showNotification('Restauration en cours', 'La restauration de la sauvegarde a commencé. Le système sera indisponible pendant quelques minutes.');
+
+                    // Close the modal
+                    const modal = this.closest('.modal-overlay');
+                    modal.classList.remove('active');
+                });
+            }
+
+            // Test email button
+            const testEmailBtn = document.querySelector('.test-email-btn');
+            if (testEmailBtn) {
+                testEmailBtn.addEventListener('click', function () {
+                    // In a real app, this would submit the form via AJAX
+                    // For this prototype, we'll just show a notification
+                    showNotification('Email de test envoyé', 'Un email de test a été envoyé à l\'adresse configurée.');
+                });
+            }
+
+            // Function to show notification
+            function showNotification(title, message) {
+                // Create notification container if it doesn't exist
+                let notifContainer = document.querySelector('.notification-container');
+                if (!notifContainer) {
+                    notifContainer = document.createElement('div');
+                    notifContainer.className = 'notification-container';
+                    document.body.appendChild(notifContainer);
+                }
+
+                // Create notification
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+
+                // Add notification content
+                notification.innerHTML = `
+         <div class="notification-header">
+           <h4>${title}</h4>
+           <button class="notification-close">&times;</button>
+         </div>
+         <div class="notification-body">
+           ${message}
+         </div>
+       `;
+
+                // Add notification to container
+                notifContainer.appendChild(notification);
+
+                // Show notification
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 10);
+
+                // Close button
+                const closeBtn = notification.querySelector('.notification-close');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        notification.classList.remove('show');
+                        setTimeout(() => {
+                            notification.remove();
+                        }, 300);
+                    });
+                }
+
+                // Auto close after 5 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+
+</html>

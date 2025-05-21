@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Congés | Mazzaro Milano RH</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/img/logo.png" alt="Mazzaro Milano" class="sidebar-logo">
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="sidebar-item">
+                    <a href="index.html" class="sidebar-link">
+                        <i class="fas fa-tachometer-alt sidebar-icon"></i>
+                        <span class="sidebar-text">Tableau de bord</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="employees.html" class="sidebar-link">
+                        <i class="fas fa-users sidebar-icon"></i>
+                        <span class="sidebar-text">Employés</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="tickets.html" class="sidebar-link">
+                        <i class="fas fa-tasks sidebar-icon"></i>
+                        <span class="sidebar-text">Tickets & Tâches</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="attendance.html" class="sidebar-link">
+                        <i class="fas fa-clock sidebar-icon"></i>
+                        <span class="sidebar-text">Pointage & Présence</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="leave.html" class="sidebar-link active">
+                        <i class="fas fa-calendar-alt sidebar-icon"></i>
+                        <span class="sidebar-text">Congés</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="calendar.html" class="sidebar-link">
+                        <i class="fas fa-calendar-day sidebar-icon"></i>
+                        <span class="sidebar-text">Calendrier</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="statistics.html" class="sidebar-link">
+                        <i class="fas fa-chart-bar sidebar-icon"></i>
+                        <span class="sidebar-text">Statistiques</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="evaluations.html" class="sidebar-link">
+                        <i class="fas fa-star sidebar-icon"></i>
+                        <span class="sidebar-text">Évaluations</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="settings.html" class="sidebar-link">
+                        <i class="fas fa-cog sidebar-icon"></i>
+                        <span class="sidebar-text">Paramètres</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <span>Mazzaro Milano RH v1.0</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1 class="page-title">Gestion des Congés</h1>
+
+                <div class="header-actions">
+                    <button class="header-action notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </button>
+
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img src="../assets/img/avatars/admin.jpg" alt="Admin Profile">
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">Admin Mazzaro</span>
+                            <span class="user-role">Super Administrateur</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-toggle"></i>
+
+                        <!-- User Dropdown Menu -->
+                        <div class="dropdown-menu user-dropdown-menu">
+                            <a href="profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i> Mon profil
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Paramètres
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="auth.logout()">
+                                <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Notification Panel -->
+            <div class="notification-panel">
+                <div class="notification-header">
+                    <h3 class="notification-title">Notifications</h3>
+                    <span class="notification-count">5</span>
+                </div>
+                <div class="notification-body">
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Nouvel employé ajouté: <strong>Sarah Trabelsi</strong></p>
+                            <span class="notification-time">Il y a 10 minutes</span>
+                        </div>
+                    </div>
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Retard de <strong>Ahmed Karim</strong> - Boutique Sud</p>
+                            <span class="notification-time">Il y a 1 heure</span>
+                        </div>
+                    </div>
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Nouvelle demande de congé de <strong>Fatma Ben Ali</strong>
+                            </p>
+                            <span class="notification-time">Il y a 3 heures</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Tâche complétée: <strong>Inventaire mensuel</strong></p>
+                            <span class="notification-time">Hier, 16:45</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-message">Nouvelle évaluation pour <strong>Boutique Nord</strong></p>
+                            <span class="notification-time">Hier, 10:20</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="notification-footer">
+                    <a href="notifications.html" class="view-all">Voir toutes les notifications</a>
+                </div>
+            </div>
+
+            <!-- Leave Content -->
+            <div class="dashboard-content">
+                <!-- Filters and Search -->
+                <div class="filters-container mb-4">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="search-box">
+                                <i class="fas fa-search search-icon"></i>
+                                <input type="search" class="form-control"
+                                    placeholder="Rechercher une demande de congé...">
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex justify-content-end">
+                                <select name="store-filter" class="form-control mr-2"
+                                    style="width: auto; margin-right: 10px;">
+                                    <option value="all">Toutes les boutiques</option>
+                                    <option value="north">Boutique Nord</option>
+                                    <option value="south">Boutique Sud</option>
+                                    <option value="east">Boutique Est</option>
+                                    <option value="west">Boutique Ouest</option>
+                                    <option value="center">Boutique Centre</option>
+                                </select>
+                                <select name="status-filter" class="form-control mr-2"
+                                    style="width: auto; margin-right: 10px;">
+                                    <option value="all">Tous les statuts</option>
+                                    <option value="pending">En attente</option>
+                                    <option value="approved">Approuvées</option>
+                                    <option value="rejected">Refusées</option>
+                                    <option value="canceled">Annulées</option>
+                                </select>
+                                <select name="type-filter" class="form-control" style="width: auto;">
+                                    <option value="all">Tous les types</option>
+                                    <option value="annual">Congé annuel</option>
+                                    <option value="sick">Congé maladie</option>
+                                    <option value="personal">Congé personnel</option>
+                                    <option value="other">Autre</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leave Overview Cards -->
+                <div class="row mb-4">
+                    <div class="col-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <div class="stat-number text-primary">45</div>
+                                <div class="stat-text">Toutes les demandes</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <div class="stat-number text-warning">12</div>
+                                <div class="stat-text">En attente</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <div class="stat-number text-success">30</div>
+                                <div class="stat-text">Approuvées</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <div class="stat-number text-danger">3</div>
+                                <div class="stat-text">Refusées</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leave Balances by Store -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Solde de congés par boutique</h3>
+                        <div class="card-actions">
+                            <button class="btn btn-sm btn-light">
+                                <i class="fas fa-download"></i> Exporter
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Boutique</th>
+                                        <th>Employés</th>
+                                        <th>Congés annuels</th>
+                                        <th>Congés maladie</th>
+                                        <th>Congés personnels</th>
+                                        <th>Total pris</th>
+                                        <th>Jours restants</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="store-icon me-2 bg-primary">
+                                                    <i class="fas fa-store"></i>
+                                                </div>
+                                                <span>Boutique Nord</span>
+                                            </div>
+                                        </td>
+                                        <td>9</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-primary" style="width: 40%;"></div>
+                                                </div>
+                                                <span>36/90</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-danger" style="width: 10%;"></div>
+                                                </div>
+                                                <span>9/90</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-warning" style="width: 20%;"></div>
+                                                </div>
+                                                <span>18/90</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-info" style="width: 70%;"></div>
+                                                </div>
+                                                <span>63/90</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-success" style="width: 30%;"></div>
+                                                </div>
+                                                <span>27/90</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="store-icon me-2 bg-secondary">
+                                                    <i class="fas fa-store"></i>
+                                                </div>
+                                                <span>Boutique Sud</span>
+                                            </div>
+                                        </td>
+                                        <td>7</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-primary" style="width: 35%;"></div>
+                                                </div>
+                                                <span>25/70</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-danger" style="width: 15%;"></div>
+                                                </div>
+                                                <span>10/70</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-warning" style="width: 25%;"></div>
+                                                </div>
+                                                <span>18/70</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-info" style="width: 75%;"></div>
+                                                </div>
+                                                <span>53/70</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-success" style="width: 25%;"></div>
+                                                </div>
+                                                <span>17/70</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="store-icon me-2 bg-success">
+                                                    <i class="fas fa-store"></i>
+                                                </div>
+                                                <span>Boutique Est</span>
+                                            </div>
+                                        </td>
+                                        <td>8</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-primary" style="width: 45%;"></div>
+                                                </div>
+                                                <span>36/80</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-danger" style="width: 5%;"></div>
+                                                </div>
+                                                <span>4/80</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-warning" style="width: 15%;"></div>
+                                                </div>
+                                                <span>12/80</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-info" style="width: 65%;"></div>
+                                                </div>
+                                                <span>52/80</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress-small flex-grow-1 me-2">
+                                                    <div class="progress-bar bg-success" style="width: 35%;"></div>
+                                                </div>
+                                                <span>28/80</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- Autres boutiques -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leave Requests -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Demandes de congés</h3>
+                        <div class="card-actions">
+                            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createLeaveModal">
+                                <i class="fas fa-plus"></i> Nouvelle demande
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Employé</th>
+                                        <th>Boutique</th>
+                                        <th>Type</th>
+                                        <th>Du</th>
+                                        <th>Au</th>
+                                        <th>Durée</th>
+                                        <th>Date de demande</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Demande en attente -->
+                                    <tr>
+                                        <td>LV-2525</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm me-2">
+                                                    <img src="../assets/img/avatars/employee3.jpg" alt="Fatma Ben Ali">
+                                                </div>
+                                                <div class="user-name">Fatma Ben Ali</div>
+                                            </div>
+                                        </td>
+                                        <td>Boutique Sud</td>
+                                        <td><span class="badge bg-primary">Congé annuel</span></td>
+                                        <td>20/05/2025</td>
+                                        <td>22/05/2025</td>
+                                        <td>3 jours</td>
+                                        <td>18/05/2025</td>
+                                        <td><span class="badge bg-warning">En attente</span></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-success" title="Approuver">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger" title="Refuser">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-light" title="Détails" data-toggle="modal"
+                                                    data-target="#leaveDetailsModal">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Demande approuvée -->
+                                    <tr>
+                                        <td>LV-2524</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm me-2">
+                                                    <img src="../assets/img/avatars/employee.jpg" alt="Ahmed Karim">
+                                                </div>
+                                                <div class="user-name">Ahmed Karim</div>
+                                            </div>
+                                        </td>
+                                        <td>Boutique Sud</td>
+                                        <td><span class="badge bg-primary">Congé annuel</span></td>
+                                        <td>15/05/2025</td>
+                                        <td>16/05/2025</td>
+                                        <td>2 jours</td>
+                                        <td>10/05/2025</td>
+                                        <td><span class="badge bg-success">Approuvée</span></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-light" title="Détails" data-toggle="modal"
+                                                    data-target="#leaveDetailsModal">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Demande congé maladie -->
+                                    <tr>
+                                        <td>LV-2523</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm me-2">
+                                                    <img src="../assets/img/avatars/employee.jpg" alt="Ahmed Karim">
+                                                </div>
+                                                <div class="user-name">Ahmed Karim</div>
+                                            </div>
+                                        </td>
+                                        <td>Boutique Sud</td>
+                                        <td><span class="badge bg-danger">Congé maladie</span></td>
+                                        <td>13/05/2025</td>
+                                        <td>13/05/2025</td>
+                                        <td>1 jour</td>
+                                        <td>13/05/2025</td>
+                                        <td><span class="badge bg-success">Approuvée</span></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-light" title="Détails" data-toggle="modal"
+                                                    data-target="#leaveDetailsModal">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Demande congé personnel -->
+                                    <tr>
+                                        <td>LV-2522</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm me-2">
+                                                    <img src="../assets/img/avatars/employee.jpg" alt="Ahmed Karim">
+                                                </div>
+                                                <div class="user-name">Ahmed Karim</div>
+                                            </div>
+                                        </td>
+                                        <td>Boutique Sud</td>
+                                        <td><span class="badge bg-warning">Congé personnel</span></td>
+                                        <td>02/05/2025</td>
+                                        <td>02/05/2025</td>
+                                        <td>1 jour</td>
+                                        <td>29/04/2025</td>
+                                        <td><span class="badge bg-success">Approuvée</span></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-light" title="Détails" data-toggle="modal"
+                                                    data-target="#leaveDetailsModal">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Demande refusée -->
+                                    <tr>
+                                        <td>LV-2521</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm me-2">
+                                                    <img src="../assets/img/avatars/employee.jpg" alt="Ahmed Karim">
+                                                </div>
+                                                <div class="user-name">Ahmed Karim</div>
+                                            </div>
+                                        </td>
+                                        <td>Boutique Sud</td>
+                                        <td><span class="badge bg-primary">Congé annuel</span></td>
+                                        <td>15/04/2025</td>
+                                        <td>16/04/2025</td>
+                                        <td>2 jours</td>
+                                        <td>05/04/2025</td>
+                                        <td><span class="badge bg-danger">Refusée</span></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-light" title="Détails" data-toggle="modal"
+                                                    data-target="#leaveDetailsModal">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Demande annulée -->
+                                    <tr>
+                                        <td>LV-2520</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm me-2">
+                                                    <img src="../assets/img/avatars/employee.jpg" alt="Ahmed Karim">
+                                                </div>
+                                                <div class="user-name">Ahmed Karim</div>
+                                            </div>
+                                        </td>
+                                        <td>Boutique Sud</td>
+                                        <td><span class="badge bg-primary">Congé annuel</span></td>
+                                        <td>25/03/2025</td>
+                                        <td>25/03/2025</td>
+                                        <td>1 jour</td>
+                                        <td>20/03/2025</td>
+                                        <td><span class="badge bg-secondary">Annulée</span></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-light" title="Détails" data-toggle="modal"
+                                                    data-target="#leaveDetailsModal">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center mb-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Précédent</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Suivant</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Graphiques et statistiques des congés -->
+                <div class="row">
+                    <div class="col-6">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3 class="chart-title">Congés par mois</h3>
+                                <div class="chart-actions">
+                                    <select class="form-control form-control-sm">
+                                        <option value="2025" selected>2025</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="leavesByMonthChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3 class="chart-title">Types de congés</h3>
+                                <div class="chart-actions">
+                                    <button class="btn btn-sm btn-light">Exporter</button>
+                                </div>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="leaveTypeChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- Modals -->
+    <!-- Create Leave Request Modal -->
+    <div class="modal fade" id="createLeaveModal" tabindex="-1" aria-labelledby="createLeaveModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createLeaveModalLabel">Créer une demande de congé</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createLeaveForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="employee" class="form-label">Employé</label>
+                                    <select id="employee" class="form-control" required>
+                                        <option value="">Sélectionner un employé</option>
+                                        <option value="1">Ahmed Karim - Boutique Sud</option>
+                                        <option value="2">Fatma Ben Ali - Boutique Sud</option>
+                                        <option value="3">Youssef Miled - Boutique Nord</option>
+                                        <option value="4">Sarah Trabelsi - Boutique Nord</option>
+                                        <!-- Autres employés -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="leave-type" class="form-label">Type de congé</label>
+                                    <select id="leave-type" class="form-control" required>
+                                        <option value="annual">Congé annuel</option>
+                                        <option value="sick">Congé maladie</option>
+                                        <option value="personal">Congé personnel</option>
+                                        <option value="other">Autre</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="start-date" class="form-label">Date de début</label>
+                                    <input type="date" id="start-date" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="end-date" class="form-label">Date de fin</label>
+                                    <input type="date" id="end-date" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" id="half-day" class="form-check-input">
+                                <label for="half-day" class="form-check-label">Demi-journée</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="reason" class="form-label">Motif</label>
+                            <textarea id="reason" class="form-control" rows="3"
+                                placeholder="Précisez le motif de la demande de congé"></textarea>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="attachment" class="form-label">Pièce jointe (optionnel)</label>
+                            <input type="file" id="attachment" class="form-control">
+                            <small class="form-text text-muted">Formats acceptés: PDF, JPG, PNG. Taille max: 5MB</small>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="status" class="form-label">Statut</label>
+                            <select id="status" class="form-control">
+                                <option value="pending">En attente</option>
+                                <option value="approved">Approuvée</option>
+                                <option value="rejected">Refusée</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="saveLeaveBtn">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leave Details Modal -->
+    <div class="modal fade" id="leaveDetailsModal" tabindex="-1" aria-labelledby="leaveDetailsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="leaveDetailsModalLabel">Détails de la demande de congé</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="leave-detail-header mb-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 id="detail-id">Demande #LV-2525</h4>
+                            <span id="detail-status" class="badge bg-warning">En attente</span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="detail-group">
+                                <label class="detail-label">Employé:</label>
+                                <div class="detail-value" id="detail-employee">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar-sm me-2">
+                                            <img src="../assets/img/avatars/employee3.jpg" alt="Fatma Ben Ali">
+                                        </div>
+                                        <div class="user-name">Fatma Ben Ali</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="detail-group">
+                                <label class="detail-label">Boutique:</label>
+                                <div class="detail-value" id="detail-store">Boutique Sud</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="detail-group">
+                                <label class="detail-label">Type de congé:</label>
+                                <div class="detail-value" id="detail-type">
+                                    <span class="badge bg-primary">Congé annuel</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="detail-group">
+                                <label class="detail-label">Durée:</label>
+                                <div class="detail-value" id="detail-duration">3 jours</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="detail-group">
+                                <label class="detail-label">Date de début:</label>
+                                <div class="detail-value" id="detail-start-date">20/05/2025</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="detail-group">
+                                <label class="detail-label">Date de fin:</label>
+                                <div class="detail-value" id="detail-end-date">22/05/2025</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="detail-group">
+                                <label class="detail-label">Date de demande:</label>
+                                <div class="detail-value" id="detail-request-date">18/05/2025</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="detail-approval-section" style="display: none;">
+                            <div class="detail-group">
+                                <label class="detail-label">Date d'approbation/refus:</label>
+                                <div class="detail-value" id="detail-approval-date">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-group mb-3">
+                        <label class="detail-label">Motif:</label>
+                        <div class="detail-value" id="detail-reason">
+                            Voyage familial prévu de longue date. Besoin de prendre 3 jours de congé pour accompagner ma
+                            famille.
+                        </div>
+                    </div>
+
+                    <div class="detail-group mb-3" id="detail-attachment-section">
+                        <label class="detail-label">Pièce jointe:</label>
+                        <div class="detail-value" id="detail-attachment">
+                            <a href="#" class="btn btn-sm btn-light">
+                                <i class="fas fa-download"></i> Télécharger la pièce jointe
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="detail-approval-notes-section" style="display: none;">
+                        <div class="detail-group mb-3">
+                            <label class="detail-label">Commentaire d'approbation/refus:</label>
+                            <div class="detail-value" id="detail-approval-notes">-</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-group mb-3">
+                        <label class="detail-label">Historique:</label>
+                        <div class="detail-value">
+                            <ul class="timeline" id="detail-history">
+                                <li class="timeline-item">
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <h6 class="timeline-title">Demande créée</h6>
+                                        <p class="timeline-text">18/05/2025 à 14:35</p>
+                                    </div>
+                                </li>
+                                <!-- D'autres événements seraient ajoutés ici dynamiquement -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" id="modal-footer-pending">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-danger" id="rejectLeaveBtn">Refuser</button>
+                    <button type="button" class="btn btn-success" id="approveLeaveBtn">Approuver</button>
+                </div>
+                <div class="modal-footer" id="modal-footer-processed" style="display: none;">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Approval/Rejection Modal -->
+    <div class="modal fade" id="approvalModal" tabindex="-1" aria-labelledby="approvalModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="approvalModalLabel">Confirmer l'approbation</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="approvalForm">
+                        <input type="hidden" id="approval-action" value="approve">
+                        <input type="hidden" id="approval-leave-id" value="">
+
+                        <div class="form-group mb-3">
+                            <label for="approval-comment" class="form-label">Commentaire (optionnel)</label>
+                            <textarea id="approval-comment" class="form-control" rows="3"
+                                placeholder="Ajoutez un commentaire optionnel"></textarea>
+                        </div>
+
+                        <div class="form-group mb-3" id="rejection-reason-group" style="display: none;">
+                            <label for="rejection-reason" class="form-label">Motif du refus</label>
+                            <select id="rejection-reason" class="form-control">
+                                <option value="">Sélectionner un motif</option>
+                                <option value="planning">Contraintes de planning</option>
+                                <option value="staff">Manque de personnel</option>
+                                <option value="quota">Quota de congés atteint</option>
+                                <option value="policy">Non conforme à la politique</option>
+                                <option value="other">Autre raison</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" id="notify-employee" class="form-check-input" checked>
+                                <label for="notify-employee" class="form-check-label">Notifier l'employé par
+                                    email</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="confirmApprovalBtn">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/leave.js"></script>
+    <script src="../assets/js/auth.js"></script>
+
+    <!-- Chart Initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Graphique des congés par mois
+            const leavesByMonthCtx = document.getElementById('leavesByMonthChart');
+            if (leavesByMonthCtx) {
+                const ctx = leavesByMonthCtx.getContext('2d');
+
+                // Données des congés par mois
+                const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'];
+                const annualLeaveData = [5, 7, 8, 12, 10, 15, 20, 25, 15, 10, 8, 10];
+                const sickLeaveData = [2, 3, 2, 1, 1, 2, 3, 1, 2, 3, 4, 2];
+                const personalLeaveData = [1, 2, 3, 2, 3, 2, 1, 2, 1, 2, 1, 3];
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: months,
+                        datasets: [
+                            {
+                                label: 'Congés annuels',
+                                data: annualLeaveData,
+                                backgroundColor: 'rgba(59, 89, 152, 0.7)',
+                                borderColor: 'rgba(59, 89, 152, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Congés maladie',
+                                data: sickLeaveData,
+                                backgroundColor: 'rgba(220, 53, 69, 0.7)',
+                                borderColor: 'rgba(220, 53, 69, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Congés personnels',
+                                data: personalLeaveData,
+                                backgroundColor: 'rgba(255, 193, 7, 0.7)',
+                                borderColor: 'rgba(255, 193, 7, 1)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 15
+                                }
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                stacked: true
+                            },
+                            y: {
+                                stacked: true,
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Graphique des types de congés
+            const leaveTypeCtx = document.getElementById('leaveTypeChart');
+            if (leaveTypeCtx) {
+                const ctx = leaveTypeCtx.getContext('2d');
+
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Congés annuels', 'Congés maladie', 'Congés personnels', 'Autres'],
+                        datasets: [{
+                            data: [65, 15, 18, 2],
+                            backgroundColor: [
+                                'rgba(59, 89, 152, 0.7)',
+                                'rgba(220, 53, 69, 0.7)',
+                                'rgba(255, 193, 7, 0.7)',
+                                'rgba(108, 117, 125, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(59, 89, 152, 1)',
+                                'rgba(220, 53, 69, 1)',
+                                'rgba(255, 193, 7, 1)',
+                                'rgba(108, 117, 125, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 20
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        const label = context.label || '';
+                                        const value = context.formattedValue || '';
+                                        const total = context.chart.data.datasets[0].data.reduce((acc, val) => acc + val, 0);
+                                        const percentage = Math.round((context.raw / total) * 100);
+                                        return `${label}: ${value} (${percentage}%)`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Gestion des modals pour les actions sur les demandes de congé
+            const approveButtons = document.querySelectorAll('.btn-success[title="Approuver"]');
+            const rejectButtons = document.querySelectorAll('.btn-danger[title="Refuser"]');
+            const detailButtons = document.querySelectorAll('.btn-light[title="Détails"]');
+
+            // Approbation
+            approveButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Dans une application réelle, on récupérerait l'ID de la demande concernée
+                    const leaveId = this.closest('tr').cells[0].textContent;
+
+                    // Mise à jour des éléments du modal
+                    document.getElementById('approvalModalLabel').textContent = 'Confirmer l\'approbation';
+                    document.getElementById('approval-action').value = 'approve';
+                    document.getElementById('approval-leave-id').value = leaveId;
+                    document.getElementById('rejection-reason-group').style.display = 'none';
+
+                    // Afficher le modal
+                    // Dans un environnement réel avec Bootstrap JS
+                    // $('#approvalModal').modal('show');
+
+                    // Pour la démo, on pourrait simuler une notification
+                    showNotification('Demande approuvée', `La demande de congé ${leaveId} a été approuvée.`);
+                });
+            });
+
+            // Refus
+            rejectButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Dans une application réelle, on récupérerait l'ID de la demande concernée
+                    const leaveId = this.closest('tr').cells[0].textContent;
+
+                    // Mise à jour des éléments du modal
+                    document.getElementById('approvalModalLabel').textContent = 'Confirmer le refus';
+                    document.getElementById('approval-action').value = 'reject';
+                    document.getElementById('approval-leave-id').value = leaveId;
+                    document.getElementById('rejection-reason-group').style.display = 'block';
+
+                    // Afficher le modal
+                    // Dans un environnement réel avec Bootstrap JS
+                    // $('#approvalModal').modal('show');
+
+                    // Pour la démo, on pourrait simuler une notification
+                    showNotification('Demande refusée', `La demande de congé ${leaveId} a été refusée.`);
+                });
+            });
+
+            // Affichage des détails
+            detailButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Dans une application réelle, on récupérerait l'ID de la demande concernée
+                    const row = this.closest('tr');
+                    const leaveId = row.cells[0].textContent;
+                    const status = row.cells[8].querySelector('.badge').textContent;
+
+                    // Afficher le bon footer de modal selon le statut
+                    if (status === 'En attente') {
+                        document.getElementById('modal-footer-pending').style.display = 'block';
+                        document.getElementById('modal-footer-processed').style.display = 'none';
+                    } else {
+                        document.getElementById('modal-footer-pending').style.display = 'none';
+                        document.getElementById('modal-footer-processed').style.display = 'block';
+                    }
+
+                    // Affichage de la section d'approbation si la demande est traitée
+                    if (status !== 'En attente') {
+                        document.getElementById('detail-approval-section').style.display = 'block';
+                        document.getElementById('detail-approval-notes-section').style.display = 'block';
+                    } else {
+                        document.getElementById('detail-approval-section').style.display = 'none';
+                        document.getElementById('detail-approval-notes-section').style.display = 'none';
+                    }
+
+                    // Afficher le modal
+                    // Dans un environnement réel avec Bootstrap JS
+                    // $('#leaveDetailsModal').modal('show');
+                });
+            });
+
+            // Création d'une nouvelle demande
+            const saveLeaveBtn = document.getElementById('saveLeaveBtn');
+            if (saveLeaveBtn) {
+                saveLeaveBtn.addEventListener('click', function () {
+                    // Simuler l'enregistrement
+                    showNotification('Demande créée', 'La demande de congé a été créée avec succès.');
+
+                    // Dans une application réelle, on fermerait le modal
+                    // $('#createLeaveModal').modal('hide');
+                });
+            }
+
+            // Fonction pour afficher une notification
+            function showNotification(title, message) {
+                console.log(`${title}: ${message}`);
+                // Dans une application réelle, on afficherait une vraie notification UI
+            }
+        });
+    </script>
+</body>
+
+</html>
